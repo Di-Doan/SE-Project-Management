@@ -1,5 +1,4 @@
-import dotenv from 'dotenv';
-dotenv.config();
+import {} from 'dotenv/config';
 
 import express from 'express';
 import cors from 'cors';
@@ -15,9 +14,8 @@ const __dirname = path.dirname(__filename);
 
 app.use(cors({ origin: `http://localhost:${port}` }));
 app.use(helmet());
-app.use(cookieParser());
 app.use(express.json());
-app.use('/public', express.static(path.join(__dirname, '..', 'public')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 const server = app.listen(port, () => {
 	console.log(`App running on port ${port}`);
