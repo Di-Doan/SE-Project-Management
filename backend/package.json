@@ -1,0 +1,24 @@
+{
+	"name": "rmit_chat_connect_server",
+	"version": "1.0.0",
+	"description": "NodeJs server for RMIT ChatConnect - SEPM project assignment",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js -p 8000",
+		"dev": "nodemon index.js -p 8000"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"bcrypt": "^5.1.1",
+		"cors": "^2.8.5",
+		"dotenv": "^16.3.1",
+		"expressjs": "^1.0.1",
+		"helmet": "^7.1.0",
+		"jsonwebtoken": "^9.0.2",
+		"socket.io": "^4.7.2"
+	},
+	"devDependencies": {
+		"nodemon": "^3.0.1"
+	}
+}
