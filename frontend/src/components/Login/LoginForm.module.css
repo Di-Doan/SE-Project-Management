@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Spectral&display=swap");
 
+body {
+  background: linear-gradient(45deg, rgb(250, 3, 3), #ffffff, #0c2568);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
 .box {
   font-family: "Spectral", serif;
   font-size: 20px;
@@ -7,11 +13,12 @@
   position: relative;
   margin: auto;
   padding: 10px;
-  background: rgba(170, 194, 235, 0.525);
-  border: 1px solid #e7ebf186;
+  background: white;
+  border: 1px solid #bdbec086;
   border-radius: 25px;
   align-items: center;
   margin-top: 3%;
+  padding-bottom: 20px;
 }
 
 .form {
@@ -21,7 +28,7 @@
 }
 
 .title {
-text-align: left;
+  text-align: left;
   margin: 20px 0px 20px;
   font-size: 30px;
 }
@@ -56,14 +63,20 @@ text-align: left;
 }
 
 .btn {
-  background: #5a88d7;
-  border-radius: 50px;
-  border: 1px solid #5a88d786;
-  width: 7em;
+  background: rgb(245, 1, 22);
+  border-radius: 10px;
+  border: 1px solid rgba(215, 90, 90, 0.525);
+  width: 100%;
   height: 2em;
   font-size: 17px;
   color: white;
-  margin: 5px;
+  margin: 10px 0px;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .switch {
@@ -120,5 +133,19 @@ a:active {
   }
   .form {
     max-width: 70%;
+  }
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
   }
 }

@@ -77,10 +77,9 @@ function LoginForm() {
           </form>
 
           <div>
-            <Link>
-                Forget your password?
+            <Link to="https://www.rmit.edu.au/students/support-services/it-support-systems/id-password">
+              Forget your password?
             </Link>
-            
           </div>
         </div>
       </div>
