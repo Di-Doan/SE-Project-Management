@@ -1,0 +1,15 @@
+import { memo, SVGProps } from 'react';
+
+const UiIconSearchLightIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg preserveAspectRatio='none' viewBox='0 0 21 21' fill='none' xmlns='http://www.w3.org/2000/svg' {...props}>
+    <path
+      fillRule='evenodd'
+      clipRule='evenodd'
+      d='M15.4512 9.6416C15.4512 12.9602 12.7609 15.6504 9.44238 15.6504C6.12382 15.6504 3.43359 12.9602 3.43359 9.6416C3.43359 6.32304 6.12382 3.63281 9.44238 3.63281C12.7609 3.63281 15.4512 6.32304 15.4512 9.6416ZM15.4786 14.4638C16.5358 13.1422 17.168 11.4657 17.168 9.6416C17.168 5.37488 13.7091 1.91602 9.44238 1.91602C5.17566 1.91602 1.7168 5.37488 1.7168 9.6416C1.7168 13.9083 5.17566 17.3672 9.44238 17.3672C11.2665 17.3672 12.9429 16.735 14.2646 15.6778L16.561 17.9742C16.8962 18.3094 17.4397 18.3094 17.7749 17.9742C18.1102 17.6389 18.1102 17.0954 17.7749 16.7602L15.4786 14.4638Z'
+      fill='#6F767E'
+    />
+  </svg>
+);
+
+const Memo = memo(UiIconSearchLightIcon);
+export { Memo as UiIconSearchLightIcon };
