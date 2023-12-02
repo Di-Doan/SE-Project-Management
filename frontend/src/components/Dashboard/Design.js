@@ -1,7 +1,6 @@
 import { memo } from 'react';
 
-
-import resets from '../_resets.module.css';
+import resets from './_resets.module.css';
 import classes from './Design.module.css';
 import { Ellipse2549Icon } from './Ellipse2549Icon.tsx';
 import { Ellipse2552Icon2 } from './Ellipse2552Icon2.tsx';
@@ -37,6 +36,7 @@ import { VectorIcon11 } from './VectorIcon11.tsx';
 import { VectorIcon12 } from './VectorIcon12.tsx';
 import { VectorIcon13 } from './VectorIcon13.tsx';
 import { VectorIcon } from './VectorIcon.tsx';
+import rmitLogo from './rmit-logo.png';
 
 const Props = {
   className: undefined,
@@ -57,7 +57,9 @@ export const Design = memo(function Design(props = {}) {
       </div>
       <div className={classes.dashboard}>
         <div className={classes.rectangle5569}></div>
-        <div className={classes.rMITLogo_Horizontal1}></div>
+        <div> 
+          <img src={rmitLogo} alt="RMIT Logo" className={classes.rMITLogo_Horizontal1} />
+        </div>
         <div className={classes.account}>Account</div>
         <div className={classes.rectangle5571}></div>
         <div className={classes.rectangle5570}></div>
@@ -265,3 +267,5 @@ export const Design = memo(function Design(props = {}) {
     </div>
   );
 });
+
+export default Design;
