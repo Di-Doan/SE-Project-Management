@@ -35,8 +35,8 @@ import { VectorIcon10 } from './VectorIcon10.tsx';
 import { VectorIcon11 } from './VectorIcon11.tsx';
 import { VectorIcon12 } from './VectorIcon12.tsx';
 import { VectorIcon13 } from './VectorIcon13.tsx';
-import { VectorIcon } from './VectorIcon.tsx';
 import rmitLogo from './rmit-logo.png';
+import { ReactComponent as HomeIcon } from './home-icon.svg';
 
 const Props = {
   className: undefined,
@@ -62,10 +62,9 @@ export const Design = memo(function Design(props = {}) {
         </div>
         <div className={classes.account}>Account</div>
         <div className={classes.rectangle5571}></div>
-        <div className={classes.rectangle5570}></div>
         <div className={classes.dashboard2}>Dashboard</div>
         <div className={classes.vector}>
-          <VectorIcon className={classes.icon4} />
+          <HomeIcon className={classes.icon4} />
         </div>
         <div className={classes.courses}>Courses</div>
         <div className={classes.group1000004376}>
@@ -87,10 +86,6 @@ export const Design = memo(function Design(props = {}) {
         <div className={classes.group1000004380}>
           <Group1000004380Icon className={classes.icon9} />
         </div>
-        <div className={classes.ellipse2549}>
-          <Ellipse2549Icon className={classes.icon10} />
-        </div>
-        <div className={classes._5}>5</div>
         <div className={classes.rectangle5590}></div>
         <div className={classes.rectangle5591}></div>
         <div className={classes.topBar}>
@@ -101,8 +96,7 @@ export const Design = memo(function Design(props = {}) {
                   <UiIconSearchLightIcon className={classes.icon11} />
                 </div>
                 <div className={classes.frame22}>
-                  <div className={classes.rectangle6}></div>
-                  <div className={classes.searchOrType}>Search or type </div>
+                  <input type="text" placeholder="Search or type" className={classes.searchOrType} />
                 </div>
               </div>
             </div>

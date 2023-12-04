@@ -80,17 +80,8 @@
   height: 1.7168px;
   background-color: #efefef;
 }
-.rectangle5570 {
-  position: fixed;
-  left: 27.4688px;
-  top: 150.2197px;
-  width: 183.6973px;
-  height: 46.3535px;
-  border-radius: 10.3008px;
-  background-color: #275a94;
-}
 .dashboard2 {
-  color: #fff;
+  color: #aeaeb1;
   font-size: 13.7344px;
   font-weight: 500;
   font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
@@ -102,6 +93,8 @@
   height: min-content;
   white-space: nowrap;
   flex-direction: column;
+  transition: background-color 0.3s ease; /* Optional: Add a transition effect for smoother hover */
+  cursor: pointer;
 }
 .vector {
   position: fixed;
@@ -128,6 +121,8 @@
   height: min-content;
   white-space: nowrap;
   flex-direction: column;
+  transition: background-color 0.3s ease; /* Optional: Add a transition effect for smoother hover */
+  cursor: pointer;
 }
 .group1000004376 {
   position: fixed;
@@ -154,6 +149,8 @@
   height: min-content;
   white-space: nowrap;
   flex-direction: column;
+  transition: background-color 0.3s ease; /* Optional: Add a transition effect for smoother hover */
+  cursor: pointer;
 }
 .group1000004377 {
   position: fixed;
@@ -180,6 +177,8 @@
   height: min-content;
   white-space: nowrap;
   flex-direction: column;
+  transition: background-color 0.3s ease; /* Optional: Add a transition effect for smoother hover */
+  cursor: pointer;
 }
 .group1000004378 {
   position: fixed;
@@ -206,6 +205,8 @@
   height: min-content;
   white-space: nowrap;
   flex-direction: column;
+  transition: background-color 0.3s ease; /* Optional: Add a transition effect for smoother hover */
+  cursor: pointer;
 }
 .group1000004379 {
   position: fixed;
@@ -232,6 +233,11 @@
   height: min-content;
   white-space: nowrap;
   flex-direction: column;
+  transition: background-color 0.3s ease; /* Optional: Add a transition effect for smoother hover */
+  cursor: pointer;
+}
+.dashboard2:hover, .courses:hover, .planning:hover, .statistics:hover, .messages:hover, .settings:hover {
+  background-color: rgb(64, 75, 228)
 }
 .group1000004380 {
   position: fixed;
@@ -245,31 +251,9 @@
   width: 100%;
   height: 100%;
 }
-.ellipse2549 {
-  position: fixed;
-  left: 172.5381px;
-  top: 466.1104px;
-  width: 25.752px;
-  height: 25.752px;
-  overflow: visible;
-}
 .icon10 {
   width: 100%;
   height: 100%;
-}
-._5 {
-  color: #fff;
-  font-size: 13.7344px;
-  font-weight: 500;
-  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    'Liberation Sans', sans-serif;
-  position: fixed;
-  left: 181.1221px;
-  top: 471.2607px;
-  width: min-content;
-  height: min-content;
-  white-space: nowrap;
-  flex-direction: column;
 }
 .rectangle5590 {
   position: fixed;
@@ -335,12 +319,6 @@
   height: min-content;
   align-items: center;
   gap: 1.7168px;
-}
-.rectangle6 {
-  width: 1.7168px;
-  height: 17.168px;
-  border-radius: 1.7168px;
-  background-color: #8191a5;
 }
 .searchOrType {
   color: #9a9fa5;
