@@ -1,3 +1,7 @@
+body {
+  background-color: #ece8e8;
+}
+
 .userProfile {
   color: #384d6c;
   font-size: 24px;
@@ -15,16 +19,7 @@
   text-shadow: 0px 4px 4px #00000040;
   flex-direction: column;
 }
-.vector75 {
-  position: absolute;
-  left: 333.9976px;
-  top: 154.239px;
-  width: 143.0029px;
-  max-width: 100%;
-  height: 0px;
-  max-height: 100%;
-  overflow: visible;
-}
+
 .icon {
   width: 100%;
   height: 100%;
@@ -97,7 +92,6 @@
   font-weight: bold;
   font-family: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-
 }
 .delete {
   width: 176px;
@@ -118,14 +112,12 @@
     "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
 }
 
-
-
 .firstName {
   color: #384d6c;
   font-size: 16px;
   font-weight: bold;
-  font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    'Liberation Sans', sans-serif;
+  font-family: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   position: absolute;
   left: 334px;
   top: 407px;
@@ -148,8 +140,8 @@
   color: #abb1bb;
   font-size: 16px;
   font-style: italic;
-  font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    'Liberation Sans', sans-serif;
+  font-family: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   position: absolute;
   left: 351px;
   top: 459px;
@@ -162,8 +154,8 @@
   color: #384d6c;
   font-size: 16px;
   font-weight: bold;
-  font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    'Liberation Sans', sans-serif;
+  font-family: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   position: absolute;
   left: 875px;
   top: 407px;
@@ -186,8 +178,8 @@
   color: #abb1bb;
   font-size: 16px;
   font-style: italic;
-  font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    'Liberation Sans', sans-serif;
+  font-family: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   position: absolute;
   left: 898px;
   top: 459px;
@@ -196,121 +188,66 @@
   white-space: nowrap;
   flex-direction: column;
 }
-.userName {
-  color: #384d6c;
-  font-size: 16px;
-  font-weight: bold;
-  font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    'Liberation Sans', sans-serif;
-  position: absolute;
-  left: 332px;
-  top: 511px;
-  width: 121px;
-  height: min-content;
-  flex-direction: column;
-}
-.nameField3 {
-  position: absolute;
-  left: 334px;
-  top: 547px;
-  width: 1038px;
-  height: 52px;
-  outline: solid 1px #d1d5db;
-  outline-offset: -1px;
-  border-radius: 8px;
-  background-color: #fff;
-}
-.egAlaaMohamed {
-  color: #abb1bb;
-  font-size: 16px;
-  font-style: italic;
-  font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    'Liberation Sans', sans-serif;
-  position: absolute;
-  left: 351px;
-  top: 563px;
-  width: min-content;
-  height: min-content;
-  white-space: nowrap;
-  flex-direction: column;
-}
-
 
 .emailAddress {
   color: #384d6c;
   font-size: 16px;
   font-weight: bold;
-  font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    'Liberation Sans', sans-serif;
+  font-family: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   position: absolute;
   left: 336px;
-  top: 687px;
+  top: 587px;
   width: 121px;
   height: min-content;
   flex-direction: column;
 }
-.emailField {
-  position: absolute;
-  left: 334px;
-  top: 723px;
-  width: 497px;
-  height: 52px;
-  outline: solid 1px #d1d5db;
-  outline-offset: -1px;
-  border-radius: 8px;
-  background-color: #fff;
-}
-.mail {
-  position: absolute;
-  left: 353px;
-  top: 735px;
-  width: 28px;
-  height: 28px;
-}
-.icon {
-  width: 100%;
-  height: 100%;
-}
-
-
-
-.introductionToMangagment {
-  color: #384d6c;
+.studentEmail {
   font-size: 20px;
   font-weight: bold;
-  font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    'Liberation Sans', sans-serif;
+  font-family: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  position: absolute;
+  left: 350px;
+  top: 620px;
+  width: 121px;
+  flex-direction: column;
+}
+
+.introductionToMangagment {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   position: absolute;
   left: 401px;
-  top: 913px;
+  top: 813px;
   width: 973px;
   height: 32px;
   flex-direction: column;
 }
 
 .buildingITSystem {
-  color: #384d6c;
   font-size: 20px;
   font-weight: bold;
-  font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    'Liberation Sans', sans-serif;
+  font-family: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   position: absolute;
   left: 401px;
-  top: 987px;
+  top: 887px;
   width: 977px;
   height: 32px;
   flex-direction: column;
 }
 
 .userDesign {
-  color: #384d6c;
   font-size: 20px;
   font-weight: bold;
-  font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    'Liberation Sans', sans-serif;
+  font-family: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   position: absolute;
   left: 401px;
-  top: 1061px;
+  top: 961px;
   width: 166px;
   height: 32px;
   flex-direction: column;
@@ -319,12 +256,74 @@
   color: #384d6c;
   font-size: 16px;
   font-weight: bold;
-  font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    'Liberation Sans', sans-serif;
+  font-family: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   position: absolute;
   left: 334px;
-  top: 864px;
+  top: 764px;
   width: 143px;
   height: min-content;
   flex-direction: column;
+}
+
+.currentGPA {
+  color: #384d6c;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+
+  position: absolute;
+  left: 334px;
+  top: 1064px;
+  width: 143px;
+  height: min-content;
+  flex-direction: column;
+}
+.saveButton {
+  position: absolute;
+  left: 926px;
+  top: 1162px;
+  width: 176px;
+  height: 56px;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0;
+  outline: solid 1px #384d6c;
+  border-radius: 8px;
+  background-color: #384d6c;
+  overflow: hidden;
+
+
+  color: #fff;
+  font-size: 14px;
+  line-height: 150%;
+  font-weight: bold;
+  font-family: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+}
+
+.cancelButton {
+  position: absolute;
+  left: 1150px;
+  top: 1190px;
+  width: 176px;
+  height: 56px;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0;
+  outline: solid 1px #384d6c;
+  outline-offset: -1px;
+  border-radius: 8px;
+  background-color: #fff;
+  overflow: hidden;
+  transform: translateY(-50%);
+
+  color: #384d6c;
+  font-size: 14px;
+  line-height: 150%;
+  font-weight: bold;
+  font-family: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+
 }

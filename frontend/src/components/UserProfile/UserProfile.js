@@ -1,86 +1,59 @@
-// import React, { useState } from "react";
-// import { Link } from "react-router-dom";
-// import axios from "axios";
-// import ProfileStyle from "./UserProfile.module.css";
-// import defaultAva from "./avatar.jpg";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import ProfileStyle from "./UserProfile.module.css";
+import defaultAva from "./avatar.jpg";
+import UserProfileSideBar from "../UserProfileSideBar/UserProfileSideBar";
 
-// function UserProfile() {
-//   return (
-//     <div className={ProfileStyle.profile}>
-//       <div>
-//         {/* title  */}
-//         <h1>User Profile</h1>
-//       </div>
+function UserProfile() {
+  return (
+    <div>
+      <UserProfileSideBar />
+      <div>
+        <div className={ProfileStyle.userProfile}>User Profile</div>
+        <div className={ProfileStyle.vector75}></div>
+        <div className={ProfileStyle.group16}>
+          <img src={defaultAva} className={ProfileStyle.icon2} />
+        </div>
+        <div className={ProfileStyle.fullName}>Full Name</div>
+        <div className={ProfileStyle.major}>Major</div>
 
-//       <div>
-//         {/* avatar  */}
-//         <div>
-//           <img src={defaultAva}></img>
-//         </div>
-//         <div>
-//           <h3>Full Name</h3>
-//           <h3>Major</h3>
-//         </div>
-//         <div>
-//           <button>Upload New Photo</button>
-//           <button>Delete</button>
-//         </div>
-//       </div>
+        <div className={ProfileStyle.row3}>
+          <button className={ProfileStyle.uploadPhoto}>Upload New Photo</button>
+          <button className={ProfileStyle.delete}>Delete</button>
+        </div>
+      </div>
 
-//       <div>
-//         {/* name  */}
-//         <h4>First Name</h4>
-//         <p>Student First Name</p>
+      <div>
+        <div className={ProfileStyle.firstName}>First Name</div>
+        <div className={ProfileStyle.nameField}></div>
+        <div className={ProfileStyle.egAlaa}>eg. Alaa</div>
+        <div className={ProfileStyle.lastName}>Last Name</div>
+        <div className={ProfileStyle.nameField2}></div>
+        <div className={ProfileStyle.egMohamed}>eg. Mohamed</div>
+      </div>
 
-//         <h4>Middle Name</h4>
-//         <p>Student Middle Name</p>
+      <div>
+        <div className={ProfileStyle.emailAddress}>Email Address</div>
+        <div className={ProfileStyle.studentEmail}>Student mail</div>
+      </div>
 
-//         <h4>Last Name</h4>
-//         <p>Student Last Name</p>
-//       </div>
+      <div>
+        <div className={ProfileStyle.introductionToMangagment}>
+          Introduction to Mangagment
+        </div>
+        <div className={ProfileStyle.buildingITSystem}>Building IT system</div>
+        <div className={ProfileStyle.userDesign}>User-Design</div>
+        <div className={ProfileStyle.currentCourse}>Current Course</div>
+      </div>
 
-//       <div>
-//         {/* email  */}
-//         <h4>Email Address</h4>
-//         <p>Student Email Address</p>
-//       </div>
+      <div>
+        <div className={ProfileStyle.currentGPA}>Current GPA</div>
+        <button className={ProfileStyle.saveButton}>Save Changes</button>
+        <button className={ProfileStyle.cancelButton}>Cancel</button>
+      </div>
+    </div>
+  );
+}
 
-//       <div>
-//         {/* current course  */}
-//         <h4>Current Course</h4>
-//         <div>
-//           <h5>Introduction to Management</h5>
-//           <h5>Building IT System</h5>
-//           <h5>User-Design</h5>
-//         </div>
-//       </div>
-
-//       <div>
-//         {/* current GPA  */}
-//         <div>
-//           <h4>Current GPA</h4>
-//           <p>3.0</p>
-//         </div>
-
-//         <form>
-//           <div>
-//             <input
-//               type="checkbox"
-//               id="showOption"
-//               name="showOption"
-//               value="Bike"
-//             />
-//             <label for="showOption"> Show option</label>
-//           </div>
-
-//           <div>
-//             <button>Cancel</button>
-//             <button>Save Changes</button>
-//           </div>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default UserProfile;
+export default UserProfile;
