@@ -72,25 +72,30 @@
   white-space: nowrap;
   flex-direction: column;
 }
-.rectangle5571 {
+.sidebar {
+  width: 233px; /* Adjust the width as needed */
+  height: 100%; /* Make it full height of the viewport */
+  background-color: #ffffff; /* Set the background color as needed */
+  color: #ecf0f1; /* Set the text color as needed */
+  padding: 20px; /* Adjust padding as needed */
   position: fixed;
-  left: 34.3359px;
-  top: 372.5449px;
-  width: 161.3789px;
-  height: 1.7168px;
-  background-color: #efefef;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
 }
+/* Add styles for other classes within the sidebar as needed */
 .dashboard2 {
   color: #aeaeb1;
-  font-size: 13.7344px;
+  font-size: 20.7344px;
   font-weight: 500;
   font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
     'Liberation Sans', sans-serif;
   position: fixed;
   left: 73.8223px;
   top: 165.6708px;
-  width: min-content;
-  height: min-content;
+  width: 13.4%;
+  height: 2%;
   white-space: nowrap;
   flex-direction: column;
   transition: background-color 0.3s ease; /* Optional: Add a transition effect for smoother hover */
@@ -110,15 +115,15 @@
 }
 .courses {
   color: #aeaeb1;
-  font-size: 13.7344px;
+  font-size: 20.7344px;
   font-weight: 500;
   font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
     'Liberation Sans', sans-serif;
   position: fixed;
   left: 78.1143px;
   top: 216.3164px;
-  width: min-content;
-  height: min-content;
+  width: 13%;
+  height: 2%;
   white-space: nowrap;
   flex-direction: column;
   transition: background-color 0.3s ease; /* Optional: Add a transition effect for smoother hover */
@@ -138,15 +143,15 @@
 }
 .planning {
   color: #aeaeb1;
-  font-size: 13.7344px;
+  font-size: 20.7344px;
   font-weight: 500;
   font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
     'Liberation Sans', sans-serif;
   position: fixed;
   left: 78.1143px;
   top: 266.1035px;
-  width: min-content;
-  height: min-content;
+  width: 13%;
+  height: 2%;
   white-space: nowrap;
   flex-direction: column;
   transition: background-color 0.3s ease; /* Optional: Add a transition effect for smoother hover */
@@ -166,15 +171,15 @@
 }
 .statistics {
   color: #aeaeb1;
-  font-size: 13.7344px;
+  font-size: 20.7344px;
   font-weight: 500;
   font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
     'Liberation Sans', sans-serif;
   position: fixed;
   left: 78.1143px;
   top: 315.8906px;
-  width: min-content;
-  height: min-content;
+  width: 13%;
+  height: 2%;
   white-space: nowrap;
   flex-direction: column;
   transition: background-color 0.3s ease; /* Optional: Add a transition effect for smoother hover */
@@ -194,15 +199,15 @@
 }
 .messages {
   color: #aeaeb1;
-  font-size: 13.7344px;
+  font-size: 20.7344px;
   font-weight: 500;
   font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
     'Liberation Sans', sans-serif;
   position: fixed;
   left: 78.1143px;
   top: 470.4023px;
-  width: min-content;
-  height: min-content;
+  width: 13%;
+  height: 2%;
   white-space: nowrap;
   flex-direction: column;
   transition: background-color 0.3s ease; /* Optional: Add a transition effect for smoother hover */
@@ -222,22 +227,22 @@
 }
 .settings {
   color: #aeaeb1;
-  font-size: 13.7344px;
+  font-size: 20.7344px;
   font-weight: 500;
   font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
     'Liberation Sans', sans-serif;
   position: fixed;
   left: 78.1143px;
   top: 522.7646px;
-  width: min-content;
-  height: min-content;
+  width: 13%;
+  height: 2%;
   white-space: nowrap;
   flex-direction: column;
   transition: background-color 0.3s ease; /* Optional: Add a transition effect for smoother hover */
   cursor: pointer;
 }
 .dashboard2:hover, .courses:hover, .planning:hover, .statistics:hover, .messages:hover, .settings:hover {
-  background-color: rgb(64, 75, 228)
+  background-color: rgb(5, 8, 51)
 }
 .group1000004380 {
   position: fixed;
@@ -254,24 +259,6 @@
 .icon10 {
   width: 100%;
   height: 100%;
-}
-.rectangle5590 {
-  position: fixed;
-  left: 231.7676px;
-  top: 0;
-  width: 1.7168px;
-  height: 879px;
-  background-color: #f2f3f6;
-}
-.rectangle5591 {
-  transform-origin: top left;
-  position: fixed;
-  left: 232.626px;
-  top: 84.123px;
-  width: 1.7168px;
-  height: 1004.3262px;
-  background-color: #f2f3f6;
-  transform: matrix(0, -1, 1, 0, 0, 0);
 }
 .topBar {
   position: fixed;
