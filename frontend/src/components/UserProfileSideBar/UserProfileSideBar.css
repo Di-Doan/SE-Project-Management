@@ -39,9 +39,7 @@
   transition: all 0.5s ease;
 }
 
-.side-nav ul li a:visited,
-.side-nav ul li a.active,
-.side-nav ul li a:hover {
+.side-nav ul li a.active {
   background: #EDF6FF;
   font-weight: bold;
   text-decoration: none;
@@ -69,6 +67,8 @@
   line-height: 60px;
   white-space: nowrap;
   font-size: 18px;
+  text-align: center;
+  justify-content: center;
 }
 
 .logo-container {
@@ -121,6 +121,7 @@
 .main-container {
   margin: 20px;
 }
+
 
 /* RESPONSIVE CODE HERE */
 @media screen and (min-width: 993px) {

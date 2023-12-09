@@ -1,5 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import "./UserProfileSideBar.css";
+import { ReactComponent as MenuIcon } from "../../assets/menu-icon.svg";
+
 
 function UserProfileSideBar() {
   const toggleMenu = () => {
@@ -23,7 +25,7 @@ function UserProfileSideBar() {
               <span className="title">RMIT </span>
             </li>
             <li className="side-nav-link">
-              <NavLink to="/admin/">
+              <NavLink to="/profile">
                 <span className="side-nav-icon">
                   <em className="fas fa-home"></em>
                 </span>
@@ -35,7 +37,7 @@ function UserProfileSideBar() {
                 <span className="side-nav-icon">
                   <em className="fas fa-ad"></em>
                 </span>
-                <span className="title">My Task</span>
+                <span className="title">Current Courses</span>
               </NavLink>
             </li>
             <li className="side-nav-link">
@@ -66,15 +68,13 @@ function UserProfileSideBar() {
           </ul>
         </div>
         <div className="admin-main">
-        <div className="top-bar">
-          <div className="toggle" onClick={() => toggleMenu()}>
-            <em className="fas fa-bars">hello</em>
+          <div className="top-bar">
+            <div className="toggle" onClick={() => toggleMenu()}>
+              <MenuIcon />
+            </div>
           </div>
+          <div className="main-container"></div>
         </div>
-        <div className="main-container">
-          
-        </div>
-      </div>
       </div>
     </div>
   );

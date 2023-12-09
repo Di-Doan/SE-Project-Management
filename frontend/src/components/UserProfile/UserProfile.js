@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import ProfileStyle from "./UserProfile.module.css";
-import defaultAva from "./avatar.jpg";
+import defaultAva from "../../assets/avatar.jpg";
 import UserProfileSideBar from "../UserProfileSideBar/UserProfileSideBar";
 
 function UserProfile() {
