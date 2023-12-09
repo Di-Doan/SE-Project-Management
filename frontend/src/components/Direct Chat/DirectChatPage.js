@@ -107,7 +107,7 @@ const DirectChatPage = () => {
           <div className="right-sender-details">
             <div className="right-sender-name">Sender Name</div>
             <div className="right-user-profile">
-              <Link to="/user-profile">View profile</Link>
+              <Link to="/profile">View profile</Link>
             </div>
           </div>
         </div>
