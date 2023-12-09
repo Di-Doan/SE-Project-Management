@@ -68,7 +68,7 @@ function UserProfileSideBar() {
           </ul>
         </div>
         <div className="admin-main">
-          <div className="top-bar">
+          <div className="profile-top-bar">
             <div className="toggle" onClick={() => toggleMenu()}>
               <MenuIcon />
             </div>
