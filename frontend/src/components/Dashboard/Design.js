@@ -1,8 +1,8 @@
 import { memo } from 'react';
+import { Link } from 'react-router-dom'
 
 import resets from './_resets.module.css';
 import classes from './Design.module.css';
-import { Ellipse2549Icon } from './Ellipse2549Icon.tsx';
 import { Ellipse2552Icon2 } from './Ellipse2552Icon2.tsx';
 import { Ellipse2552Icon3 } from './Ellipse2552Icon3.tsx';
 import { Ellipse2552Icon4 } from './Ellipse2552Icon4.tsx';
@@ -35,8 +35,8 @@ import { VectorIcon10 } from './VectorIcon10.tsx';
 import { VectorIcon11 } from './VectorIcon11.tsx';
 import { VectorIcon12 } from './VectorIcon12.tsx';
 import { VectorIcon13 } from './VectorIcon13.tsx';
-import { VectorIcon } from './VectorIcon.tsx';
 import rmitLogo from './rmit-logo.png';
+import { ReactComponent as HomeIcon } from './home-icon.svg';
 
 const Props = {
   className: undefined,
@@ -56,43 +56,41 @@ export const Design = memo(function Design(props = {}) {
         <Ellipse2617Icon className={classes.icon3} />
       </div>
       <div className={classes.dashboard}>
-        <div className={classes.rectangle5569}></div>
-        <div> 
-          <img src={rmitLogo} alt="RMIT Logo" className={classes.rMITLogo_Horizontal1} />
+        <div className={classes.sidebar}>
+          <div>
+            <img src={rmitLogo} alt="RMIT Logo" className={classes.rMITLogo_Horizontal1} />
+          </div>
+          <div className={classes.account}>Account</div>
+          <div className={classes.rectangle5571}></div>
+          <Link to="/Dashboard" className={classes.sidebarLink}>
+            <div className={classes.dashboard2}>Dashboard</div>
+            <div className={classes.vector}>
+              <HomeIcon className={classes.icon4} />
+            </div>
+          </Link>
+          <div className={classes.courses}>Courses</div>
+          <div className={classes.group1000004376}>
+            <Group1000004376Icon className={classes.icon5} />
+          </div>
+          <div className={classes.planning}>Planning</div>
+          <div className={classes.group1000004377}>
+            <Group1000004377Icon className={classes.icon6} />
+          </div>
+          <div className={classes.statistics}>Statistics</div>
+          <div className={classes.group1000004378}>
+            <Group1000004378Icon className={classes.icon7} />
+          </div>
+          <Link to="/Login" className={classes.sidebarLink}>
+            <div className={classes.messages}>Messages</div>
+            <div className={classes.group1000004379}>
+              <Group1000004379Icon className={classes.icon8} />
+            </div>
+          </Link>
+          <div className={classes.settings}>Settings</div>
+          <div className={classes.group1000004380}>
+            <Group1000004380Icon className={classes.icon9} />
+          </div>
         </div>
-        <div className={classes.account}>Account</div>
-        <div className={classes.rectangle5571}></div>
-        <div className={classes.rectangle5570}></div>
-        <div className={classes.dashboard2}>Dashboard</div>
-        <div className={classes.vector}>
-          <VectorIcon className={classes.icon4} />
-        </div>
-        <div className={classes.courses}>Courses</div>
-        <div className={classes.group1000004376}>
-          <Group1000004376Icon className={classes.icon5} />
-        </div>
-        <div className={classes.planning}>Planning</div>
-        <div className={classes.group1000004377}>
-          <Group1000004377Icon className={classes.icon6} />
-        </div>
-        <div className={classes.statistics}>Statistics</div>
-        <div className={classes.group1000004378}>
-          <Group1000004378Icon className={classes.icon7} />
-        </div>
-        <div className={classes.messages}>Messages</div>
-        <div className={classes.group1000004379}>
-          <Group1000004379Icon className={classes.icon8} />
-        </div>
-        <div className={classes.settings}>Settings</div>
-        <div className={classes.group1000004380}>
-          <Group1000004380Icon className={classes.icon9} />
-        </div>
-        <div className={classes.ellipse2549}>
-          <Ellipse2549Icon className={classes.icon10} />
-        </div>
-        <div className={classes._5}>5</div>
-        <div className={classes.rectangle5590}></div>
-        <div className={classes.rectangle5591}></div>
         <div className={classes.topBar}>
           <div className={classes.searchBox}>
             <div className={classes.searchInput}>
@@ -101,8 +99,7 @@ export const Design = memo(function Design(props = {}) {
                   <UiIconSearchLightIcon className={classes.icon11} />
                 </div>
                 <div className={classes.frame22}>
-                  <div className={classes.rectangle6}></div>
-                  <div className={classes.searchOrType}>Search or type </div>
+                  <input type="text" placeholder="Search or type" className={classes.searchOrType} />
                 </div>
               </div>
             </div>

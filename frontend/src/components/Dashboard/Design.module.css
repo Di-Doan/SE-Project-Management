@@ -72,36 +72,34 @@
   white-space: nowrap;
   flex-direction: column;
 }
-.rectangle5571 {
+.sidebar {
+  width: 233px; /* Adjust the width as needed */
+  height: 100%; /* Make it full height of the viewport */
+  background-color: #ffffff; /* Set the background color as needed */
+  color: #ecf0f1; /* Set the text color as needed */
+  padding: 20px; /* Adjust padding as needed */
   position: fixed;
-  left: 34.3359px;
-  top: 372.5449px;
-  width: 161.3789px;
-  height: 1.7168px;
-  background-color: #efefef;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
 }
-.rectangle5570 {
-  position: fixed;
-  left: 27.4688px;
-  top: 150.2197px;
-  width: 183.6973px;
-  height: 46.3535px;
-  border-radius: 10.3008px;
-  background-color: #275a94;
-}
+/* Add styles for other classes within the sidebar as needed */
 .dashboard2 {
-  color: #fff;
-  font-size: 13.7344px;
+  color: #aeaeb1;
+  font-size: 20.7344px;
   font-weight: 500;
   font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
     'Liberation Sans', sans-serif;
   position: fixed;
   left: 73.8223px;
   top: 165.6708px;
-  width: min-content;
-  height: min-content;
+  width: 13.4%;
+  height: 2%;
   white-space: nowrap;
   flex-direction: column;
+  transition: background-color 0.3s ease; /* Optional: Add a transition effect for smoother hover */
+  cursor: pointer;
 }
 .vector {
   position: fixed;
@@ -117,17 +115,19 @@
 }
 .courses {
   color: #aeaeb1;
-  font-size: 13.7344px;
+  font-size: 20.7344px;
   font-weight: 500;
   font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
     'Liberation Sans', sans-serif;
   position: fixed;
   left: 78.1143px;
   top: 216.3164px;
-  width: min-content;
-  height: min-content;
+  width: 13%;
+  height: 2%;
   white-space: nowrap;
   flex-direction: column;
+  transition: background-color 0.3s ease; /* Optional: Add a transition effect for smoother hover */
+  cursor: pointer;
 }
 .group1000004376 {
   position: fixed;
@@ -143,17 +143,19 @@
 }
 .planning {
   color: #aeaeb1;
-  font-size: 13.7344px;
+  font-size: 20.7344px;
   font-weight: 500;
   font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
     'Liberation Sans', sans-serif;
   position: fixed;
   left: 78.1143px;
   top: 266.1035px;
-  width: min-content;
-  height: min-content;
+  width: 13%;
+  height: 2%;
   white-space: nowrap;
   flex-direction: column;
+  transition: background-color 0.3s ease; /* Optional: Add a transition effect for smoother hover */
+  cursor: pointer;
 }
 .group1000004377 {
   position: fixed;
@@ -169,17 +171,19 @@
 }
 .statistics {
   color: #aeaeb1;
-  font-size: 13.7344px;
+  font-size: 20.7344px;
   font-weight: 500;
   font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
     'Liberation Sans', sans-serif;
   position: fixed;
   left: 78.1143px;
   top: 315.8906px;
-  width: min-content;
-  height: min-content;
+  width: 13%;
+  height: 2%;
   white-space: nowrap;
   flex-direction: column;
+  transition: background-color 0.3s ease; /* Optional: Add a transition effect for smoother hover */
+  cursor: pointer;
 }
 .group1000004378 {
   position: fixed;
@@ -195,17 +199,19 @@
 }
 .messages {
   color: #aeaeb1;
-  font-size: 13.7344px;
+  font-size: 20.7344px;
   font-weight: 500;
   font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
     'Liberation Sans', sans-serif;
   position: fixed;
   left: 78.1143px;
   top: 470.4023px;
-  width: min-content;
-  height: min-content;
+  width: 13%;
+  height: 2%;
   white-space: nowrap;
   flex-direction: column;
+  transition: background-color 0.3s ease; /* Optional: Add a transition effect for smoother hover */
+  cursor: pointer;
 }
 .group1000004379 {
   position: fixed;
@@ -221,17 +227,22 @@
 }
 .settings {
   color: #aeaeb1;
-  font-size: 13.7344px;
+  font-size: 20.7344px;
   font-weight: 500;
   font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
     'Liberation Sans', sans-serif;
   position: fixed;
   left: 78.1143px;
   top: 522.7646px;
-  width: min-content;
-  height: min-content;
+  width: 13%;
+  height: 2%;
   white-space: nowrap;
   flex-direction: column;
+  transition: background-color 0.3s ease; /* Optional: Add a transition effect for smoother hover */
+  cursor: pointer;
+}
+.dashboard2:hover, .courses:hover, .planning:hover, .statistics:hover, .messages:hover, .settings:hover {
+  background-color: rgb(5, 8, 51)
 }
 .group1000004380 {
   position: fixed;
@@ -245,49 +256,9 @@
   width: 100%;
   height: 100%;
 }
-.ellipse2549 {
-  position: fixed;
-  left: 172.5381px;
-  top: 466.1104px;
-  width: 25.752px;
-  height: 25.752px;
-  overflow: visible;
-}
 .icon10 {
   width: 100%;
   height: 100%;
-}
-._5 {
-  color: #fff;
-  font-size: 13.7344px;
-  font-weight: 500;
-  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    'Liberation Sans', sans-serif;
-  position: fixed;
-  left: 181.1221px;
-  top: 471.2607px;
-  width: min-content;
-  height: min-content;
-  white-space: nowrap;
-  flex-direction: column;
-}
-.rectangle5590 {
-  position: fixed;
-  left: 231.7676px;
-  top: 0;
-  width: 1.7168px;
-  height: 879px;
-  background-color: #f2f3f6;
-}
-.rectangle5591 {
-  transform-origin: top left;
-  position: fixed;
-  left: 232.626px;
-  top: 84.123px;
-  width: 1.7168px;
-  height: 1004.3262px;
-  background-color: #f2f3f6;
-  transform: matrix(0, -1, 1, 0, 0, 0);
 }
 .topBar {
   position: fixed;
@@ -335,12 +306,6 @@
   height: min-content;
   align-items: center;
   gap: 1.7168px;
-}
-.rectangle6 {
-  width: 1.7168px;
-  height: 17.168px;
-  border-radius: 1.7168px;
-  background-color: #8191a5;
 }
 .searchOrType {
   color: #9a9fa5;
