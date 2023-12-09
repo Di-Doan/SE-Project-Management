@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import LogStyle from "./LoginForm.module.css";
+import LogStyle from "./ForgotPassword.module.css";
 import axios from "axios";
 
-function LoginForm() {
-  const [data, setData] = useState({ id: "", password: "" });
+function ResetPassword() {
+  const [data, setData] = useState({ id: "", password: "", password2: "" });
   const [error, setError] = useState("");
 
   const handleChange = ({ currentTarget: input }) => {
@@ -40,10 +40,11 @@ function LoginForm() {
       <div className={LogStyle.box}>
         <div className={LogStyle.form}>
           <form className="login" onSubmit={handleSubmit}>
-            <h1 className={LogStyle.title}>Login</h1>
+            <h1 className={LogStyle.title}>Reset Password</h1>
+            <p className={LogStyle.idDisplay}>Student ID: 23232323</p>
             {error && <div className={LogStyle.error}>{error}</div>}
             <div className={LogStyle.input}>
-              <label htmlFor="id">Student ID</label>
+              <label htmlFor="id">New Password</label>
               <div>
                 <input
                   type="text"
@@ -55,13 +56,13 @@ function LoginForm() {
               </div>
             </div>
             <div className={LogStyle.input}>
-              <label htmlFor="password">Password</label>
+              <label htmlFor="email">Confirm New Password</label>
               <div>
                 <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  value={data.password}
+                  type="email"
+                  name="email"
+                  id="email"
+                  value={data.email}
                   onChange={handleChange}
                 />
               </div>
@@ -72,19 +73,13 @@ function LoginForm() {
               name="login"
               value="Login"
             >
-              Login
+              Submit
             </button>
           </form>
-
-          <div>
-            <Link to="/forgot-password">
-              Forget your password?
-            </Link>
-          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export default LoginForm;
+export default ResetPassword;

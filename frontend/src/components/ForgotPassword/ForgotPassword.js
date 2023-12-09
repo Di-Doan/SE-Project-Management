@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import LogStyle from "./LoginForm.module.css";
+import LogStyle from "./ForgotPassword.module.css";
 import axios from "axios";
 
-function LoginForm() {
+function ForgotPassword() {
   const [data, setData] = useState({ id: "", password: "" });
   const [error, setError] = useState("");
 
@@ -40,7 +40,7 @@ function LoginForm() {
       <div className={LogStyle.box}>
         <div className={LogStyle.form}>
           <form className="login" onSubmit={handleSubmit}>
-            <h1 className={LogStyle.title}>Login</h1>
+            <h1 className={LogStyle.title}>Forgotten Password</h1>
             {error && <div className={LogStyle.error}>{error}</div>}
             <div className={LogStyle.input}>
               <label htmlFor="id">Student ID</label>
@@ -55,13 +55,13 @@ function LoginForm() {
               </div>
             </div>
             <div className={LogStyle.input}>
-              <label htmlFor="password">Password</label>
+              <label htmlFor="email">Email</label>
               <div>
                 <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  value={data.password}
+                  type="email"
+                  name="email"
+                  id="email"
+                  value={data.email}
                   onChange={handleChange}
                 />
               </div>
@@ -72,19 +72,13 @@ function LoginForm() {
               name="login"
               value="Login"
             >
-              Login
+              Submit
             </button>
           </form>
-
-          <div>
-            <Link to="/forgot-password">
-              Forget your password?
-            </Link>
-          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export default LoginForm;
+export default ForgotPassword;
