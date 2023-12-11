@@ -4,8 +4,8 @@
 	"description": "NodeJs server for RMIT ChatConnect - SEPM project assignment",
 	"main": "index.js",
 	"scripts": {
-		"start": "PORT=8000 node index.js",
-		"dev": "PORT=8000 nodemon index.js"
+		"start": "node index.js",
+		"dev": "nodemon index.js"
 	},
 	"author": "",
 	"type": "module",
