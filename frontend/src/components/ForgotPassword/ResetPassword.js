@@ -4,7 +4,7 @@ import LogStyle from "./ForgotPassword.module.css";
 import axios from "axios";
 
 function ResetPassword() {
-  const [data, setData] = useState({ id: "", password: "", password2: "" });
+  const [data, setData] = useState({ code: "", id: "", password: "", password2: "" });
   const [error, setError] = useState("");
 
   const handleChange = ({ currentTarget: input }) => {
@@ -43,6 +43,18 @@ function ResetPassword() {
             <h1 className={LogStyle.title}>Reset Password</h1>
             <p className={LogStyle.idDisplay}>Student ID: 23232323</p>
             {error && <div className={LogStyle.error}>{error}</div>}
+            <div className={LogStyle.input}>
+              <label htmlFor="id">Code</label>
+              <div>
+                <input
+                  type="text"
+                  name="text"
+                  id="text"
+                  value={data.code}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
             <div className={LogStyle.input}>
               <label htmlFor="id">New Password</label>
               <div>
