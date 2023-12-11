@@ -1,24 +1,26 @@
 // DirectChatPage.js
 
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import{Link} from 'react-router-dom';
-import DirectChatSidebar from './DirectChatSidebar'; // Adjust the path accordingly
-import style from './DirectChatPage.css'
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import DirectChatSidebar from "./DirectChatSidebar"; // Adjust the path accordingly
+import style from "./DirectChatPage.css";
+import ava1 from "../../assets/avatar2.jpg";
+import ava2 from "../../assets/avatar3.jpg";
 
 const DirectChatPage = () => {
   const { id } = useParams();
   const [chat, setChat] = useState(null); // Set initial state to null
-  const [messageText, setMessageText] = useState('');
-  
+  const [messageText, setMessageText] = useState("");
+
   // Simulated useEffect to fetch chat data
   useEffect(() => {
     // Simulating fetching chat data from an API or other source
     // For simplicity, we set some initial data directly
     const initialChatData = {
-      name: 'John Doe', // Replace with actual chat data
+      name: "John Doe", // Replace with actual chat data
       messages: [
-        { id: 1, sender: 'John Doe', text: 'Hello there!' },
+        { id: 1, sender: "John Doe", text: "Hello there!" },
         // Add more messages as needed
       ],
     };
@@ -27,40 +29,43 @@ const DirectChatPage = () => {
   }, [id]);
 
   const handleSendMessage = () => {
-    if (messageText.trim() !== '') {
+    if (messageText.trim() !== "") {
       const newMessage = {
         id: chat.messages.length + 1,
-        sender: 'User',
+        sender: "User",
         text: messageText,
       };
 
-    setChat((prevChat) => ({
-      ...prevChat,
-      messages: [...prevChat.messages, newMessage],
-    }));
+      setChat((prevChat) => ({
+        ...prevChat,
+        messages: [...prevChat.messages, newMessage],
+      }));
 
-    // Reset message text after sending
-    setMessageText('');
-  }
-};
+      // Reset message text after sending
+      setMessageText("");
+    }
+  };
 
   if (!chat) {
     return <div>Loading...</div>; // Add loading state or spinner
   }
 
   const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       handleSendMessage();
     }
   };
 
   return (
-    <div className='direct-chat-container'>
+    <div className="direct-chat-container">
       <DirectChatSidebar />
-      <div className='main-content'>
+      <div className="main-content">
         <div className="top-bar">
           <div className="sender-info">
-            <div className="sender-avatar"> {/* Add sender's avatar here */}</div>
+            <div className="sender-avatar">
+              {" "}
+              {/* Add sender's avatar here */}
+            </div>
             <div className="sender-name">{chat.name}</div>
           </div>
           <button className="call-button">Call</button>
@@ -73,10 +78,16 @@ const DirectChatPage = () => {
           <div className="chat-messages">
             {/* Render chat messages here */}
             {chat.messages.map((message) => (
-              <div key={message.id} 
-              className={`message-box ${message.sender === 'User' ? 'user-message' : 'sender-message'}`}
+              <div
+                key={message.id}
+                className={`message-box ${
+                  message.sender === "User" ? "user-message" : "sender-message"
+                }`}
               >
-                <div className="message-avatar">{/* Add sender's avatar here */}</div>
+                <div className="message-avatar">
+                  {/* Add sender's avatar here */}
+
+                </div>
                 <div className="message-content">
                   <div className="message-text">{message.text}</div>
                 </div>
@@ -92,9 +103,11 @@ const DirectChatPage = () => {
                 value={messageText}
                 onChange={(e) => setMessageText(e.target.value)}
                 onKeyPress={handleKeyPress} /* Add the onKeyPress event */
-                placeholder='Type a message...'
+                placeholder="Type a message..."
               />
-              <button onClick={handleSendMessage} className="send-button">Send</button>
+              <button onClick={handleSendMessage} className="send-button">
+                Send
+              </button>
             </div>
           </div>
         </div>

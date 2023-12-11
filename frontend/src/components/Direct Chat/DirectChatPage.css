@@ -91,6 +91,7 @@
 /* Styles for user messages */
 .user-message {
     align-self: flex-end;
+    float: right;
 }
 
 /* Styles for sender messages */
