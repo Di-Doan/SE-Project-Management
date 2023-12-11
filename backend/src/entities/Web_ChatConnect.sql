@@ -57,6 +57,7 @@ CREATE TABLE Student (
     email VARCHAR(255),
     mobile VARCHAR(255),
     gpa DECIMAL(3, 2),
+    showGpa BOOLEAN NOT NULL,
     status INT NOT NULL,
     FULLTEXT (rmit_sid, fullname, email, mobile)
 );
