@@ -4,10 +4,11 @@
 	"description": "NodeJs server for RMIT ChatConnect - SEPM project assignment",
 	"main": "index.js",
 	"scripts": {
-		"start": "node index.js -p 8000",
-		"dev": "nodemon index.js -p 8000"
+		"start": "PORT=8000 node index.js",
+		"dev": "PORT=8000 nodemon index.js"
 	},
 	"author": "",
+	"type": "module",
 	"license": "ISC",
 	"dependencies": {
 		"bcrypt": "^5.1.1",
@@ -16,6 +17,7 @@
 		"expressjs": "^1.0.1",
 		"helmet": "^7.1.0",
 		"jsonwebtoken": "^9.0.2",
+		"mysql2": "^3.6.5",
 		"socket.io": "^4.7.2"
 	},
 	"devDependencies": {
