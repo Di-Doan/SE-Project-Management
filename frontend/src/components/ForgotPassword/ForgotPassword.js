@@ -4,7 +4,7 @@ import LogStyle from "./ForgotPassword.module.css";
 import axios from "axios";
 
 function ForgotPassword() {
-  const [data, setData] = useState({ id: "", password: "" });
+  const [data, setData] = useState({ id: "", email: "" });
   const [error, setError] = useState("");
 
   const handleChange = ({ currentTarget: input }) => {
@@ -42,18 +42,7 @@ function ForgotPassword() {
           <form className="login" onSubmit={handleSubmit}>
             <h1 className={LogStyle.title}>Forgotten Password</h1>
             {error && <div className={LogStyle.error}>{error}</div>}
-            <div className={LogStyle.input}>
-              <label htmlFor="id">Student ID</label>
-              <div>
-                <input
-                  type="text"
-                  name="text"
-                  id="text"
-                  value={data.id}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
+
             <div className={LogStyle.input}>
               <label htmlFor="email">Email</label>
               <div>
