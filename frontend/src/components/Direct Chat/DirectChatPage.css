@@ -30,12 +30,11 @@
     margin-right: 20px;
 }
 
-.sender-avatar {
+.sender-avatar img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: #fff; /* Set your desired background color */
-    margin-right: 10px;
+    object-fit: cover;
 }
 
 .sender-name {
@@ -67,18 +66,19 @@
 }
 
 /* Styles for each message */
-.message-box {
+.message {
     display: flex;
-    align-items: center;
+    flex-direction: center;
+    align-items: flex-start;
     margin-bottom: 10px;
+    clear: both;
 }
 
 /* Styles for the sender's avatar */
-.message-avatar {
+.message-avatar img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: #007bff;
     margin-right: 10px;
 }
 
@@ -90,13 +90,12 @@
 
 /* Styles for user messages */
 .user-message {
-    align-self: flex-end;
     float: right;
 }
 
 /* Styles for sender messages */
 .sender-message {
-    align-self: flex-start;
+    float: left;
 }
 
 .message-text {

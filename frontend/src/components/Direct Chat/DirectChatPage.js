@@ -63,7 +63,7 @@ const DirectChatPage = () => {
         <div className="top-bar">
           <div className="sender-info">
             <div className="sender-avatar">
-              {" "}
+              <img src={ava1} />
               {/* Add sender's avatar here */}
             </div>
             <div className="sender-name">{chat.name}</div>
@@ -71,22 +71,18 @@ const DirectChatPage = () => {
           <button className="call-button">Call</button>
         </div>
         <div className="direct-chat-page">
-          <div className="chat-header">
-            <div className="chat-avatar"> {/* Add avatar here */}</div>
-          </div>
-
           <div className="chat-messages">
             {/* Render chat messages here */}
             {chat.messages.map((message) => (
               <div
                 key={message.id}
-                className={`message-box ${
-                  message.sender === "User" ? "user-message" : "sender-message"
-                }`}
+                className={`message ${message.sender === 'User' ? 'user-message' : 'sender-message'}`}
               >
                 <div className="message-avatar">
-                  {/* Add sender's avatar here */}
-
+                  {message.sender === 'User' ? ('') :
+                    (
+                      <img src={ava1} alt="Sender Avatar" />
+                    )}
                 </div>
                 <div className="message-content">
                   <div className="message-text">{message.text}</div>
@@ -115,12 +111,14 @@ const DirectChatPage = () => {
       <div className="right-sidebar">
         <div className="right-sender-info">
           <div className="right-sender-avatar">
-            <img src="path-to-avatar-image" alt="Sender Avatar" />
+            <img src={ava1} alt="Sender Avatar" />
           </div>
           <div className="right-sender-details">
             <div className="right-sender-name">Sender Name</div>
             <div className="right-user-profile">
-              <Link to="/profile">View profile</Link>
+              <Link to="/profile">
+                <button className="profile-button">View profile</button>
+              </Link>
             </div>
           </div>
         </div>
