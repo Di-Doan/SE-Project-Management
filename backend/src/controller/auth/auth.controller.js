@@ -40,10 +40,10 @@ export async function signin(req, res) {
 	const { username, password } = req.body;
 	try {
 		const user = await student.getStudentByUsername(username, password);
-		if (!user) res.status(400).json({ error: 'Incorrect usernam or password' });
+		if (!user) res.status(400).json({ error: 'Incorrect username or password' });
 
 		const validatePassword = await bcrypt.compare(password, user.passowrd);
-		if (!validatePassword) res.status(400).json({ error: 'Incorrect usernam or password' });
+		if (!validatePassword) res.status(400).json({ error: 'Incorrect username or password' });
 
 		const accessToken = jwt.sign({ id: user.id }, process.env.JWT_ACCESS_TOKEN_SECRET, {
 			expiresIn: parseInt(process.env.JWT_ACCESS_TOKEN_EXPIRY),

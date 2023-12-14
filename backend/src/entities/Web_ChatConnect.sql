@@ -5,7 +5,7 @@ USE Web_ChatConnect;
 -- create tables
 CREATE TABLE Chat (
     chat_id INT PRIMARY KEY AUTO_INCREMENT,
-    chat_description VARCHAR(255),
+    chat_description VARCHAR(255)
 );
 
 CREATE TABLE Semester (
@@ -22,7 +22,7 @@ CREATE TABLE Course (
     semester_id INT NOT NULL,
     announcement_chat_id INT,
     reference_chat_id INT,
-    status INT NOT NULL
+    status INT NOT NULL,
     FOREIGN KEY (semester_id) REFERENCES Semester (semester_id) ON DELETE CASCADE,
     FOREIGN KEY (announcement_chat_id) REFERENCES Chat (chat_id) ON DELETE SET NULL,
     FOREIGN KEY (reference_chat_id) REFERENCES Chat (chat_id) ON DELETE SET NULL,
