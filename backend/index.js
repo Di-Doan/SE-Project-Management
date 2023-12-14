@@ -20,8 +20,8 @@ app.use(helmet());
 app.use(express.json());
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
-app.use('/auth', authRouter);
-app.use('/profile', profileRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/profile', profileRouter);
 // app.use('/courses');
 // app.use('/chats');
 // app.use('/friends');
