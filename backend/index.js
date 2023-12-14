@@ -7,6 +7,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import authRouter from './src/controller/auth/auth.router.js';
+import profileRouter from './src/controller/profile/profile.router.js';
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -20,10 +21,9 @@ app.use(express.json());
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.use('/auth', authRouter);
-app.use('/courses');
-app.use('/chats');
-app.use('/friends');
+app.use('/profile', profileRouter);
+// app.use('/courses');
+// app.use('/chats');
+// app.use('/friends');
 
-const server = app.listen(port, () => {
-	console.log(`App running on port ${port}`);
-});
+app.listen(port, () => console.log(`App running on port ${port}`));

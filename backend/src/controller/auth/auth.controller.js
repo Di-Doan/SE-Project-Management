@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+
 import * as student from '../../entities/student.service.js';
 
 export async function signup(req, res) {
@@ -52,14 +53,37 @@ export async function signin(req, res) {
 			expiresIn: parseInt(process.env.JWT_REFRESH_TOKEN_EXPIRY),
 		});
 
-		return res.status(200).json({
-			accessToken: accessToken,
-			refreshToken: refreshToken,
-		});
+		return res.status(200).json({ accessToken, refreshToken });
 	} catch (err) {
 		console.error(err);
 		return res.status(500).json({ error: 'Internal server error' });
 	}
+}
+
+export async function renew(req, res) {
+	const { refreshToken } = req.body;
+	if (!refreshToken) return res.status(400).json({ error: 'Missing refresh token' });
+	try {
+		const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_TOKEN_SECRET);
+		const user = await student.getStudentById(decoded.id);
+		if (!user) return res.status(400).json({ error: 'Invalid refresh token' });
+
+		const accessToken = jwt.sign({ id: user.id }, process.env.JWT_ACCESS_TOKEN_SECRET, {
+			expiresIn: parseInt(process.env.JWT_ACCESS_TOKEN_EXPIRY),
+		});
+		const refreshToken = jwt.sign({ id: user.id }, process.env.JWT_ACCESS_TOKEN_SECRET, {
+			expiresIn: parseInt(process.env.JWT_REFRESH_TOKEN_EXPIRY),
+		});
+
+		return res.status(200).json({ accessToken, refreshToken });
+	} catch (err) {
+		console.error(err);
+		return res.status(400).json({ error: 'Invalid refresh token' });
+	}
+}
+
+export async function signout(req, res) {
+	// Implement redis to blacklist token
 }
 
 export async function validateAuth(req, res, next) {
@@ -82,18 +106,15 @@ export async function validateAuth(req, res, next) {
 	}
 }
 
-export async function signout(req, res) {
-	// Implement redis to blacklist token
-}
+export async function validateRmit(req, res, next) {
+	const authHeader = req.headers.authorization;
+	if (!authHeader) res.status(401).json({ error: 'Unauthorized access' });
+	if (!authHeader.startsWith('Basic ') || !authHeader.split(' ')[1])
+		res.status(401).json({ error: 'Invalid access token' });
 
-export async function getProfile(req, res) {
-	const { user } = req;
-	return res.status(200).json(user);
-}
+	const encodedCredential = authHeader.split(' ')[1];
+	const decodedCredential = Buffer.from(encodedCredential, 'base64').toString('utf-8');
+	const [clientId, clientSecret] = decodedCredential.split(':');
 
-export async function updateProfile(req, res) {
-	const { id } = req.user;
-	const result = student.deleteStudent(id);
-	if (!result) return res.status(500).json({ error: 'Invalid access token' });
-	return res.status(500).json({ status: true });
+	return res.status(401).json({ error: 'Invalid access token' });
 }

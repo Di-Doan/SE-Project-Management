@@ -12,13 +12,14 @@ CREATE TABLE Semester (
     semester_id INT PRIMARY KEY AUTO_INCREMENT,
     semester_name VARCHAR(255) NOT NULL,
     start_date DATE NOT NULL,
-    end_date DATE NOT NULL
+    end_date DATE NOT NULL,
+    status INT NOT NULL
 );
 
 CREATE TABLE Course (
     course_id INT PRIMARY KEY AUTO_INCREMENT,
-    course_name VARCHAR(255) NOT NULL,
     course_code VARCHAR(255) NOT NULL,
+    course_name VARCHAR(255) NOT NULL,
     semester_id INT NOT NULL,
     announcement_chat_id INT,
     reference_chat_id INT,
@@ -55,15 +56,16 @@ CREATE TABLE Student (
     description VARCHAR(255),
     email VARCHAR(255),
     mobile VARCHAR(255),
-    messenger VARCHAR(255),
     gpa DECIMAL(3, 2),
+    showGpa BOOLEAN NOT NULL,
     status INT NOT NULL,
-    FULLTEXT (rmit_sid, fullname, email, mobile, messenger)
+    FULLTEXT (rmit_sid, fullname, email, mobile)
 );
 
 CREATE TABLE Student_Course (
     student_id INT NOT NULL,
     course_id INT NOT NULL,
+    availability BOOLEAN NOT NULL,
     FOREIGN KEY (student_id) REFERENCES Student (student_id) ON DELETE CASCADE,
     FOREIGN KEY (course_id) REFERENCES Course (course_id) ON DELETE CASCADE,
     PRIMARY KEY (student_id, course_id)
@@ -95,10 +97,10 @@ CREATE TABLE Message (
 
 CREATE TABLE DirectChat (
     first_std_id INT NOT NULL,
-    sencond_std_id INT NOT NULL,
+    second_std_id INT NOT NULL,
     chat_id INT NOT NULL,
     FOREIGN KEY (first_std_id) REFERENCES Student (student_id) ON DELETE CASCADE,
-    FOREIGN KEY (sencond_std_id) REFERENCES Student (student_id) ON DELETE CASCADE,
+    FOREIGN KEY (second_std_id) REFERENCES Student (student_id) ON DELETE CASCADE,
     FOREIGN KEY (chat_id) REFERENCES Chat (chat_id) ON DELETE CASCADE,
-    PRIMARY KEY (first_std_id, sencond_std_id)
+    PRIMARY KEY (first_std_id, second_std_id)
 );

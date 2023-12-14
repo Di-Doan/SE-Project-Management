@@ -65,12 +65,12 @@ export const createStudent = async (student) => {
 
 export const editStudentById = async (id, student) => {
 	try {
-		const { password, fullname, email, mobile, messenger, gpa } = student;
+		const { password, fullname, mobile, description, showGpa, gpa } = student;
 
 		const hashPassword = password ? await bcrypt.hash(password, 10) : undefined;
 
 		const [results] = await pool.query('UPDATE Student SET ? WHERE student_id = ?', [
-			{ fullname, mobile, email, messenger, gpa, password: hashPassword },
+			{ fullname, mobile, gpa, description, showGpa, password: hashPassword },
 			id,
 		]);
 
