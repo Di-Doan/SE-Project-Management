@@ -1,0 +1,180 @@
+/* Styles for the container */
+.direct-chat-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Styles for the main content area */
+.main-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Styles for the top bar */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #007bff;
+    /* Set your desired background color */
+    color: #fff;
+}
+
+/* Styles for sender information in the top bar */
+.sender-info {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.sender-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff; /* Set your desired background color */
+    margin-right: 10px;
+}
+
+.sender-name {
+    font-weight: bold;
+}
+
+/* Styles for the call button in the top bar */
+.call-button {
+    padding: 10px;
+    background-color: #28a745; /* Set your desired background color */
+    color: #fff; /* Set your desired text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; /* Adjust the font size */
+    margin-left: 20px;
+}
+
+/* Styles for the DirectChatPage content */
+.direct-chat-page {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-messages {
+    max-height: 400px; /* Adjust the max height as needed */
+    overflow-y: auto;
+}
+
+/* Styles for each message */
+.message-box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Styles for the sender's avatar */
+.message-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #007bff;
+    margin-right: 10px;
+}
+
+/* Styles for the message content (sender and text) */
+.message-content {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Styles for user messages */
+.user-message {
+    align-self: flex-end;
+    float: right;
+}
+
+/* Styles for sender messages */
+.sender-message {
+    align-self: flex-start;
+}
+
+.message-text {
+    font-size: 14px;
+    padding: 10px;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+}
+
+/* Styles for the message input container */
+.message-input-container {
+    position: fixed;
+    bottom: 0;
+    left: 292px;
+    right: 242px;
+    background-color: #fff;
+    padding: 15px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+/* Styles for the message input section */
+.message-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Adjust the width of the input field */
+.message-input input {
+    flex-grow: 1;
+    margin-right: 10px; /* Add some spacing between the input field and the button */
+  }
+
+.send-button {
+    padding: 10px;
+    background-color: #007bff;
+    /* Set your desired background color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Right sidebar styles */
+.right-sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.right-sender-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.right-sender-avatar img {
+    width: 80px; /* Adjust the width of the avatar as needed */
+    height: 80px; /* Adjust the height of the avatar as needed */
+    border-radius: 50%;
+    margin-bottom: 10px; /* Add margin between avatar and sender details */
+}
+
+.right-sender-details {
+    text-align: center;
+}
+
+.right-sender-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.right-user-profile{
+    color: #007bff; /* Adjust the color of the user profile link */
+    text-decoration: none;
+}
