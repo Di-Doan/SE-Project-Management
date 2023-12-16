@@ -3,10 +3,12 @@ import {} from 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
+import bodyParser from 'body-parser';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 import authRouter from './src/controller/auth/auth.router.js';
+import profileRouter from './src/controller/profile/profile.router.js';
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -18,12 +20,17 @@ app.use(cors({ origin: `http://localhost:${port}` }));
 app.use(helmet());
 app.use(express.json());
 app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
 
 app.use('/auth', authRouter);
-app.use('/courses');
-app.use('/chats');
-app.use('/friends');
+app.use('/profile', profileRouter);
+// app.use('/courses');
+// app.use('/chats');
+// app.use('/friends');
 
-const server = app.listen(port, () => {
-	console.log(`App running on port ${port}`);
-});
+app.listen(port, () => console.log(`App running on port ${port}`));
