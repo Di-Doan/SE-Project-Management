@@ -8,6 +8,7 @@ import { generateRandomNumber } from '../../utils/helper.js';
 
 export async function signup(req, res) {
 	const { sid, fullname, mobile, gpa } = req.body;
+	console.log(req.body);
 
 	if (!sid || !fullname || !gpa)
 		return res.status(400).json({ error: 'Missing required student property' });
