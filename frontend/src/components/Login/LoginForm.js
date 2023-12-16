@@ -4,7 +4,7 @@ import LogStyle from "./LoginForm.module.css";
 import axios from "axios";
 
 function LoginForm() {
-  const [data, setData] = useState({ id: "", password: "" });
+  const [data, setData] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
 
   const handleChange = ({ currentTarget: input }) => {
@@ -14,14 +14,15 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:5000/api/auth";
+      const url = "http://localhost:5000/auth/signin";
+      console.log(data);
       const { data: res } = await axios.post(url, data);
-      sessionStorage.setItem("token", res.data);
+      localStorage.setItem("token", res.data.accessToken);
       if (typeof window !== "undefined") {
-        sessionStorage.setItem("userid", data.id);
-        sessionStorage.setItem("signed", data.signed);
+        localStorage.setItem("id", data.username);
+        localStorage.setItem("signed", data.signed);
       }
-      window.location = "/";
+      window.location = "/dashboard";
       console.log(res.message);
     } catch (error) {
       if (
@@ -47,8 +48,8 @@ function LoginForm() {
               <div>
                 <input
                   type="text"
-                  name="text"
-                  id="text"
+                  name="username"
+                  id="username"
                   value={data.id}
                   onChange={handleChange}
                 />
@@ -71,6 +72,7 @@ function LoginForm() {
               type="submit"
               name="login"
               value="Login"
+              onChange={handleSubmit}
             >
               Login
             </button>

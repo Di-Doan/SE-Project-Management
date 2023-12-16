@@ -15,7 +15,7 @@ export const getStudentByUsername = async (username) => {
 
 		return results.length > 0
 			? {
-					id: results[0].student_id,
+					id: results[0].student_id, 
 					rmitSID: results[0].rmit_sid,
 					passowrd: results[0].password,
 			  }

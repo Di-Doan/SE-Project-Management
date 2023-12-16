@@ -104,3 +104,5 @@ CREATE TABLE DirectChat (
     FOREIGN KEY (chat_id) REFERENCES Chat (chat_id) ON DELETE CASCADE,
     PRIMARY KEY (first_std_id, second_std_id)
 );
+
+insert into Student value ("test", "test", 3.0);

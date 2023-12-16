@@ -5,6 +5,7 @@ import * as student from '../../entities/student.service.js';
 
 export async function signup(req, res) {
 	const { sid, fullname, mobile, gpa } = req.body;
+	console.log(req.body);
 
 	if (!sid || !fullname || !gpa)
 		return res.status(400).json({ error: 'Missing required student property' });
@@ -39,7 +40,8 @@ export async function resetPassword(req, res) {
 
 export async function signin(req, res) {
 	const { username, password } = req.body;
-	try {
+	console.log(req.body); 
+	try { 
 		const user = await student.getStudentByUsername(username, password);
 		if (!user) res.status(400).json({ error: 'Incorrect username or password' });
 
@@ -57,7 +59,7 @@ export async function signin(req, res) {
 	} catch (err) {
 		console.error(err);
 		return res.status(500).json({ error: 'Internal server error' });
-	}
+	} 
 }
 
 export async function renew(req, res) {
