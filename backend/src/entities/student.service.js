@@ -17,7 +17,7 @@ export const getStudentByUsername = async (username) => {
 			? {
 					id: results[0].student_id, 
 					rmitSID: results[0].rmit_sid,
-					passowrd: results[0].password,
+					password: results[0].password,
 			  }
 			: null;
 	} catch (err) {
