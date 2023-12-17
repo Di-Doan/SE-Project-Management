@@ -1,8 +1,9 @@
+import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import redis from '../../utils/redis.service.js';
-import { STUDENT_STATUS } from '../../entities/student.service.js';
 
+import redis from '../../utils/redis.service.js';
+import pool from '../../utils/mysql.service.js';
 import * as student from '../../entities/student.service.js';
 
 export async function signup(req, res) {
@@ -11,35 +12,65 @@ export async function signup(req, res) {
 	if (!sid || !fullname || !gpa)
 		return res.status(400).json({ error: 'Missing required student property' });
 
-	const createdUser = await student.createStudent({
-		sid,
-		fullname,
-		mobile,
-		gpa,
-		email: `${sid}@rmit.edu.vn`,
-	});
+	const connection = await pool.getConnection();
 
-	if (createdUser) return res.status(201).json({ status: true });
-	else return res.status(500).json({ error: 'Internal server error' });
+	try {
+		await connection.beginTransaction();
+		const createdUser = await student.createStudent(
+			{ sid, fullname, mobile, gpa, email: `${sid}@rmit.edu.vn` },
+			connection
+		);
+
+		const firebaseUser = await axios.post(
+			`${process.env.FIREBASE_AUTH_BASE_URL}:signUp?key=${process.env.FIREBASE_AUTH_API_KEY}`,
+			{ email: `${sid}@rmit.edu.vn`, password: sid }
+		);
+
+		if (createdUser && firebaseUser) {
+			await connection.commit();
+			res.status(201).json({ status: true });
+		} else {
+			await connection.rollback();
+			res.status(500).json({ error: 'Internal server error' });
+		}
+	} catch (err) {
+		console.error(err);
+		await connection.rollback();
+		res.status(500).json({ error: 'Internal server error' });
+	} finally {
+		connection.release();
+	}
 }
 
 export async function forgotPassword(req, res) {
 	const { email } = req.body;
 
-	// Implement send email to user
+	await axios.post(
+		`${process.env.FIREBASE_AUTH_BASE_URL}:sendOobCode?key=${process.env.FIREBASE_AUTH_API_KEY}`,
+		{ requestType: 'PASSWORD_RESET', email }
+	);
 
 	return res.status(200).json({ status: true });
 }
 
 export async function resetPassword(req, res) {
-	const { code, id, password } = req.body;
+	const { code, password } = req.body;
 
 	if (!code) return res.status(400).json({ error: 'Missing validation code' });
-	if (!id) return res.status(400).json({ error: 'Missing student id' });
 	if (!password) return res.status(400).json({ error: 'Missing new password' });
 
-	if (code != '123456') return res.status(400).json({ error: 'Invalid validation code' });
-	const result = await student.editStudentById(id, { password, status: STUDENT_STATUS.ACTIVE });
+	const confirmation = await axios.post(
+		`${process.env.FIREBASE_AUTH_BASE_URL}:resetPassword?key=${process.env.FIREBASE_AUTH_API_KEY}`,
+		{ oobCode: code }
+	);
+
+	if (!confirmation.email) return res.status(400).json({ error: 'Invalid validation code' });
+
+	const user = await student.getStudentByUsername(confirmation.email);
+	const result = await student.editStudentById(user.id, {
+		password,
+		status: student.STUDENT_STATUS.ACTIVE,
+	});
 
 	if (!result) return res.status(500).json({ error: 'Internal server error' });
 	else return res.status(200).json({ status: true });
