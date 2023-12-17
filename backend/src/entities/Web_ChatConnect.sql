@@ -51,13 +51,13 @@ CREATE TABLE Team (
 CREATE TABLE Student (
     student_id INT PRIMARY KEY AUTO_INCREMENT,
     rmit_sid VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
+    password VARCHAR(255),
     fullname VARCHAR(255) NOT NULL,
     description VARCHAR(255),
     email VARCHAR(255),
     mobile VARCHAR(255),
     gpa DECIMAL(3, 2),
-    showGpa BOOLEAN NOT NULL,
+    showGpa BOOLEAN NOT NULL DEFAULT 0,
     status INT NOT NULL,
     FULLTEXT (rmit_sid, fullname, email, mobile)
 );

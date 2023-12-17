@@ -5,8 +5,8 @@ import { validateAuth } from '../auth/auth.controller.js';
 
 const router = Router();
 
-router.get('/profile', validateAuth, profileController.getProfile);
-router.put('/profile', validateAuth, profileController.editProfile);
-router.delete('/profile', validateAuth, profileController.deleteProfile);
+router.get('/', validateAuth, profileController.getProfile);
+router.put('/', validateAuth, profileController.editProfile);
+router.delete('/', validateAuth, profileController.deleteProfile);
 
 export default router;
