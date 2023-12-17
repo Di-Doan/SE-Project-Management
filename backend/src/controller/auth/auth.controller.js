@@ -130,7 +130,7 @@ export async function validateAuth(req, res, next) {
 	}
 }
 
-export async function validateRmit(req, res, next) {
+export async function validateRmitClient(req, res, next) {
 	const authHeader = req.headers.authorization;
 	if (!authHeader) return res.status(401).json({ error: 'Unauthorized access' });
 	if (!authHeader.startsWith('Basic ') || !authHeader.split(' ')[1])
@@ -140,5 +140,11 @@ export async function validateRmit(req, res, next) {
 	const decodedCredential = Buffer.from(encodedCredential, 'base64').toString('utf-8');
 	const [clientId, clientSecret] = decodedCredential.split(':');
 
-	return res.status(401).json({ error: 'Invalid access token' });
+	if (
+		clientId != process.env.BASIC_AUTH_RMIT_ID ||
+		clientSecret != process.env.BASIC_AUTH_RMIT_SECRET
+	)
+		return res.status(401).json({ error: 'Invalid access token' });
+
+	next();
 }
