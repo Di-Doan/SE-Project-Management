@@ -1,4 +1,6 @@
+import bcrypt from 'bcrypt';
 import pool from '../utils/mysql.service.js';
+import removeUndefined from '../utils/remove_undefined.js';
 
 export const STUDENT_STATUS = {
 	PENDING: 0,
@@ -10,14 +12,14 @@ export const getStudentsByFilters = async (filters) => {};
 
 export const getStudentByUsername = async (username) => {
 	try {
-		const queryString = 'SELECT * FROM Student WHERE Student.email = ? AND Student.status = ?';
-		const [results] = await pool.query(queryString, [username, STUDENT_STATUS.ACTIVE]);
+		const queryString = 'SELECT * FROM Student WHERE Student.email = ? OR Student.rmit_sid = ?';
+		const [results] = await pool.query(queryString, [username, username, STUDENT_STATUS.ACTIVE]);
 
 		return results.length > 0
 			? {
 					id: results[0].student_id, 
 					rmitSID: results[0].rmit_sid,
-					passowrd: results[0].password,
+					password: results[0].password,
 			  }
 			: null;
 	} catch (err) {
@@ -53,7 +55,7 @@ export const createStudent = async (student) => {
 		const { sid, fullname, mobile, gpa } = student;
 
 		const [results] = await pool.query('INSERT INTO Student SET ?', [
-			{ rmit_sid: sid, fullname, mobile, gpa, status: STUDENT_STATUS.PENDING },
+			removeUndefined({ rmit_sid: sid, fullname, mobile, gpa, status: STUDENT_STATUS.PENDING }),
 		]);
 
 		return results.insertId;
@@ -65,12 +67,20 @@ export const createStudent = async (student) => {
 
 export const editStudentById = async (id, student) => {
 	try {
-		const { password, fullname, mobile, description, showGpa, gpa } = student;
+		const { password, fullname, mobile, description, showGpa, gpa, status } = student;
 
-		const hashPassword = password ? await bcrypt.hash(password, 10) : undefined;
+		const hashPassword = await (password ? bcrypt.hash(password, 10) : undefined);
 
 		const [results] = await pool.query('UPDATE Student SET ? WHERE student_id = ?', [
-			{ fullname, mobile, gpa, description, showGpa, password: hashPassword },
+			removeUndefined({
+				fullname,
+				mobile,
+				gpa,
+				description,
+				showGpa,
+				status,
+				password: hashPassword,
+			}),
 			id,
 		]);
 
