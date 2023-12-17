@@ -56,6 +56,11 @@ const DirectChatPage = () => {
     }
   };
 
+  const getCurrentVietnamTime = () => {
+    const options = { timeZone: 'Asia/Ho_Chi_Minh', hour: 'numeric', minute: 'numeric' };
+    return new Date().toLocaleString('en-US', options);
+  };
+
   return (
     <div className="direct-chat-container">
       <DirectChatSidebar />
@@ -86,6 +91,9 @@ const DirectChatPage = () => {
                 </div>
                 <div className="message-content">
                   <div className="message-text">{message.text}</div>
+                  <div className="message-time">
+                    {getCurrentVietnamTime()}
+                  </div>
                 </div>
               </div>
             ))}
