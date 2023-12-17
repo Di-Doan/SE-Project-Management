@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import LogStyle from "./LoginForm.module.css";
 import axios from "axios";
+// import axiosInstance from "../../ultilities/axiosInstance";
 
 function LoginForm() {
   const [data, setData] = useState({ username: "", password: "" });
@@ -15,13 +16,9 @@ function LoginForm() {
     e.preventDefault();
     try {
       const url = "http://localhost:5000/auth/signin";
-      console.log(data);
       const { data: res } = await axios.post(url, data);
-      localStorage.setItem("token", res.data.accessToken);
-      if (typeof window !== "undefined") {
-        localStorage.setItem("id", data.username);
-        localStorage.setItem("signed", data.signed);
-      }
+      localStorage.setItem("authTokens", res.data.accessToken);
+
       window.location = "/dashboard";
       console.log(res.message);
     } catch (error) {
