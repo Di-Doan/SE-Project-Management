@@ -1,9 +1,24 @@
 import { NavLink, Outlet } from "react-router-dom";
 import "./UserProfileSideBar.css";
 import { ReactComponent as MenuIcon } from "../../assets/menu-icon.svg";
-
+import axiosInstance from "../../ultilities/axiosInstance";
 
 function UserProfileSideBar() {
+  const authTokens = localStorage.getItem("authTokens")
+    ? JSON.parse(localStorage.getItem("authTokens"))
+    : null;
+
+  const signOut = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axiosInstance.post('/auth/signout', authTokens)
+      console.log(response);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
   const toggleMenu = () => {
     let toggle = document.querySelector(".toggle");
     let sideNav = document.querySelector(".side-nav");
@@ -58,12 +73,12 @@ function UserProfileSideBar() {
             </li>
 
             <li className="side-nav-link" id="sign-out-link">
-              <NavLink to="/admin/login">
+             
                 <span className="side-nav-icon">
                   <em className="fas fa-sign-out"></em>
                 </span>
-                <span className="title">Sign out</span>
-              </NavLink>
+                <button className="title" onClick={signOut}>Sign out</button>
+ 
             </li>
           </ul>
         </div>

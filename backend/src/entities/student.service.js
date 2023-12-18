@@ -42,6 +42,7 @@ export const getStudentById = async (id) => {
 					mobile: results[0].mobile,
 					messenger: results[0].messenger,
 					gpa: results[0].gpa,
+					showGpa: results[0].showGpa
 			  }
 			: null;
 	} catch (err) {

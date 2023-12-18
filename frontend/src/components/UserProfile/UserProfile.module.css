@@ -280,6 +280,43 @@ body {
   height: min-content;
   flex-direction: column;
 }
+
+.studentGPA {
+  color: #000000;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+
+  position: absolute;
+  left: 360px;
+  top: 1100px;
+  width: 143px;
+  height: min-content;
+  flex-direction: column;
+}
+
+.showGPA {color: #000000;
+
+  position: absolute;
+  left: 710px;
+  top: 1100px;
+  width: 143px;
+  height: min-content;
+  flex-direction: column;}
+
+.showGPALabel {color: #000000;
+  font-size: 18px;
+  font-family: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+
+  position: absolute;
+  left: 800px;
+  top: 1100px;
+  width: 143px;
+  height: min-content;
+  flex-direction: column;}
+
 .saveButton {
   position: absolute;
   left: 926px;

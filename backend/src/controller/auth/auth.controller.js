@@ -8,7 +8,6 @@ import { generateRandomNumber } from '../../utils/helper.js';
 
 export async function signup(req, res) {
 	const { sid, fullname, mobile, gpa } = req.body;
-	console.log(req.body);
 
 	if (!sid || !fullname || !gpa)
 		return res.status(400).json({ error: 'Missing required student property' });
@@ -113,10 +112,11 @@ export async function signin(req, res) {
 
 	try {
 		const user = await student.getStudentByUsername(username);
-		if (!user) return res.status(400).json({ error: 'Incorrect username or password' });
+		if (!user) return res.status(400).json({ error: 'Incorrect student ID or password' });
 
 		const validatePassword = await bcrypt.compare(password, user.password);
-		if (!validatePassword) return res.status(400).json({ error: 'Incorrect username or password' });
+		if (!validatePassword)
+			return res.status(400).json({ error: 'Incorrect student ID or password' });
 
 		const accessToken = jwt.sign({ id: user.id }, process.env.JWT_ACCESS_TOKEN_SECRET, {
 			expiresIn: parseInt(process.env.JWT_ACCESS_TOKEN_EXPIRY),

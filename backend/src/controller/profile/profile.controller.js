@@ -22,6 +22,7 @@ export async function editProfile(req, res) {
 		return res.status(200).json({ message: 'Profile updated successfully', user: updatedUser });
 	} catch (err) {
 		console.error('Error updating profile:', err);
+
 		return res.status(500).json({ error: 'Internal server error' });
 	}
 }
