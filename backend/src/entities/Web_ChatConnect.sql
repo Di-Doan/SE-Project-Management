@@ -105,4 +105,4 @@ CREATE TABLE DirectChat (
     PRIMARY KEY (first_std_id, second_std_id)
 );
 
-insert into Student value ("test", "test", 3.0);
+

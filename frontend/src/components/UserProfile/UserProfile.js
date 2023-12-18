@@ -8,7 +8,7 @@ import UserProfileSideBar from "../UserProfileSideBar/UserProfileSideBar";
 import axiosInstance from "../../ultilities/axiosInstance";
 
 function UserProfile() {
-  const [user, setUser] = useState({course: [], email: "", fullname: "", gpa: "", showGPA: 0, id: 0, mobile: "", rmitSID: ""});
+  const [user, setUser] = useState({});
   const [gpa, setGpa] = useState();
   const [oldData, setOldData] = useState();
 
@@ -23,22 +23,34 @@ function UserProfile() {
   }
 
   const getData = async () => {
-        try {
+    try {
       const response = await axiosInstance.get("/profile");
-      console.log(response);
-          setUser(response.data.user)
+      setUser(response.data.user);
+      setOldData(response.data.user);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
-  useEffect( () => {
+  useEffect(() => {
     getData();
   }, []);
 
-  const showGPA = () => {};
+  const showGPA = () => {
+    if (user.showGpa == 1) {
+      setUser({ ...user, showGpa: 0 });
+    } else return setUser({ ...user, showGpa: 1 });
+  };
 
-  const saveChanges = () => {};
+  const saveChanges = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axiosInstance.put("/profile", user);
+      window.location = "/profile";
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const cancelChanges = () => {
     setUser(oldData);
@@ -85,22 +97,30 @@ function UserProfile() {
 
       <div>
         <div className={ProfileStyle.introductionToMangagment}>
-          Introduction to Mangagment
+          {user.courses ? user.courses[0].name : "empty"}
         </div>
-        <div className={ProfileStyle.buildingITSystem}>Building IT system</div>
-        <div className={ProfileStyle.userDesign}>User-Design</div>
-        <div className={ProfileStyle.currentCourse}>Current Course</div>
+        <div className={ProfileStyle.buildingITSystem}>
+          {user.courses ? user.courses[1].name : "empty"}
+        </div>
+        <div className={ProfileStyle.userDesign}>
+          {user.courses ? user.courses[2].name : "empty"}
+        </div>
+        <div className={ProfileStyle.currentCourse}>Current Courses</div>
       </div>
 
       <div>
         <div className={ProfileStyle.currentGPA}>Current GPA</div>
-        <div className={ProfileStyle.studentGPA}>Student GPA</div>
+        <div className={ProfileStyle.studentGPA}>
+          {user.gpa ? user.gpa : "Student GPA"}
+        </div>
         <input
           className={ProfileStyle.showGPA}
-          type="radio"
+          type="checkbox"
           id="showGPA"
           name="showGPA"
           value="showGPA"
+          checked={user.showGpa == 1 ? true : false}
+          onClick={showGPA}
         />
         <label className={ProfileStyle.showGPALabel} for="showGPA">
           {" "}
@@ -109,8 +129,12 @@ function UserProfile() {
       </div>
 
       <div>
-        <button className={ProfileStyle.saveButton}>Save Changes</button>
-        <button className={ProfileStyle.cancelButton}>Cancel</button>
+        <button className={ProfileStyle.saveButton} onClick={saveChanges}>
+          Save Changes
+        </button>
+        <button className={ProfileStyle.cancelButton} onClick={cancelChanges}>
+          Cancel
+        </button>
       </div>
     </div>
   );
