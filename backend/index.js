@@ -28,7 +28,7 @@ app.use(
 app.use(bodyParser.json());
 
 app.use('/api/auth', authRouter);
-app.use('/api/profile', profileRouter);
+app.use('/api/profile', profileRouter); 
 // app.use('/courses');
 // app.use('/chats');
 // app.use('/friends');

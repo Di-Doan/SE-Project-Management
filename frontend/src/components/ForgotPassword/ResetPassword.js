@@ -2,27 +2,38 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import LogStyle from "./ForgotPassword.module.css";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+import axiosInstance from "../../ultilities/axiosInstance";
 
 function ResetPassword() {
-  const [data, setData] = useState({ code: "", id: "", password: "", password2: "" });
+  const [data, setData] = useState({ code: "123456", id: "", password: "" });
   const [error, setError] = useState("");
+  const [token, setToken] = useState();
+
+  const authTokens = localStorage.getItem("authTokens")
+    ? JSON.parse(localStorage.getItem("authTokens"))
+    : null;
+
+  useState(() => {
+    if (authTokens) {
+      const token = jwtDecode(authTokens.accessToken);
+      setData({ ...data, id: token.id });
+      console.log(data);
+    }
+  }, []);
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
+    console.log(data);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:5000/api/auth";
-      const { data: res } = await axios.post(url, data);
-      sessionStorage.setItem("token", res.data);
-      if (typeof window !== "undefined") {
-        sessionStorage.setItem("userid", data.id);
-        sessionStorage.setItem("signed", data.signed);
-      }
-      window.location = "/";
-      console.log(res.message);
+      const response = await axiosInstance.post("/auth/reset-password", data);
+
+      console.log("success");
+      window.location = '/login';
     } catch (error) {
       if (
         error.response &&
@@ -41,7 +52,7 @@ function ResetPassword() {
         <div className={LogStyle.form}>
           <form className="login" onSubmit={handleSubmit}>
             <h1 className={LogStyle.title}>Reset Password</h1>
-            <p className={LogStyle.idDisplay}>Student ID: 23232323</p>
+            <p className={LogStyle.idDisplay}>Student ID: {data.id}</p>
             {error && <div className={LogStyle.error}>{error}</div>}
             <div className={LogStyle.input}>
               <label htmlFor="id">Code</label>
@@ -60,21 +71,9 @@ function ResetPassword() {
               <div>
                 <input
                   type="text"
-                  name="text"
-                  id="text"
-                  value={data.id}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-            <div className={LogStyle.input}>
-              <label htmlFor="email">Confirm New Password</label>
-              <div>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  value={data.email}
+                  name="password"
+                  id="password"
+                  value={data.password}
                   onChange={handleChange}
                 />
               </div>

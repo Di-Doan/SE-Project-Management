@@ -7,7 +7,6 @@ import * as student from '../../entities/student.service.js';
 
 export async function signup(req, res) {
 	const { sid, fullname, mobile, gpa } = req.body;
-	console.log(req.body);
 
 	if (!sid || !fullname || !gpa)
 		return res.status(400).json({ error: 'Missing required student property' });
@@ -32,7 +31,7 @@ export async function forgotPassword(req, res) {
 	return res.status(200).json({ status: true });
 }
 
-export async function resetPassword(req, res) {
+export async function resetPassword(req, res) { 
 	const { code, id, password } = req.body;
 
 	if (!code) return res.status(400).json({ error: 'Missing validation code' });
@@ -53,10 +52,10 @@ export async function signin(req, res) {
 
 	try {
 		const user = await student.getStudentByUsername(username);
-		if (!user) return res.status(400).json({ error: 'Incorrect username or password' });
+		if (!user) return res.status(400).json({ error: 'Incorrect student ID or password' });
 
 		const validatePassword = await bcrypt.compare(password, user.password);
-		if (!validatePassword) return res.status(400).json({ error: 'Incorrect username or password' });
+		if (!validatePassword) return res.status(400).json({ error: "Incorrect student ID or password" });
 
 		const accessToken = jwt.sign({ id: user.id }, process.env.JWT_ACCESS_TOKEN_SECRET, {
 			expiresIn: parseInt(process.env.JWT_ACCESS_TOKEN_EXPIRY),
@@ -126,7 +125,7 @@ export async function validateAuth(req, res, next) {
 		req.user = user;
 		next();
 	} catch (err) {
-		console.err('Error validating authentication:', err);
+		console.error('Error validating authentication:', err);
 		return res.status(401).json({ error: 'Invalid access token' });
 	}
 }

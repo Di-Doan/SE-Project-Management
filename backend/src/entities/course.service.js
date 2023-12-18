@@ -6,9 +6,9 @@ export const COURSE_STATUS = {
 };
 
 export const getCourses = async (filter) => {
-	const whereQuery = '';
+	var whereQuery = '';
 	if (filter.studentId) {
-		whereQuery += `sc.student_id = ${pool.escape(studentId)}`;
+		whereQuery += `sc.student_id = ${pool.escape(filter.studentId)}`;
 	}
 
 	const queryString = `
