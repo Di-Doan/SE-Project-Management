@@ -11,8 +11,6 @@ import { Ellipse2615Icon } from './Ellipse2615Icon.tsx';
 import { Ellipse2616Icon } from './Ellipse2616Icon.tsx';
 import { Ellipse2617Icon } from './Ellipse2617Icon.tsx';
 import { Group1000004376Icon } from './Group1000004376Icon.tsx';
-import { Group1000004377Icon } from './Group1000004377Icon.tsx';
-import { Group1000004378Icon } from './Group1000004378Icon.tsx';
 import { Group1000004379Icon } from './Group1000004379Icon.tsx';
 import { Group1000004380Icon } from './Group1000004380Icon.tsx';
 import { Group1000004396Icon2 } from './Group1000004396Icon2.tsx';
@@ -71,14 +69,6 @@ export const Design = memo(function Design(props = {}) {
           <div className={classes.courses}>Courses</div>
           <div className={classes.group1000004376}>
             <Group1000004376Icon className={classes.icon5} />
-          </div>
-          <div className={classes.planning}>Planning</div>
-          <div className={classes.group1000004377}>
-            <Group1000004377Icon className={classes.icon6} />
-          </div>
-          <div className={classes.statistics}>Statistics</div>
-          <div className={classes.group1000004378}>
-            <Group1000004378Icon className={classes.icon7} />
           </div>
           <Link to="/Login" className={classes.sidebarLink}>
             <div className={classes.messages}>Messages</div>
