@@ -8,7 +8,6 @@ import axiosInstance from "../../ultilities/axiosInstance";
 function ResetPassword() {
   const [data, setData] = useState({ code: "123456", id: "", password: "" });
   const [error, setError] = useState("");
-  const [token, setToken] = useState();
 
   const authTokens = localStorage.getItem("authTokens")
     ? JSON.parse(localStorage.getItem("authTokens"))

@@ -19,13 +19,13 @@ function LoginForm() {
       localStorage.setItem("authTokens", JSON.stringify(response.data));
       window.location = "/profile";
     } catch (error) {
+      console.log(error)
       if (
         error.response &&
         error.response.status >= 400 &&
         error.response.status <= 500
       ) {
         setError(error.response.data.error);
-        console.log(error);
       }
     }
   };

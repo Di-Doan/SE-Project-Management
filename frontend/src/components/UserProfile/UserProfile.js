@@ -9,17 +9,11 @@ import axiosInstance from "../../ultilities/axiosInstance";
 
 function UserProfile() {
   const [user, setUser] = useState({});
-  const [gpa, setGpa] = useState();
   const [oldData, setOldData] = useState();
+  const [auth, setAuth] = useState(false);
 
-  const authTokens = localStorage.getItem("authTokens")
-    ? JSON.parse(localStorage.getItem("authTokens"))
-    : null;
-
-  if (!authTokens) {
+  if (auth) {
     window.location = "/login";
-  } else {
-    const token = jwtDecode(authTokens.accessToken);
   }
 
   const getData = async () => {
@@ -28,7 +22,9 @@ function UserProfile() {
       setUser(response.data.user);
       setOldData(response.data.user);
     } catch (error) {
-      console.log(error);
+      if (error) {
+        setAuth(true);
+      }
     }
   };
 
@@ -48,6 +44,13 @@ function UserProfile() {
       const response = await axiosInstance.put("/profile", user);
       window.location = "/profile";
     } catch (error) {
+      if (
+        error.response.request.status >= 400 &&
+        error.response.request.status <= 500
+      ) {
+        window.location = "/login";
+      }
+
       console.log(error);
     }
   };
