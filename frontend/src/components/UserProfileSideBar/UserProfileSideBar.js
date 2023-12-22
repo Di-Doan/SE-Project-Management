@@ -8,16 +8,20 @@ function UserProfileSideBar() {
     ? JSON.parse(localStorage.getItem("authTokens"))
     : null;
 
+  if (!authTokens) {
+    window.location = "/login";
+  }
+
   const signOut = async (e) => {
     e.preventDefault();
     try {
-      const response = await axiosInstance.post('/auth/signout', authTokens)
-      console.log(response);
+      const response = await axiosInstance.post("/auth/signout", authTokens);
+      localStorage.removeItem("authTokens");
+      window.location = "/profile";
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
-
+  };
 
   const toggleMenu = () => {
     let toggle = document.querySelector(".toggle");
@@ -73,12 +77,12 @@ function UserProfileSideBar() {
             </li>
 
             <li className="side-nav-link" id="sign-out-link">
-             
-                <span className="side-nav-icon">
-                  <em className="fas fa-sign-out"></em>
-                </span>
-                <button className="title" onClick={signOut}>Sign out</button>
- 
+              <span className="side-nav-icon">
+                <em className="fas fa-sign-out"></em>
+              </span>
+              <button className="title" onClick={signOut}>
+                Sign out
+              </button>
             </li>
           </ul>
         </div>
