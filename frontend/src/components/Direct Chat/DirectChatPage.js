@@ -81,17 +81,26 @@ const DirectChatPage = () => {
             {chat.messages.map((message) => (
               <div
                 key={message.id}
-                className={`message ${message.sender === 'User' ? 'user-message' : 'sender-message'}`}
+                className={`message ${
+                  message.sender === "User" ? "user-message" : "sender-message"
+                }`}
               >
                 <div className="message-avatar">
-                  {message.sender === 'User' ? ('') :
-                    (
-                      <img src={ava1} alt="Sender Avatar" />
-                    )}
+                  {message.sender === "User" ? (
+                    ""
+                  ) : (
+                    <img src={ava1} alt="Sender Avatar" />
+                  )}
                 </div>
                 <div className="message-content">
                   <div className="message-text">{message.text}</div>
-                  <div className="message-time">
+                  <div
+                    className={`${
+                      message.sender === "User"
+                        ? "message-time-user"
+                        : "message-time"
+                    }`}
+                  >
                     {getCurrentVietnamTime()}
                   </div>
                 </div>

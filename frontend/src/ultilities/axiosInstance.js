@@ -21,10 +21,18 @@ axiosInstance.interceptors.request.use(async (req) => {
     req.headers.Authorization = `Bearer ${authTokens?.accessToken}`;
   }
 
-  const user = jwtDecode(authTokens.accessToken);
-  const isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1;
+  if (authTokens) {
+    const user = jwtDecode(authTokens?.accessToken);
+    const isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1;
+    if (!isExpired) return req;
 
-  if (!isExpired) return req;
+    const response = await axios.post(`${baseURL}/auth/renew`, {
+      refreshToken: authTokens.refreshToken,
+    });
+
+    localStorage.setItem("authTokens", JSON.stringify(response.data));
+    req.headers.Authorization = `Bearer ${authTokens?.accessToken}`;
+  }
 
   return req;
 });
