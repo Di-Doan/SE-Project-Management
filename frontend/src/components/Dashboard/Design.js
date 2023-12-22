@@ -28,11 +28,6 @@ import { VectorIcon2 } from './VectorIcon2.tsx';
 import { VectorIcon3 } from './VectorIcon3.tsx';
 import { VectorIcon4 } from './VectorIcon4.tsx';
 import { VectorIcon5 } from './VectorIcon5.tsx';
-import { VectorIcon9 } from './VectorIcon9.tsx';
-import { VectorIcon10 } from './VectorIcon10.tsx';
-import { VectorIcon11 } from './VectorIcon11.tsx';
-import { VectorIcon12 } from './VectorIcon12.tsx';
-import { VectorIcon13 } from './VectorIcon13.tsx';
 import rmitLogo from './rmit-logo.png';
 import { ReactComponent as HomeIcon } from './home-icon.svg';
 
@@ -218,37 +213,22 @@ export const Design = memo(function Design(props = {}) {
           <div className={classes.image2362}></div>
           <div className={classes._3DAnimationConference3}>3D Animation Conference</div>
           <div className={classes.december221030PM2}>December 22, 10:30 PM</div>
-          <div className={classes.vector9}>
-            <VectorIcon9 className={classes.icon33} />
-          </div>
           <div className={classes.rectangle55976}></div>
           <div className={classes.image2336}></div>
           <div className={classes._3DAnimationConference4}>3D Animation Conference</div>
           <div className={classes.december221030PM3}>December 22, 10:30 PM</div>
-          <div className={classes.vector10}>
-            <VectorIcon10 className={classes.icon34} />
-          </div>
           <div className={classes.rectangle55977}></div>
           <div className={classes.image2364}></div>
           <div className={classes._3DAnimationConference5}>3D Animation Conference</div>
           <div className={classes.december221030PM4}>December 22, 10:30 PM</div>
-          <div className={classes.vector11}>
-            <VectorIcon11 className={classes.icon35} />
-          </div>
           <div className={classes.rectangle55978}></div>
           <div className={classes.image2338}></div>
           <div className={classes._3DAnimationConference6}>3D Animation Conference</div>
           <div className={classes.december221030PM5}>December 22, 10:30 PM</div>
-          <div className={classes.vector12}>
-            <VectorIcon12 className={classes.icon36} />
-          </div>
           <div className={classes.rectangle55979}></div>
           <div className={classes.image2366}></div>
           <div className={classes._3DAnimationConference7}>3D Animation Conference</div>
           <div className={classes.december221030PM6}>December 22, 10:30 PM</div>
-          <div className={classes.vector13}>
-            <VectorIcon13 className={classes.icon37} />
-          </div>
         </div>
       </div>
     </div>

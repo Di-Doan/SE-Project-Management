@@ -7,6 +7,7 @@
   background-color: #d63b3b;
   overflow: hidden;
 }
+
 .rectangle5695 {
   position: relative;
   left: 0;
@@ -15,18 +16,22 @@
   height: 1500px;
   background-color: #0a2442;
 }
+
 .icon {
   width: 100%;
   height: 100%;
 }
+
 .icon2 {
   width: 100%;
   height: 100%;
 }
+
 .icon3 {
   width: 100%;
   height: 100%;
 }
+
 .dashboard {
   position: absolute;
   left: 350px;
@@ -39,6 +44,7 @@
   overflow: hidden;
   box-shadow: 0px 17.168px 103.0078px 0px #b2b2b21f;
 }
+
 .rectangle5569 {
   position: fixed;
   left: 0;
@@ -47,17 +53,21 @@
   height: 100%;
   background-color: #ffffff;
 }
+
 .rMITLogo_Horizontal1 {
   position: fixed;
   left: 27px;
   top: 18px;
   width: 145px;
   height: 112px;
-  background-image:/* webpackIgnore: true */ url('/assets/rMITLogo_Horizontal1.png');
+  background-image:
+    /* webpackIgnore: true */
+    url('/assets/rMITLogo_Horizontal1.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 .account {
   color: #3c3e43;
   font-size: 13.7344px;
@@ -72,18 +82,25 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .sidebar {
-  width: 233px; /* Adjust the width as needed */
-  height: 100%; /* Make it full height of the viewport */
-  background-color: #ffffff; /* Set the background color as needed */
-  color: #ecf0f1; /* Set the text color as needed */
-  padding: 20px; /* Adjust padding as needed */
+  width: 233px;
+  /* Adjust the width as needed */
+  height: 100%;
+  /* Make it full height of the viewport */
+  background-color: #ffffff;
+  /* Set the background color as needed */
+  color: #ecf0f1;
+  /* Set the text color as needed */
+  padding: 20px;
+  /* Adjust padding as needed */
   position: fixed;
   top: 0;
   left: 0;
   display: flex;
   flex-direction: column;
 }
+
 /* Add styles for other classes within the sidebar as needed */
 .dashboard2 {
   color: #aeaeb1;
@@ -98,9 +115,11 @@
   height: 2%;
   white-space: nowrap;
   flex-direction: column;
-  transition: background-color 0.3s ease; /* Optional: Add a transition effect for smoother hover */
+  transition: background-color 0.3s ease;
+  /* Optional: Add a transition effect for smoother hover */
   cursor: pointer;
 }
+
 .vector {
   position: fixed;
   left: 47.2119px;
@@ -109,10 +128,12 @@
   height: 20.6016px;
   overflow: visible;
 }
+
 .icon4 {
   width: 100%;
   height: 100%;
 }
+
 .courses {
   color: #aeaeb1;
   font-size: 20.7344px;
@@ -126,9 +147,11 @@
   height: 2%;
   white-space: nowrap;
   flex-direction: column;
-  transition: background-color 0.3s ease; /* Optional: Add a transition effect for smoother hover */
+  transition: background-color 0.3s ease;
+  /* Optional: Add a transition effect for smoother hover */
   cursor: pointer;
 }
+
 .group1000004376 {
   position: fixed;
   left: 47.2119px;
@@ -137,10 +160,12 @@
   height: 20.6016px;
   overflow: visible;
 }
+
 .icon5 {
   width: 100%;
   height: 100%;
 }
+
 .messages {
   color: #aeaeb1;
   font-size: 20.7344px;
@@ -154,9 +179,11 @@
   height: 2%;
   white-space: nowrap;
   flex-direction: column;
-  transition: background-color 0.3s ease; /* Optional: Add a transition effect for smoother hover */
+  transition: background-color 0.3s ease;
+  /* Optional: Add a transition effect for smoother hover */
   cursor: pointer;
 }
+
 .group1000004379 {
   position: fixed;
   left: 47.2119px;
@@ -165,10 +192,12 @@
   height: 20.6016px;
   overflow: visible;
 }
+
 .icon8 {
   width: 100%;
   height: 100%;
 }
+
 .settings {
   color: #aeaeb1;
   font-size: 20.7344px;
@@ -182,12 +211,20 @@
   height: 2%;
   white-space: nowrap;
   flex-direction: column;
-  transition: background-color 0.3s ease; /* Optional: Add a transition effect for smoother hover */
+  transition: background-color 0.3s ease;
+  /* Optional: Add a transition effect for smoother hover */
   cursor: pointer;
 }
-.dashboard2:hover, .courses:hover, .planning:hover, .statistics:hover, .messages:hover, .settings:hover {
+
+.dashboard2:hover,
+.courses:hover,
+.planning:hover,
+.statistics:hover,
+.messages:hover,
+.settings:hover {
   background-color: rgb(5, 8, 51)
 }
+
 .group1000004380 {
   position: fixed;
   left: 47.2119px;
@@ -196,14 +233,17 @@
   height: 20.6016px;
   overflow: visible;
 }
+
 .icon9 {
   width: 100%;
   height: 100%;
 }
+
 .icon10 {
   width: 100%;
   height: 100%;
 }
+
 .topBar {
   position: fixed;
   left: 232.626px;
@@ -217,6 +257,7 @@
   background-color: #fcfcfc;
   box-shadow: inset 0.8584px 0px 0px 0px #f4f4f4;
 }
+
 .searchBox {
   width: 309.0234px;
   height: min-content;
@@ -225,11 +266,13 @@
   background-color: #f4f4f4;
   overflow: hidden;
 }
+
 .searchInput {
   width: min-content;
   height: min-content;
   align-self: flex-start;
 }
+
 .left {
   width: min-content;
   height: min-content;
@@ -237,20 +280,24 @@
   align-items: center;
   gap: 10.3008px;
 }
+
 .uIIconSearchLight {
   width: 20.6016px;
   height: 20.6016px;
 }
+
 .icon11 {
   width: 100%;
   height: 100%;
 }
+
 .frame22 {
   width: min-content;
   height: min-content;
   align-items: center;
   gap: 1.7168px;
 }
+
 .searchOrType {
   color: #9a9fa5;
   font-size: 12.876px;
@@ -264,12 +311,14 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .rightBlock {
   width: min-content;
   height: min-content;
   align-items: flex-start;
   gap: 20.6016px;
 }
+
 .message {
   position: relative;
   width: 41.2031px;
@@ -277,6 +326,7 @@
   flex-direction: column;
   align-items: flex-start;
 }
+
 .uIIconMessageLight {
   position: absolute;
   left: calc(50% - 0px);
@@ -285,10 +335,12 @@
   height: 20.6016px;
   transform: translate(-50%, -50%);
 }
+
 .icon12 {
   width: 100%;
   height: 100%;
 }
+
 .frame26 {
   position: absolute;
   left: 54.1667%;
@@ -301,6 +353,7 @@
   background-color: #ff6a55;
   overflow: hidden;
 }
+
 .notification {
   position: relative;
   width: 41.2031px;
@@ -308,6 +361,7 @@
   flex-direction: column;
   align-items: flex-start;
 }
+
 .uIIconNotificationLight {
   position: absolute;
   left: 10.3008px;
@@ -315,10 +369,12 @@
   width: 20.6016px;
   height: 20.6016px;
 }
+
 .icon13 {
   width: 100%;
   height: 100%;
 }
+
 .frame262 {
   position: absolute;
   left: 54.1667%;
@@ -331,6 +387,7 @@
   background-color: #ff6a55;
   overflow: hidden;
 }
+
 .avatar {
   position: relative;
   width: 41.2031px;
@@ -341,17 +398,21 @@
   background-color: #ffbc99;
   overflow: hidden;
 }
+
 .customer11 {
   position: absolute;
   left: -48.4375%;
   right: -48.4375%;
   top: -28.125%;
   bottom: -68.8252%;
-  background-image:/* webpackIgnore: true */ url('/assets/customer11.png');
+  background-image:
+    /* webpackIgnore: true */
+    url('/assets/customer11.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 .rectangle5594 {
   position: relative;
   left: 80.5%;
@@ -361,6 +422,7 @@
   border-radius: 12.0176px;
   background-color: rgb(213, 222, 241)
 }
+
 .rectangle5597 {
   position: absolute;
   left: 81.5%;
@@ -371,18 +433,25 @@
   background-color: #fff;
   box-shadow: 0px 27.4688px 103.0078px 18.8848px #8282821a;
 }
+
 .image233 {
   position: absolute;
   left: 1640px;
   top: 10.8%;
   width: 64.3799px;
   height: 60.9463px;
-  background-image:/* webpackIgnore: true */ url('/assets/image233.png');
+  background-image:
+    /* webpackIgnore: true */
+    url('/assets/image233.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  -webkit-mask-image:/* webpackIgnore: true */ url('/assets/maskGroup.svg');
-  mask-image:/* webpackIgnore: true */ url('/assets/maskGroup.svg');
+  -webkit-mask-image:
+    /* webpackIgnore: true */
+    url('/assets/maskGroup.svg');
+  mask-image:
+    /* webpackIgnore: true */
+    url('/assets/maskGroup.svg');
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-position: 2.5751953125px 2.5751953125px;
@@ -390,6 +459,7 @@
   -webkit-mask-size: 58.37109375px 57.5126953125px;
   mask-size: 58.37109375px 57.5126953125px;
 }
+
 ._3DAnimationConference {
   color: #000;
   font-size: 14.5928px;
@@ -404,6 +474,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .december14830PM {
   color: #a5b4cb;
   font-size: 12.0176px;
@@ -418,6 +489,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .vector2 {
   position: absolute;
   left: 1950px;
@@ -426,10 +498,12 @@
   height: 30px;
   overflow: visible;
 }
+
 .icon14 {
   width: 100%;
   height: 100%;
 }
+
 .rectangle55972 {
   position: absolute;
   left: 81.5%;
@@ -440,18 +514,25 @@
   background-color: #fff;
   box-shadow: 0px 27.4688px 103.0078px 18.8848px #8282821a;
 }
+
 .image234 {
   position: absolute;
   left: 1635px;
   top: 18.8%;
   width: 73.8223px;
   height: 66.9551px;
-  background-image:/* webpackIgnore: true */ url('/assets/image234.png');
+  background-image:
+    /* webpackIgnore: true */
+    url('/assets/image234.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  -webkit-mask-image:/* webpackIgnore: true */ url('/assets/maskGroup2.svg');
-  mask-image:/* webpackIgnore: true */ url('/assets/maskGroup2.svg');
+  -webkit-mask-image:
+    /* webpackIgnore: true */
+    url('/assets/maskGroup2.svg');
+  mask-image:
+    /* webpackIgnore: true */
+    url('/assets/maskGroup2.svg');
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-position: 7.7255859375px 5.150390625px;
@@ -459,6 +540,7 @@
   -webkit-mask-size: 58.37109375px 57.5126953125px;
   mask-size: 58.37109375px 57.5126953125px;
 }
+
 .handleUXResearch {
   color: #000;
   font-size: 14.5928px;
@@ -473,6 +555,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .december181030PM {
   color: #a5b4cb;
   font-size: 12.0176px;
@@ -487,6 +570,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .vector3 {
   position: absolute;
   left: 1950px;
@@ -495,10 +579,12 @@
   height: 30px;
   overflow: visible;
 }
+
 .icon15 {
   width: 100%;
   height: 100%;
 }
+
 .rectangle55973 {
   position: absolute;
   left: 81.5%;
@@ -509,18 +595,25 @@
   background-color: #fff;
   box-shadow: 0px 27.4688px 103.0078px 18.8848px #8282821a;
 }
+
 .image237 {
   position: absolute;
   left: 1640px;
   top: 26.8%;
   width: 115.0254px;
   height: 71.2471px;
-  background-image:/* webpackIgnore: true */ url('/assets/image237.png');
+  background-image:
+    /* webpackIgnore: true */
+    url('/assets/image237.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  -webkit-mask-image:/* webpackIgnore: true */ url('/assets/maskGroup3.svg');
-  mask-image:/* webpackIgnore: true */ url('/assets/maskGroup3.svg');
+  -webkit-mask-image:
+    /* webpackIgnore: true */
+    url('/assets/maskGroup3.svg');
+  mask-image:
+    /* webpackIgnore: true */
+    url('/assets/maskGroup3.svg');
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-position: 1.716796875px 1.716796875px;
@@ -528,6 +621,7 @@
   -webkit-mask-size: 58.37109375px 57.5126953125px;
   mask-size: 58.37109375px 57.5126953125px;
 }
+
 .machineLearningLesson {
   color: #000;
   font-size: 14.5928px;
@@ -542,6 +636,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .december181030PM2 {
   color: #a5b4cb;
   font-size: 12.0176px;
@@ -556,6 +651,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .vector4 {
   position: absolute;
   left: 1950px;
@@ -564,10 +660,12 @@
   height: 30px;
   overflow: visible;
 }
+
 .icon16 {
   width: 100%;
   height: 100%;
 }
+
 .rectangle55974 {
   position: absolute;
   left: 81.5%;
@@ -578,18 +676,25 @@
   background-color: #fff;
   box-shadow: 0px 27.4688px 103.0078px 18.8848px #8282821a;
 }
+
 .image236 {
   position: absolute;
   left: 1580px;
   top: 33.8%;
   width: 198.29px;
   height: 90.9902px;
-  background-image:/* webpackIgnore: true */ url('/assets/image236.png');
+  background-image:
+    /* webpackIgnore: true */
+    url('/assets/image236.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  -webkit-mask-image:/* webpackIgnore: true */ url('/assets/maskGroup4.svg');
-  mask-image:/* webpackIgnore: true */ url('/assets/maskGroup4.svg');
+  -webkit-mask-image:
+    /* webpackIgnore: true */
+    url('/assets/maskGroup4.svg');
+  mask-image:
+    /* webpackIgnore: true */
+    url('/assets/maskGroup4.svg');
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-position: 66.0966796875px 19.7431640625px;
@@ -597,6 +702,7 @@
   -webkit-mask-size: 58.37109375px 57.5126953125px;
   mask-size: 58.37109375px 57.5126953125px;
 }
+
 ._3DAnimationConference2 {
   color: #000;
   font-size: 14.5928px;
@@ -611,6 +717,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .december221030PM {
   color: #a5b4cb;
   font-size: 12.0176px;
@@ -625,6 +732,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .vector5 {
   position: absolute;
   left: 1950px;
@@ -633,10 +741,12 @@
   height: 30px;
   overflow: visible;
 }
+
 .icon17 {
   width: 100%;
   height: 100%;
 }
+
 .myPlanning {
   color: #000;
   font-size: 17.168px;
@@ -651,6 +761,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .rectangle5593 {
   position: absolute;
   left: 1900px;
@@ -662,6 +773,7 @@
   border-radius: 15.022px;
   background-color: #fff;
 }
+
 .week {
   color: #1e2027;
   font-size: 12.0176px;
@@ -676,10 +788,12 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .icon18 {
   width: 100%;
   height: 100%;
 }
+
 .rectangle5606 {
   position: absolute;
   left: 72.3%;
@@ -689,6 +803,7 @@
   border-radius: 12.0176px;
   background-color: #fff;
 }
+
 .topTutors {
   color: #000;
   font-size: 17.168px;
@@ -703,6 +818,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .addTheyToList {
   color: #abb2b8;
   font-size: 12.0176px;
@@ -717,6 +833,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .rectangle5592 {
   position: absolute;
   left: 73.3%;
@@ -727,6 +844,7 @@
   background-color: #fff;
   box-shadow: 0px 27.4688px 103.0078px 18.8848px #8282821a;
 }
+
 .group1000004396 {
   position: absolute;
   left: 83.3%;
@@ -735,10 +853,12 @@
   height: 26.6104px;
   overflow: visible;
 }
+
 .icon19 {
   width: 100%;
   height: 100%;
 }
+
 .ellipse2552 {
   position: absolute;
   left: 74%;
@@ -747,10 +867,12 @@
   height: 30.0439px;
   overflow: visible;
 }
+
 .icon20 {
   width: 100%;
   height: 100%;
 }
+
 .annaKarlos {
   color: #131635;
   font-size: 12.0176px;
@@ -765,6 +887,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .programming {
   color: #abb2b8;
   font-size: 10.3008px;
@@ -779,6 +902,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .rectangle55922 {
   position: absolute;
   left: 87%;
@@ -789,6 +913,7 @@
   background-color: #fff;
   box-shadow: 0px 27.4688px 103.0078px 18.8848px #8282821a;
 }
+
 .group10000043962 {
   position: absolute;
   left: 97%;
@@ -797,10 +922,12 @@
   height: 26.6104px;
   overflow: visible;
 }
+
 .icon21 {
   width: 100%;
   height: 100%;
 }
+
 .ellipse25522 {
   position: absolute;
   left: 87.5%;
@@ -809,10 +936,12 @@
   height: 30.0439px;
   overflow: visible;
 }
+
 .icon22 {
   width: 100%;
   height: 100%;
 }
+
 .karlaMay {
   color: #131635;
   font-size: 12.0176px;
@@ -827,6 +956,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .maths {
   color: #abb2b8;
   font-size: 10.3008px;
@@ -841,6 +971,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .rectangle55923 {
   position: absolute;
   left: 73.3%;
@@ -851,6 +982,7 @@
   background-color: #fff;
   box-shadow: 0px 27.4688px 103.0078px 18.8848px #8282821a;
 }
+
 .group10000043963 {
   position: absolute;
   left: 83.3%;
@@ -859,10 +991,12 @@
   height: 26.6104px;
   overflow: visible;
 }
+
 .icon23 {
   width: 100%;
   height: 100%;
 }
+
 .ellipse25523 {
   position: absolute;
   left: 74%;
@@ -871,10 +1005,12 @@
   height: 30.0439px;
   overflow: visible;
 }
+
 .icon24 {
   width: 100%;
   height: 100%;
 }
+
 .billJesson {
   color: #131635;
   font-size: 12.0176px;
@@ -889,6 +1025,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .design {
   color: #abb2b8;
   font-size: 10.3008px;
@@ -903,6 +1040,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .rectangle55924 {
   position: absolute;
   left: 87%;
@@ -913,6 +1051,7 @@
   background-color: #fff;
   box-shadow: 0px 27.4688px 103.0078px 18.8848px #8282821a;
 }
+
 .group10000043964 {
   position: absolute;
   left: 97%;
@@ -921,10 +1060,12 @@
   height: 26.6104px;
   overflow: visible;
 }
+
 .icon25 {
   width: 100%;
   height: 100%;
 }
+
 .ellipse25524 {
   position: absolute;
   left: 87.5%;
@@ -933,10 +1074,12 @@
   height: 30.0439px;
   overflow: visible;
 }
+
 .icon26 {
   width: 100%;
   height: 100%;
 }
+
 .alanBaker {
   color: #131635;
   font-size: 12.0176px;
@@ -951,6 +1094,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .physics {
   color: #abb2b8;
   font-size: 10.3008px;
@@ -965,6 +1109,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .rectangle5607 {
   position: absolute;
   left: 80.5%;
@@ -974,6 +1119,7 @@
   border-radius: 12.0176px;
   background-color: #fff;
 }
+
 .completedCourse {
   color: #020202;
   font-size: 17.168px;
@@ -988,10 +1134,12 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .icon27 {
   width: 100%;
   height: 100%;
 }
+
 .group1000004421 {
   position: absolute;
   left: 81.5%;
@@ -1000,10 +1148,12 @@
   height: 17.168px;
   overflow: visible;
 }
+
 .icon28 {
   width: 100%;
   height: 100%;
 }
+
 .javaCode {
   color: #67686c;
   font-size: 12.0176px;
@@ -1018,6 +1168,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 ._75100 {
   color: #1c1e24;
   font-size: 12.0176px;
@@ -1032,6 +1183,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .group1000004420 {
   position: absolute;
   left: 81.5%;
@@ -1040,10 +1192,12 @@
   height: 17.168px;
   overflow: visible;
 }
+
 .icon29 {
   width: 100%;
   height: 100%;
 }
+
 .designBasic {
   color: #67686c;
   font-size: 12.0176px;
@@ -1058,6 +1212,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 ._65100 {
   color: #1c1e24;
   font-size: 12.0176px;
@@ -1072,6 +1227,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .group1000004422 {
   position: absolute;
   left: 81.5%;
@@ -1080,10 +1236,12 @@
   height: 17.168px;
   overflow: visible;
 }
+
 .icon30 {
   width: 100%;
   height: 100%;
 }
+
 .teamBuilding {
   color: #67686c;
   font-size: 12.0176px;
@@ -1098,6 +1256,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 ._30100 {
   color: #1c1e24;
   font-size: 12.0176px;
@@ -1112,6 +1271,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .group10000044222 {
   position: absolute;
   left: 81.5%;
@@ -1120,10 +1280,12 @@
   height: 17.168px;
   overflow: visible;
 }
+
 .icon31 {
   width: 100%;
   height: 100%;
 }
+
 .businessMarketing {
   color: #67686c;
   font-size: 12.0176px;
@@ -1138,6 +1300,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 ._20100 {
   color: #1c1e24;
   font-size: 12.0176px;
@@ -1152,6 +1315,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .frame27 {
   position: absolute;
   left: 0px;
@@ -1162,6 +1326,7 @@
   align-items: flex-start;
   overflow: hidden;
 }
+
 .rectangle55942 {
   position: absolute;
   left: 0;
@@ -1171,6 +1336,7 @@
   border-radius: 12.0176px;
   background-color: #ffffff;
 }
+
 .courses2 {
   color: #000;
   font-size: 17.168px;
@@ -1184,6 +1350,7 @@
   height: min-content;
   flex-direction: column;
 }
+
 .rectangle55932 {
   position: absolute;
   left: 70%;
@@ -1195,6 +1362,7 @@
   border-radius: 15.022px;
   background-color: #fff;
 }
+
 .currentSemester {
   color: #1e2027;
   font-size: 12.0176px;
@@ -1208,10 +1376,12 @@
   height: 29px;
   flex-direction: column;
 }
+
 .icon32 {
   width: 100%;
   height: 100%;
 }
+
 .rectangle55975 {
   position: absolute;
   left: 30%;
@@ -1222,18 +1392,25 @@
   background-color: #fff;
   box-shadow: 0px 27.4688px 103.0078px 18.8848px #8282821a;
 }
+
 .image2362 {
   position: absolute;
   left: 27%;
   top: 73.9912px;
   width: 198.29px;
   height: 90.9902px;
-  background-image:/* webpackIgnore: true */ url('/assets/image2362.png');
+  background-image:
+    /* webpackIgnore: true */
+    url('/assets/image2362.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  -webkit-mask-image:/* webpackIgnore: true */ url('/assets/maskGroup5.svg');
-  mask-image:/* webpackIgnore: true */ url('/assets/maskGroup5.svg');
+  -webkit-mask-image:
+    /* webpackIgnore: true */
+    url('/assets/maskGroup5.svg');
+  mask-image:
+    /* webpackIgnore: true */
+    url('/assets/maskGroup5.svg');
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-position: 66.0966796875px 19.7431640625px;
@@ -1241,6 +1418,7 @@
   -webkit-mask-size: 58.37109375px 57.5126953125px;
   mask-size: 58.37109375px 57.5126953125px;
 }
+
 ._3DAnimationConference3 {
   color: #000;
   font-size: 14.5928px;
@@ -1255,6 +1433,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .december221030PM2 {
   color: #a5b4cb;
   font-size: 12.0176px;
@@ -1269,18 +1448,12 @@
   white-space: nowrap;
   flex-direction: column;
 }
-.vector9 {
-  position: absolute;
-  left: 50%;
-  top: 8%;
-  width: 10px;
-  height: 30px;
-  overflow: visible;
-}
+
 .icon33 {
   width: 100%;
   height: 100%;
 }
+
 .rectangle55976 {
   position: absolute;
   left: 1.2%;
@@ -1291,18 +1464,25 @@
   background-color: #fff;
   box-shadow: 0px 27.4688px 103.0078px 18.8848px #8282821a;
 }
+
 .image2336 {
   position: absolute;
   left: 2%;
   top: 91.5615px;
   width: 64.3799px;
   height: 60.9463px;
-  background-image:/* webpackIgnore: true */ url('/assets/image2336.png');
+  background-image:
+    /* webpackIgnore: true */
+    url('/assets/image2336.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  -webkit-mask-image:/* webpackIgnore: true */ url('/assets/maskGroup6.svg');
-  mask-image:/* webpackIgnore: true */ url('/assets/maskGroup6.svg');
+  -webkit-mask-image:
+    /* webpackIgnore: true */
+    url('/assets/maskGroup6.svg');
+  mask-image:
+    /* webpackIgnore: true */
+    url('/assets/maskGroup6.svg');
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-position: 2.5751953125px 2.5751953125px;
@@ -1310,6 +1490,7 @@
   -webkit-mask-size: 58.37109375px 57.5126953125px;
   mask-size: 58.37109375px 57.5126953125px;
 }
+
 ._3DAnimationConference4 {
   color: #000;
   font-size: 14.5928px;
@@ -1324,6 +1505,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .december221030PM3 {
   color: #a5b4cb;
   font-size: 12.0176px;
@@ -1338,18 +1520,12 @@
   white-space: nowrap;
   flex-direction: column;
 }
-.vector10 {
-  position: absolute;
-  left: 21%;
-  top: 8%;
-  width: 10px;
-  height: 30px;
-  overflow: visible;
-}
+
 .icon34 {
   width: 100%;
   height: 100%;
 }
+
 .rectangle55977 {
   position: absolute;
   left: 1.2%;
@@ -1360,18 +1536,25 @@
   background-color: #fff;
   box-shadow: 0px 27.4688px 103.0078px 18.8848px #8282821a;
 }
+
 .image2364 {
   position: absolute;
   left: -2%;
   top: 198.9912px;
   width: 198.29px;
   height: 90.9902px;
-  background-image:/* webpackIgnore: true */ url('/assets/image2364.png');
+  background-image:
+    /* webpackIgnore: true */
+    url('/assets/image2364.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  -webkit-mask-image:/* webpackIgnore: true */ url('/assets/maskGroup7.svg');
-  mask-image:/* webpackIgnore: true */ url('/assets/maskGroup7.svg');
+  -webkit-mask-image:
+    /* webpackIgnore: true */
+    url('/assets/maskGroup7.svg');
+  mask-image:
+    /* webpackIgnore: true */
+    url('/assets/maskGroup7.svg');
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-position: 66.0966796875px 19.7431640625px;
@@ -1379,6 +1562,7 @@
   -webkit-mask-size: 58.37109375px 57.5126953125px;
   mask-size: 58.37109375px 57.5126953125px;
 }
+
 ._3DAnimationConference5 {
   color: #000;
   font-size: 14.5928px;
@@ -1393,6 +1577,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .december221030PM4 {
   color: #a5b4cb;
   font-size: 12.0176px;
@@ -1407,18 +1592,12 @@
   white-space: nowrap;
   flex-direction: column;
 }
-.vector11 {
-  position: absolute;
-  left: 21%;
-  top: 17.4%;
-  width: 10px;
-  height: 30px;
-  overflow: visible;
-}
+
 .icon35 {
   width: 100%;
   height: 100%;
 }
+
 .rectangle55978 {
   position: absolute;
   left: 1.2%;
@@ -1429,18 +1608,25 @@
   background-color: #fff;
   box-shadow: 0px 27.4688px 103.0078px 18.8848px #8282821a;
 }
+
 .image2338 {
   position: absolute;
   left: 2%;
   top: 341.1592px;
   width: 64.3799px;
   height: 60.9463px;
-  background-image:/* webpackIgnore: true */ url('/assets/image2338.png');
+  background-image:
+    /* webpackIgnore: true */
+    url('/assets/image2338.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  -webkit-mask-image:/* webpackIgnore: true */ url('/assets/maskGroup8.svg');
-  mask-image:/* webpackIgnore: true */ url('/assets/maskGroup8.svg');
+  -webkit-mask-image:
+    /* webpackIgnore: true */
+    url('/assets/maskGroup8.svg');
+  mask-image:
+    /* webpackIgnore: true */
+    url('/assets/maskGroup8.svg');
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-position: 2.5751953125px 2.5751953125px;
@@ -1448,6 +1634,7 @@
   -webkit-mask-size: 58.37109375px 57.5126953125px;
   mask-size: 58.37109375px 57.5126953125px;
 }
+
 ._3DAnimationConference6 {
   color: #000;
   font-size: 14.5928px;
@@ -1462,6 +1649,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .december221030PM5 {
   color: #a5b4cb;
   font-size: 12.0176px;
@@ -1476,21 +1664,15 @@
   white-space: nowrap;
   flex-direction: column;
 }
-.vector12 {
-  position: absolute;
-  left: 21%;
-  top: 26.8%;
-  width: 10px;
-  height: 30px;
-  overflow: visible;
-}
+
 .icon36 {
   width: 100%;
   height: 100%;
 }
+
 .rectangle55979 {
   position: absolute;
-  left: 1.2%; 
+  left: 1.2%;
   top: 455px;
   width: 351.9434px;
   height: 84.123px;
@@ -1498,18 +1680,25 @@
   background-color: #fff;
   box-shadow: 0px 27.4688px 103.0078px 18.8848px #8282821a;
 }
+
 .image2366 {
   position: absolute;
   left: -2%;
   top: 448.9912px;
   width: 198.29px;
   height: 90.9902px;
-  background-image:/* webpackIgnore: true */ url('/assets/image2366.png');
+  background-image:
+    /* webpackIgnore: true */
+    url('/assets/image2366.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  -webkit-mask-image:/* webpackIgnore: true */ url('/assets/maskGroup9.svg');
-  mask-image:/* webpackIgnore: true */ url('/assets/maskGroup9.svg');
+  -webkit-mask-image:
+    /* webpackIgnore: true */
+    url('/assets/maskGroup9.svg');
+  mask-image:
+    /* webpackIgnore: true */
+    url('/assets/maskGroup9.svg');
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-position: 66.0966796875px 19.7431640625px;
@@ -1517,6 +1706,7 @@
   -webkit-mask-size: 58.37109375px 57.5126953125px;
   mask-size: 58.37109375px 57.5126953125px;
 }
+
 ._3DAnimationConference7 {
   color: #000;
   font-size: 14.5928px;
@@ -1531,6 +1721,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
+
 .december221030PM6 {
   color: #a5b4cb;
   font-size: 12.0176px;
@@ -1545,14 +1736,7 @@
   white-space: nowrap;
   flex-direction: column;
 }
-.vector13 {
-  position: absolute;
-  left: 21%;
-  top: 36.2%;
-  width: 10px;
-  height: 30px;
-  overflow: visible;
-}
+
 .icon37 {
   width: 100%;
   height: 100%;
