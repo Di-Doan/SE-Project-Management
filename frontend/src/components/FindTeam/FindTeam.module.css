@@ -1,0 +1,139 @@
+.body {
+  background-color: white;
+}
+
+.groupFilter {
+  width: 30%;
+  min-width: 230px;
+
+  box-sizing: border-box;
+  font-family: LatoWeb, "Lato Extended", Lato, "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  max-width: 100%;
+  overflow: visible;
+  overscroll-behavior: auto;
+
+  margin: 20px;
+  position: relative;
+}
+
+.groupSelect {
+  display: inline-block;
+  margin-bottom: 0;
+  vertical-align: middle;
+
+  width: 220px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+
+  height: 2.375rem;
+  line-height: 2.375rem;
+
+  padding: 8px;
+  font-size: 0.875rem;
+  border-radius: 3px;
+
+  font-family: "Lato Extended","Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.groupList {
+  display: block;
+  margin-top: 50px;
+}
+
+.groupBox {
+  border: 1px solid #c1c7cf;
+  border-radius: 3px;
+  margin: 20px;
+  display: block;
+}
+
+.groupHeader {
+  padding: 16px 16px 16px 10px;
+  display: flex;
+  align-items: center;
+}
+
+.groupTitle {
+  display: inline-flex;
+  align-items: center;
+  flex-grow: 1;
+  max-width: 70%;
+}
+
+.groupLabel {
+  margin: 0 7px 0 5px;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 18px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.groupStudent {
+  color: #555;
+  font-weight: normal;
+  flex-basis: 10rem;
+}
+
+.groupJoin {
+  flex-basis: 7rem;
+}
+
+.joinBtn {
+  margin: 0px;
+  padding: 7px;
+  border-radius: 0.25rem;
+  border-width: 0px;
+  width: auto;
+  cursor: pointer;
+
+  box-sizing: border-box;
+  font-family: LatoWeb, "Lato Extended", Lato, "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  max-width: 100%;
+  overflow: visible;
+  display: inline-block;
+  vertical-align: middle;
+  color: white;
+  background: #270f58;
+  position: relative;
+  overscroll-behavior: auto;
+  appearance: none;
+  text-decoration: none;
+  touch-action: manipulation;
+}
+
+.createGroupBtn {
+  height: 36px;
+  z-index: 1;
+  position: relative;
+  margin: 10px;
+
+  float: right;
+  display: block;
+}
+
+.createBtn {
+  margin: 0px;
+  padding: 10px;
+  border-radius: 0.25rem;
+  border-width: 0px;
+  width: auto;
+  cursor: pointer;
+
+  box-sizing: border-box;
+  font-family: LatoWeb, "Lato Extended", Lato, "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  max-width: 100%;
+  overflow: visible;
+  display: inline-block;
+  vertical-align: middle;
+  color: white;
+  background: #270f58;
+  position: relative;
+  overscroll-behavior: auto;
+  appearance: none;
+  text-decoration: none;
+  touch-action: manipulation;
+}

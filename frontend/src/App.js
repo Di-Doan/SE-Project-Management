@@ -8,6 +8,8 @@ import ResetPassword from "./components/ForgotPassword/ResetPassword";
 import UserProfile from "./components/UserProfile/UserProfile";
 import Design from "./components/Dashboard/Design";
 import DirectChatPage from "./components/Direct Chat/DirectChatPage";
+import FindTeam from "./components/FindTeam/FindTeam";
+import People from "./components/People/People";
 
 
 function App() {
@@ -22,6 +24,9 @@ function App() {
         <Route path="/profile" element={<UserProfile />} />
         <Route path="/dashboard" element={<Design />} />
         <Route path="/directchatpage" element={<DirectChatPage />} />
+
+        <Route path="/team" element={<FindTeam />} />
+        <Route path="/people" element={<People />} />
       </Routes>
     </BrowserRouter>
   );
