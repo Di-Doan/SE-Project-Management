@@ -62,7 +62,7 @@ function UserProfile() {
   return (
     <div>
       <UserProfileSideBar />
-      <div>
+      <div className={ProfileStyle.body}>
         <div className={ProfileStyle.userProfile}>User Profile</div>
         <div className={ProfileStyle.vector75}></div>
         <div className={ProfileStyle.group16}>
