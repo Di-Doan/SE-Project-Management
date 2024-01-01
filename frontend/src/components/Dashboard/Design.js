@@ -1,5 +1,7 @@
 import { memo } from 'react';
 import { Link } from 'react-router-dom'
+import axios from "axios";
+import { AxiosInstance } from '../../ultilities/axiosInstance.js';
 
 import resets from './_resets.module.css';
 import classes from './Design.module.css';
@@ -34,6 +36,19 @@ import { ReactComponent as HomeIcon } from './home-icon.svg';
 const Props = {
   className: undefined,
 };
+
+const getData = async () => {
+  try {
+    const response = await axiosInstance.get("/profile");
+    setUser(response.data.user);
+    setOldData(response.data.user);
+  } catch (error) {
+    if (error) {
+      setAuth(true);
+    }
+  }
+};
+
 /* @figmaId 1703:1745 */
 export const Design = memo(function Design(props = {}) {
   return (
@@ -211,11 +226,17 @@ export const Design = memo(function Design(props = {}) {
           <div className={classes.currentSemester}>Current Semester</div>
           <div className={classes.rectangle55975}></div>
           <div className={classes.image2362}></div>
-          <div className={classes._3DAnimationConference3}>3D Animation Conference</div>
-          <div className={classes.december221030PM2}>December 22, 10:30 PM</div>
+          <div className={classes._3DAnimationConference3}>
+            {user.courses ? user.courses[0].name : "empty"}
+          </div>
+          <div className={classes.december221030PM2}>
+            {user.courses ? user.courses[1].name : "empty"}
+          </div>
           <div className={classes.rectangle55976}></div>
           <div className={classes.image2336}></div>
-          <div className={classes._3DAnimationConference4}>3D Animation Conference</div>
+          <div className={classes._3DAnimationConference4}>
+            {user.courses ? user.courses[2].name : "empty"}
+          </div>
           <div className={classes.december221030PM3}>December 22, 10:30 PM</div>
           <div className={classes.rectangle55977}></div>
           <div className={classes.image2364}></div>
