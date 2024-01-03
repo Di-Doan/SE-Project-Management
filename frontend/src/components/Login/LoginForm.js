@@ -17,7 +17,7 @@ function LoginForm() {
     try {
       const response =  await axiosInstance.post('/auth/signin', data);
       localStorage.setItem("authTokens", JSON.stringify(response.data));
-      window.location = "/profile";
+      window.location = "/dashboard";
     } catch (error) {
       console.log(error)
       if (
