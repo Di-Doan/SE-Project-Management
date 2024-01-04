@@ -1,5 +1,8 @@
-import { memo } from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom'
+import axios from "axios";
+import { AxiosInstance } from '../../ultilities/axiosInstance.js';
+import { jwtDecode } from "jwt-decode";
 
 import resets from './_resets.module.css';
 import classes from './Design.module.css';
@@ -11,14 +14,8 @@ import { Ellipse2615Icon } from './Ellipse2615Icon.tsx';
 import { Ellipse2616Icon } from './Ellipse2616Icon.tsx';
 import { Ellipse2617Icon } from './Ellipse2617Icon.tsx';
 import { Group1000004376Icon } from './Group1000004376Icon.tsx';
-import { Group1000004377Icon } from './Group1000004377Icon.tsx';
-import { Group1000004378Icon } from './Group1000004378Icon.tsx';
 import { Group1000004379Icon } from './Group1000004379Icon.tsx';
 import { Group1000004380Icon } from './Group1000004380Icon.tsx';
-import { Group1000004396Icon2 } from './Group1000004396Icon2.tsx';
-import { Group1000004396Icon3 } from './Group1000004396Icon3.tsx';
-import { Group1000004396Icon4 } from './Group1000004396Icon4.tsx';
-import { Group1000004396Icon } from './Group1000004396Icon.tsx';
 import { Group1000004420Icon } from './Group1000004420Icon.tsx';
 import { Group1000004421Icon } from './Group1000004421Icon.tsx';
 import { Group1000004422Icon2 } from './Group1000004422Icon2.tsx';
@@ -30,19 +27,38 @@ import { VectorIcon2 } from './VectorIcon2.tsx';
 import { VectorIcon3 } from './VectorIcon3.tsx';
 import { VectorIcon4 } from './VectorIcon4.tsx';
 import { VectorIcon5 } from './VectorIcon5.tsx';
-import { VectorIcon9 } from './VectorIcon9.tsx';
-import { VectorIcon10 } from './VectorIcon10.tsx';
-import { VectorIcon11 } from './VectorIcon11.tsx';
-import { VectorIcon12 } from './VectorIcon12.tsx';
-import { VectorIcon13 } from './VectorIcon13.tsx';
 import rmitLogo from './rmit-logo.png';
 import { ReactComponent as HomeIcon } from './home-icon.svg';
 
 const Props = {
   className: undefined,
 };
-/* @figmaId 1703:1745 */
-export const Design = memo(function Design(props = {}) {
+
+function Dashboard() {
+  const [user, setUser] = useState({});
+  const [oldData, setOldData] = useState();
+  const [auth, setAuth] = useState(false);
+
+  if (auth) {
+    window.location = "/login";
+  }
+
+  const getData = async () => {
+    try {
+      const response = await axiosInstance.get("/profile");
+      setUser(response.data.user);
+      setOldData(response.data.user);
+    } catch (error) {
+      if (error) {
+        setAuth(true);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <div className={`${resets.clapyResets} ${classes.root}`}>
       <div className={classes.rectangle5695}></div>
@@ -71,14 +87,6 @@ export const Design = memo(function Design(props = {}) {
           <div className={classes.courses}>Courses</div>
           <div className={classes.group1000004376}>
             <Group1000004376Icon className={classes.icon5} />
-          </div>
-          <div className={classes.planning}>Planning</div>
-          <div className={classes.group1000004377}>
-            <Group1000004377Icon className={classes.icon6} />
-          </div>
-          <div className={classes.statistics}>Statistics</div>
-          <div className={classes.group1000004378}>
-            <Group1000004378Icon className={classes.icon7} />
           </div>
           <Link to="/Login" className={classes.sidebarLink}>
             <div className={classes.messages}>Messages</div>
@@ -160,38 +168,25 @@ export const Design = memo(function Design(props = {}) {
         <div className={classes.week}>Week</div>
         <div className={classes.rectangle5606}></div>
         <div className={classes.topTutors}>Top Tutors</div>
-        <div className={classes.addTheyToList}>Add they to list</div>
         <div className={classes.rectangle5592}></div>
-        <div className={classes.group1000004396}>
-          <Group1000004396Icon className={classes.icon19} />
-        </div>
         <div className={classes.ellipse2552}>
           <Ellipse2552Icon className={classes.icon20} />
         </div>
         <div className={classes.annaKarlos}>Anna Karlos</div>
         <div className={classes.programming}>Programming</div>
         <div className={classes.rectangle55922}></div>
-        <div className={classes.group10000043962}>
-          <Group1000004396Icon2 className={classes.icon21} />
-        </div>
         <div className={classes.ellipse25522}>
           <Ellipse2552Icon2 className={classes.icon22} />
         </div>
         <div className={classes.karlaMay}>Karla May</div>
         <div className={classes.maths}>Maths</div>
         <div className={classes.rectangle55923}></div>
-        <div className={classes.group10000043963}>
-          <Group1000004396Icon3 className={classes.icon23} />
-        </div>
         <div className={classes.ellipse25523}>
           <Ellipse2552Icon3 className={classes.icon24} />
         </div>
         <div className={classes.billJesson}>Bill Jesson</div>
         <div className={classes.design}>Design</div>
         <div className={classes.rectangle55924}></div>
-        <div className={classes.group10000043964}>
-          <Group1000004396Icon4 className={classes.icon25} />
-        </div>
         <div className={classes.ellipse25524}>
           <Ellipse2552Icon4 className={classes.icon26} />
         </div>
@@ -221,48 +216,33 @@ export const Design = memo(function Design(props = {}) {
         <div className={classes._20100}>20/100</div>
         <div className={classes.frame27}>
           <div className={classes.rectangle55942}></div>
-          <div className={classes.courses2}>Courses</div>
+          <div className={classes.courses2}>Current Courses</div>
           <div className={classes.rectangle55932}></div>
           <div className={classes.currentSemester}>Current Semester</div>
-          <div className={classes.rectangle55975}></div>
-          <div className={classes.image2362}></div>
-          <div className={classes._3DAnimationConference3}>3D Animation Conference</div>
-          <div className={classes.december221030PM2}>December 22, 10:30 PM</div>
-          <div className={classes.vector9}>
-            <VectorIcon9 className={classes.icon33} />
-          </div>
           <div className={classes.rectangle55976}></div>
           <div className={classes.image2336}></div>
-          <div className={classes._3DAnimationConference4}>3D Animation Conference</div>
-          <div className={classes.december221030PM3}>December 22, 10:30 PM</div>
-          <div className={classes.vector10}>
-            <VectorIcon10 className={classes.icon34} />
+          <div className={classes._3DAnimationConference4}>
+            {user && user.courses && user.courses[0] ? user.courses[0].name : "empty"}
           </div>
+          <div className={classes.december221030PM3}>December 22, 10:30 PM</div>
           <div className={classes.rectangle55977}></div>
           <div className={classes.image2364}></div>
-          <div className={classes._3DAnimationConference5}>3D Animation Conference</div>
-          <div className={classes.december221030PM4}>December 22, 10:30 PM</div>
-          <div className={classes.vector11}>
-            <VectorIcon11 className={classes.icon35} />
+          <div className={classes._3DAnimationConference5}>
+          3D Animation Conference
           </div>
+          <div className={classes.december221030PM4}>December 22, 10:30 PM</div>
           <div className={classes.rectangle55978}></div>
           <div className={classes.image2338}></div>
           <div className={classes._3DAnimationConference6}>3D Animation Conference</div>
           <div className={classes.december221030PM5}>December 22, 10:30 PM</div>
-          <div className={classes.vector12}>
-            <VectorIcon12 className={classes.icon36} />
-          </div>
           <div className={classes.rectangle55979}></div>
           <div className={classes.image2366}></div>
           <div className={classes._3DAnimationConference7}>3D Animation Conference</div>
           <div className={classes.december221030PM6}>December 22, 10:30 PM</div>
-          <div className={classes.vector13}>
-            <VectorIcon13 className={classes.icon37} />
-          </div>
         </div>
       </div>
     </div>
   );
-});
+}
 
-export default Design;
+export default Dashboard;

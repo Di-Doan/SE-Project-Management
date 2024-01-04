@@ -7,10 +7,11 @@ import ResetPassword from "./components/ForgotPassword/ResetPassword";
 
 import UserProfile from "./components/UserProfile/UserProfile";
 import CurrentCourses from "./components/UserProfile/CurrentCourses";
-import Design from "./components/Dashboard/Design";
 import DirectChatPage from "./components/Direct Chat/DirectChatPage";
 import FindTeam from "./components/FindTeam/FindTeam";
 import People from "./components/People/People";
+import Dashboard from "./components/Dashboard/Dashboard";
+import CoursesChat from "./components/Courses Chat/CoursesChat"
 
 
 function App() {
@@ -24,8 +25,10 @@ function App() {
 
         <Route path="/profile" element={<UserProfile />} />
         <Route path="/current-courses" element={<CurrentCourses />} />
-        <Route path="/dashboard" element={<Design />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/directchatpage" element={<DirectChatPage />} />
+        <Route path="/courseschat" element={<CoursesChat />} />
+
 
         <Route path="/team" element={<FindTeam />} />
         <Route path="/people" element={<People />} />

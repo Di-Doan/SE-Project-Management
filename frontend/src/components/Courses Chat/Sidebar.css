@@ -1,0 +1,53 @@
+/* Sidebar.css */
+.sidebar {
+    background-color: #36393f;
+    /* Discord dark theme background color */
+    color: #ffffff;
+    /* Text color */
+    width: 250px;
+    /* Adjust the width as needed */
+    padding: 20px;
+    height: 100vh;
+    /* Full height of the viewport */
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar-item:hover {
+    background-color: #4a4f57;
+    /* Hover background color */
+}
+
+.sub-item {
+    padding-left: 20px;
+    /* Indent sub-items */
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+    /* Push user info to the bottom */
+    padding: 10px;
+    background-color: #333;
+    /* Sidebar background color */
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-name {
+    color: #fff;
+    font-weight: bold;
+}
+  
