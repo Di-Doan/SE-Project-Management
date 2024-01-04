@@ -1,5 +1,8 @@
 .body {
-  background-color: #ece8e8;
+  background-color: #d3d0d0;
+  width: auto;
+  height:auto;
+  display: block;
 }
 
 .userProfile {

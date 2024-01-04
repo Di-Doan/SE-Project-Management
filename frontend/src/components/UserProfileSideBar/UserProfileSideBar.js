@@ -34,7 +34,7 @@ function UserProfileSideBar() {
 
   return (
     <div>
-      <div className="admin-container">
+      <div>
         <div className="side-nav">
           <ul>
             <li className="side-nav-link logo-container">
@@ -52,7 +52,7 @@ function UserProfileSideBar() {
               </NavLink>
             </li>
             <li className="side-nav-link">
-              <NavLink to="/admin/billboards">
+              <NavLink to="/current-courses">
                 <span className="side-nav-icon">
                   <em className="fas fa-ad"></em>
                 </span>
@@ -92,7 +92,7 @@ function UserProfileSideBar() {
               <MenuIcon />
             </div>
           </div>
-          <div className="main-container"></div>
+
         </div>
       </div>
     </div>

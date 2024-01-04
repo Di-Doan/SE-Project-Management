@@ -6,6 +6,7 @@ import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import ResetPassword from "./components/ForgotPassword/ResetPassword";
 
 import UserProfile from "./components/UserProfile/UserProfile";
+import CurrentCourses from "./components/UserProfile/CurrentCourses";
 import Design from "./components/Dashboard/Design";
 import DirectChatPage from "./components/Direct Chat/DirectChatPage";
 import FindTeam from "./components/FindTeam/FindTeam";
@@ -22,6 +23,7 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
 
         <Route path="/profile" element={<UserProfile />} />
+        <Route path="/current-courses" element={<CurrentCourses />} />
         <Route path="/dashboard" element={<Design />} />
         <Route path="/directchatpage" element={<DirectChatPage />} />
 

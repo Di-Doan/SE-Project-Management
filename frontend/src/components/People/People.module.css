@@ -2,6 +2,7 @@
   margin-top: 20px;
   margin-bottom: 20px;
   display: block;
+  padding: 20px;
 }
 
 .table {
@@ -95,5 +96,36 @@ td {
 .avaBox {
   width: 55.5289px;
   height: 54.595px;
+}
 
+.profile-top-bar {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.topLink {
+  margin-left: 50px;
+}
+
+.link {
+  margin: 0 10px 0 10px;
+}
+
+.topLink a {
+  text-decoration: none;
+
+  width: 100%;
+
+  color: #384d6c;
+  transition: all 0.1s ease;
+}
+
+.topLink a:hover {
+  font-weight: bold;
 }
