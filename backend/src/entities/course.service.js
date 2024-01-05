@@ -37,8 +37,12 @@ export const getCourses = async (filter) => {
 export const getCourse = async (courseId, studentId) => {
 	const queryString = `
     SELECT c.course_id, c.course_name, c.course_code, c.status, e.announcement_chat_id, c.reference_chat_id, s.semester_name,
-      JSON_ARRAYAGG(DISTINCT JSON_OBJECTAGG('id', tt.tutorial_id, 'name', tt.tutorial_name, 'chatId', tt.tut_chat_id, 'joined', CASE WHEN stt.student_id IS NOT NULL THEN 'True' ELSE 'False' END)) as tutorials
-      JSON_ARRAYAGG(DISTINCT JSON_OBJECTAGG('id', t.team_id, 'name', t.team_name, 'chatId', t.team_chat_id, 'joined', CASE WHEN st.student_id IS NOT NULL THEN 'True' ELSE 'False' END)) as teams
+      CAST(CONCAT('[', GROUP_CONCAT(
+				DISTINCT JSON_OBJECT('id', tt.tutorial_id, 'name', tt.tutorial_name, 'chatId', tt.tut_chat_id, 'joined', CASE WHEN stt.student_id IS NOT NULL THEN 'True' ELSE 'False' END)
+			), ']') AS JSON) as tutorials,
+      CAST(CONCAT('[', GROUP_CONCAT(
+				DISTINCT JSON_OBJECTAGG('id', t.team_id, 'name', t.team_name, 'chatId', t.team_chat_id, 'joined', CASE WHEN st.student_id IS NOT NULL THEN 'True' ELSE 'False' END)
+			), ']') AS JSON) as teams
     FROM Course AS c
     LEFT JOIN Semester AS s 
       ON c.semester_id = s.semester_id

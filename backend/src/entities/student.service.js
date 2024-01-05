@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import pool from '../utils/mysql.service.js';
-import removeUndefined from '../utils/remove_undefined.js';
+import removeUndefined from '../utils/helper.js';
 
 export const STUDENT_STATUS = {
 	PENDING: 0,
