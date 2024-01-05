@@ -55,8 +55,8 @@ export async function forgotPassword(req, res) {
 		const otp = generateRandomNumber(6);
 		await redis.set(`otp:${email}`, otp, 'EX', 60);
 
-		mailgun.messages.create({
-			from: `No-reply <${process.env.MAILGUN_DOMAIN_NAME || 'RMIT ChatConnect'}>`,
+		mailgun.messages.create(process.env.MAILGUN_DOMAIN_NAME, {
+			from: `No-reply <no-reply@${process.env.MAILGUN_DOMAIN_NAME || 'RMIT ChatConnect'}>`,
 			to: [email],
 			subject: 'RMIT ChatConnect - Reset password',
 			text: `
