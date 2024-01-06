@@ -74,7 +74,7 @@ If you did not make this request then please ignore this email.`
 				console.log('Forgot Password Email sent successfully:', response.data);
 			})
 			.catch((error) => {
-				console.error('Error sending forgot password email:', error.response.data);
+				console.error('Error sending forgot password email:', otp, error.response.data);
 			});
 
 		return res.status(200).json({ status: true });
@@ -191,7 +191,7 @@ export async function validateAuth(req, res, next) {
 		req.user = user;
 		next();
 	} catch (err) {
-		console.err('Error validating authentication:', err);
+		console.error('Error validating authentication:', err);
 		return res.status(401).json({ error: 'Invalid access token' });
 	}
 }
