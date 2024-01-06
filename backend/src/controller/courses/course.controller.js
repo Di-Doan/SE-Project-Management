@@ -1,11 +1,8 @@
 import pool from '../../utils/mysql.service.js';
 import * as courseService from '../../entities/course.service.js';
 import * as chatService from '../../entities/chat.service.js';
-import * as tutorialService from '../../entities/tutorial.service.js';
-import * as teamService from '../../entities/team.service.js';
+import * as studentService from '../../entities/student.service.js';
 import * as studentCourseService from '../../entities/student_course.service.js';
-import * as studentTutorialService from '../../entities/student_tutorial.service.js';
-import * as studentTeamService from '../../entities/student_team.service.js';
 
 export const getCourses = async (req, res) => {
 	const { id: studentId } = req.user;
@@ -86,87 +83,53 @@ export const createCourse = async (req, res) => {
 	}
 };
 
-export const createTutorial = async (req, res) => {
+export const addStudentCourse = async (req, res) => {
+	const { studentId } = req.body;
 	const { id: courseId } = req.params;
-	const { name } = req.body;
 
-	if (!name) {
-		return res.status(400).json({ message: 'Missing tutorial session name' });
-	}
+	const coursePromise = courseService.getCourseByID(courseId);
+	const studentPromise = studentService.getStudentById(studentId);
+	const studentCoursePromise = studentCourseService.getStudentCourse(studentId, courseId);
 
-	const course = await courseService.getCourseByID(courseId);
-	if (!course) {
-		return res.status(404).json({ message: 'Course ID not found' });
-	}
-
-	const connection = await pool.getConnection();
-	await connection.beginTransaction();
+	const [course, student, studentCourse] = await Promise.all([
+		coursePromise,
+		studentPromise,
+		studentCoursePromise,
+	]);
+	if (!course) return res.status(404).json({ message: 'Course ID not found' });
+	if (!student) return res.status(404).json({ message: 'Student ID not found' });
+	if (studentCourse) return res.status(400).json({ message: 'Student already in this course' });
 
 	try {
-		const chatId = await chatService.createChat(
-			`This is tutorial chat for ${name} session.`,
-			connection
-		);
-		if (!chatId) {
-			await connection.rollback();
-			return res.status(500).json({ message: 'Failed to create chat' });
+		const studentCourseId = await studentCourseService.addStudentCourse(studentId, courseId);
+		if (!studentCourseId) {
+			return res.status(500).json({ message: 'Failed to add student course' });
 		}
 
-		const tutorial = { name, chatId, courseId };
-		const tutorialId = await tutorialService.createTutorial(tutorial, connection);
-		if (!tutorialId) {
-			await connection.rollback();
-			return res.status(500).json({ message: 'Failed to create tutorial' });
-		}
-
-		await connection.commit();
-		return res.status(200).json({ id: tutorialId, ...tutorial });
+		return res.status(200).json({ id: studentCourseId, studentId, courseId });
 	} catch (err) {
-		console.error('Failed to create tutorial:', err);
-		await connection.rollback();
-		return res.status(500).json({ message: 'Failed to create tutorial' });
-	} finally {
-		connection.release();
+		console.error('Failed to add student course:', err);
+		return res.status(500).json({ message: 'Failed to add student course' });
 	}
 };
 
-export const createTeam = async (req, res) => {
-	const { id: courseId } = req.params;
-	const { name } = req.body;
+export const removeStudentCourse = async (req, res) => {
+	const { id: courseId, studentId } = req.params;
 
-	if (!name) {
-		return res.status(400).json({ message: 'Missing team name' });
+	const studentCourse = await studentCourseService.getStudentCourse(studentId, courseId);
+	if (!studentCourse) {
+		return res.status(400).json({ message: 'Student not in this course' });
 	}
-
-	const course = await courseService.getCourseByID(courseId);
-	if (!course) {
-		return res.status(404).json({ message: 'Course ID not found' });
-	}
-
-	const connection = await pool.getConnection();
-	await connection.beginTransaction();
 
 	try {
-		const chatId = await chatService.createChat(`This is team chat for ${name}.`, connection);
-		if (!chatId) {
-			await connection.rollback();
-			return res.status(500).json({ message: 'Failed to create chat' });
+		const studentCourseId = await studentCourseService.removeStudentCourse(studentId, courseId);
+		if (!studentCourseId) {
+			return res.status(500).json({ message: 'Failed to remove student course' });
 		}
 
-		const team = { name, chatId, courseId };
-		const teamId = await teamService.createTeam(team, connection);
-		if (!teamId) {
-			await connection.rollback();
-			return res.status(500).json({ message: 'Failed to create team' });
-		}
-
-		await connection.commit();
-		return res.status(200).json({ id: teamId, ...team });
+		return res.status(200).json({ id: studentCourseId, studentId, courseId });
 	} catch (err) {
-		console.error('Failed to create team:', err);
-		await connection.rollback();
-		return res.status(500).json({ message: 'Failed to create team' });
-	} finally {
-		connection.release();
+		console.error('Failed to remove student course:', err);
+		return res.status(500).json({ message: 'Failed to remove student course' });
 	}
 };
