@@ -3,8 +3,6 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
 import redis from '../../utils/redis.service.js';
-import pool from '../../utils/mysql.service.js';
-import mailgun from '../../utils/mailgun.service.js';
 import * as student from '../../entities/student.service.js';
 import { generateRandomNumber } from '../../utils/helper.js';
 
@@ -14,33 +12,23 @@ export async function signup(req, res) {
 	if (!sid || !fullname || !gpa)
 		return res.status(400).json({ error: 'Missing required student property' });
 
-	const connection = await pool.getConnection();
-
 	try {
-		await connection.beginTransaction();
-		const createdUser = await student.createStudent(
-			{ sid, fullname, mobile, gpa, email: `${sid}@rmit.edu.vn` },
-			connection
-		);
+		const createdUser = await student.createStudent({
+			sid,
+			fullname,
+			mobile,
+			gpa,
+			email: `${sid}@rmit.edu.vn`,
+		});
 
-		const firebaseUser = await axios.post(
-			`${process.env.FIREBASE_AUTH_BASE_URL}:signUp?key=${process.env.FIREBASE_AUTH_API_KEY}`,
-			{ email: `${sid}@rmit.edu.vn`, password: sid }
-		);
-
-		if (createdUser && firebaseUser) {
-			await connection.commit();
+		if (createdUser) {
 			res.status(201).json({ status: true });
 		} else {
-			await connection.rollback();
 			res.status(500).json({ error: 'Internal server error' });
 		}
 	} catch (err) {
 		console.error(err);
-		await connection.rollback();
 		res.status(500).json({ error: 'Internal server error' });
-	} finally {
-		connection.release();
 	}
 }
 
@@ -53,21 +41,41 @@ export async function forgotPassword(req, res) {
 
 	try {
 		const otp = generateRandomNumber(6);
-		await redis.set(`otp:${email}`, otp, 'EX', 60);
+		await redis.set(`otp:${email}`, otp, 'EX', 60 * 60);
 
-		mailgun.messages.create(process.env.MAILGUN_DOMAIN_NAME, {
-			from: `No-reply <no-reply@${process.env.MAILGUN_DOMAIN_NAME || 'RMIT ChatConnect'}>`,
-			to: [email],
-			subject: 'RMIT ChatConnect - Reset password',
-			text: `
-Hi ${user.rmitSID},
+		const apiUrl = `https://api.mailgun.net/v3/${process.env.MAILGUN_DOMAIN_NAME || ''}/messages`;
+
+		const formData = new FormData();
+		formData.append(
+			'from',
+			`No Reply <noreply@${process.env.MAILGUN_DOMAIN_NAME || 'RMIT ChatConnect'}/>`
+		);
+		formData.append('to', email);
+		formData.append('subject', 'RMIT ChatConnect - Reset password');
+		formData.append(
+			'text',
+			`Hi ${user.rmitSID},
 
 There was a request to change your password!
 Your password reset code is: ${otp}
 
-If you did not make this request then please ignore this email.
-			`,
-		});
+If you did not make this request then please ignore this email.`
+		);
+
+		axios
+			.post(apiUrl, formData, {
+				headers: {
+					Authorization: `Basic ${Buffer.from(`api:${process.env.MAILGUN_API_KEY}`).toString(
+						'base64'
+					)}`,
+				},
+			})
+			.then((response) => {
+				console.log('Forgot Password Email sent successfully:', response.data);
+			})
+			.catch((error) => {
+				console.error('Error sending forgot password email:', error.response.data);
+			});
 
 		return res.status(200).json({ status: true });
 	} catch (err) {
@@ -87,7 +95,7 @@ export async function resetPassword(req, res) {
 	if (!confirmation || confirmation != code)
 		return res.status(400).json({ error: 'Invalid validation code' });
 
-	const user = await student.getStudentByUsername(confirmation);
+	const user = await student.getStudentByUsername(email);
 	const result = await student.editStudentById(user.id, {
 		password,
 		status: student.STUDENT_STATUS.ACTIVE,
@@ -124,8 +132,11 @@ export async function signin(req, res) {
 }
 
 export async function renew(req, res) {
-	const { refreshToken } = req.body;
-	if (!refreshToken) return res.status(400).json({ error: 'Missing refresh token' });
+	const refreshToken = req.body.refreshToken;
+	if (!refreshToken) {
+		return res.status(400).json({ error: 'Missing refresh token' });
+	}
+
 	try {
 		const isRevoked = await redis.get(`token:${refreshToken}`);
 		if (isRevoked) return res.status(400).json({ error: 'Invalid refresh token' });
@@ -134,14 +145,14 @@ export async function renew(req, res) {
 		const user = await student.getStudentById(decoded.id);
 		if (!user) return res.status(400).json({ error: 'Invalid refresh token' });
 
-		const accessToken = jwt.sign({ id: user.id }, process.env.JWT_ACCESS_TOKEN_SECRET, {
+		const newAccessToken = jwt.sign({ id: user.id }, process.env.JWT_ACCESS_TOKEN_SECRET, {
 			expiresIn: parseInt(process.env.JWT_ACCESS_TOKEN_EXPIRY),
 		});
-		const refreshToken = jwt.sign({ id: user.id }, process.env.JWT_REFRESH_TOKEN_SECRET, {
+		const newRefreshToken = jwt.sign({ id: user.id }, process.env.JWT_REFRESH_TOKEN_SECRET, {
 			expiresIn: parseInt(process.env.JWT_REFRESH_TOKEN_EXPIRY),
 		});
 
-		return res.status(200).json({ accessToken, refreshToken });
+		return res.status(200).json({ accessToken: newAccessToken, refreshToken: newRefreshToken });
 	} catch (err) {
 		console.error(err);
 		return res.status(400).json({ error: 'Invalid refresh token' });

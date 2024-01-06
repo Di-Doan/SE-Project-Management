@@ -53,10 +53,17 @@ export const getStudentById = async (id) => {
 export const createStudent = async (student, connection) => {
 	const db = connection || pool;
 	try {
-		const { sid, fullname, mobile, gpa } = student;
+		const { sid, fullname, mobile, gpa, email } = student;
 
 		const [results] = await db.query('INSERT INTO Student SET ?', [
-			removeUndefined({ rmit_sid: sid, fullname, mobile, gpa, status: STUDENT_STATUS.PENDING }),
+			removeUndefined({
+				rmit_sid: sid,
+				fullname,
+				mobile,
+				gpa,
+				email,
+				status: STUDENT_STATUS.PENDING,
+			}),
 		]);
 
 		return results.insertId;
