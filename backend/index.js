@@ -9,6 +9,8 @@ import { fileURLToPath } from 'url';
 
 import authRouter from './src/controller/auth/auth.router.js';
 import profileRouter from './src/controller/profile/profile.router.js';
+import friendRouter from './src/controller/friends/friend.router.js';
+import courseRouter from './src/controller/courses/course.router.js';
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -29,10 +31,11 @@ app.use(
 app.use(bodyParser.json());
 
 app.use('/api/auth', authRouter);
-app.use('/api/profile', profileRouter); 
-// app.use('/courses');
-// app.use('/chats');
-// app.use('/friends');
+app.use('/api/profile', profileRouter);
+app.use('/api/courses', courseRouter);
+app.use('/api/friends', friendRouter);
+// app.use('/api/chats');
+app.use('/api/*', (req, res) => res.status(404).json({ message: 'Not found' }));
 
 app.use((req, res) => {
 	res.sendFile(path.join(__dirname, '..', 'frontend', 'build', 'index.html'));
