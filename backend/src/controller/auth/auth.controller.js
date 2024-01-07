@@ -107,7 +107,6 @@ export async function resetPassword(req, res) {
 
 export async function signin(req, res) {
 	const { username, password } = req.body;
-	console.log(req.body)
 	if (!username || !password)
 		return res.status(400).json({ error: 'Missing username or password' });
 
@@ -116,7 +115,8 @@ export async function signin(req, res) {
 		if (!user) return res.status(400).json({ error: 'Incorrect student ID or password' });
 
 		const validatePassword = await bcrypt.compare(password, user.password);
-		if (!validatePassword) return res.status(400).json({ error: "Incorrect student ID or password" });
+		if (!validatePassword)
+			return res.status(400).json({ error: 'Incorrect student ID or password' });
 
 		const accessToken = jwt.sign({ id: user.id }, process.env.JWT_ACCESS_TOKEN_SECRET, {
 			expiresIn: parseInt(process.env.JWT_ACCESS_TOKEN_EXPIRY),
@@ -125,11 +125,11 @@ export async function signin(req, res) {
 			expiresIn: parseInt(process.env.JWT_REFRESH_TOKEN_EXPIRY),
 		});
 
-		return res.status(200).json({ accessToken, refreshToken }); 
+		return res.status(200).json({ accessToken, refreshToken });
 	} catch (err) {
 		console.error(err);
 		return res.status(500).json({ error: 'Internal server error' });
-	} 
+	}
 }
 
 export async function renew(req, res) {
