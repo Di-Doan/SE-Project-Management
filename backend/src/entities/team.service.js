@@ -24,7 +24,7 @@ export const createTeam = async (team, connection) => {
 	try {
 		const { name, courseId, chatId } = team;
 
-		const [results] = await db.query('INSERT INTO Team SET ?', [
+		const [results] = await db.query('INSERT INTO Team SET ?', [ 
 			{
 				team_name: name,
 				course_id: courseId,

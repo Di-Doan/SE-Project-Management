@@ -6,7 +6,7 @@ import { jwtDecode } from "jwt-decode";
 import axiosInstance from "../../ultilities/axiosInstance";
 
 function ResetPassword() {
-  const [data, setData] = useState({ code: "123456", id: "", password: "" });
+  const [data, setData] = useState({ code: "", email: "", password: "" });
   const [error, setError] = useState("");
 
   const authTokens = localStorage.getItem("authTokens")
@@ -30,9 +30,7 @@ function ResetPassword() {
     e.preventDefault();
     try {
       const response = await axiosInstance.post("/auth/reset-password", data);
-
-      console.log("success");
-      window.location = '/login';
+      window.location = "/login";
     } catch (error) {
       if (
         error.response &&
@@ -51,25 +49,36 @@ function ResetPassword() {
         <div className={LogStyle.form}>
           <form className="login" onSubmit={handleSubmit}>
             <h1 className={LogStyle.title}>Reset Password</h1>
-            <p className={LogStyle.idDisplay}>Student ID: {data.id}</p>
             {error && <div className={LogStyle.error}>{error}</div>}
             <div className={LogStyle.input}>
-              <label htmlFor="id">Code</label>
+              <label htmlFor="email">Email</label>
+              <div>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  value={data.email}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className={LogStyle.input}>
+              <label htmlFor="code">Code</label>
               <div>
                 <input
                   type="text"
-                  name="text"
-                  id="text"
+                  name="code"
+                  id="code"
                   value={data.code}
                   onChange={handleChange}
                 />
               </div>
             </div>
             <div className={LogStyle.input}>
-              <label htmlFor="id">New Password</label>
+              <label htmlFor="password">New Password</label>
               <div>
                 <input
-                  type="text"
+                  type="password"
                   name="password"
                   id="password"
                   value={data.password}

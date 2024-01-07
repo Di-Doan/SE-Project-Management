@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import LogStyle from "./ForgotPassword.module.css";
 import axios from "axios";
+import axiosInstance from "../../ultilities/axiosInstance";
 
 function ForgotPassword() {
-  const [data, setData] = useState({ id: "", email: "" });
+  const [data, setData] = useState({ email: "" });
   const [error, setError] = useState("");
 
   const handleChange = ({ currentTarget: input }) => {
@@ -14,22 +15,15 @@ function ForgotPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:5000/api/auth";
-      const { data: res } = await axios.post(url, data);
-      sessionStorage.setItem("token", res.data);
-      if (typeof window !== "undefined") {
-        sessionStorage.setItem("userid", data.id);
-        sessionStorage.setItem("signed", data.signed);
-      }
-      window.location = "/";
-      console.log(res.message);
+      const response = await axiosInstance.post("/auth/forgot-password", data);
+      window.location = "/reset-password";
     } catch (error) {
       if (
         error.response &&
         error.response.status >= 400 &&
         error.response.status <= 500
       ) {
-        setError(error.response.data.message);
+        setError(error.response.data.error);
         console.log(error);
       }
     }
