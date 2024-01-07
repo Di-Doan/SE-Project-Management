@@ -37,7 +37,6 @@ export const getStudentById = async (id, courseId) => {
 			WHERE Student.student_id = ? AND Student.status = ?
 		`;
 		const [results] = await pool.query(queryString, [id, STUDENT_STATUS.ACTIVE]);
-		console.log(results);
 
 		return results.length > 0
 			? {

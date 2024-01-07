@@ -107,7 +107,6 @@ export async function resetPassword(req, res) {
 
 export async function signin(req, res) {
 	const { username, password } = req.body;
-	console.log(req.body)
 	if (!username || !password)
 		return res.status(400).json({ error: 'Missing username or password' });
 

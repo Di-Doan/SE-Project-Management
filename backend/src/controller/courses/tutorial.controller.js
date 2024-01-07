@@ -7,7 +7,6 @@ import * as studentService from '../../entities/student.service.js';
 
 export const createTutorial = async (req, res) => {
 	const { id: courseId } = req.params;
-	console.log(courseId);
 	const { name } = req.body;
 
 	if (!name) {
