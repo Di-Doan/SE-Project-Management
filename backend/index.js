@@ -9,6 +9,7 @@ import { fileURLToPath } from 'url';
 import authRouter from './src/controller/auth/auth.router.js';
 import profileRouter from './src/controller/profile/profile.router.js';
 import friendRouter from './src/controller/friends/friend.router.js';
+import chatRouter from './src/controller/chat/chat.router.js';
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -24,8 +25,8 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.use('/api/auth', authRouter);
 app.use('/api/profile', profileRouter);
-// app.use('/courses');
-// app.use('/chats');
+// app.use('/api/courses');
+app.use('/api/chats', chatRouter);
 app.use('/api/friends', friendRouter);
 
 app.use((req, res) => {

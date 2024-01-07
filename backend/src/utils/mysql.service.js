@@ -19,6 +19,17 @@ const pool = mysql.createPool({
 });
 
 function initDB () {
+	pool.query(`
+		DROP DATABASE IF EXISTS Web_ChatConnect;
+		CREATE DATABASE Web_ChatConnect;
+	`, (err) => {
+		if (err) {
+			console.error('[Initializing database]: ERROR - Failed to drop database.\n', err.message);
+			return;
+		}
+		
+		console.log('[Initializing database]: SUCCESS - Database cleaned!');
+	})
 	fs.readFile(DATABASE_INIT_SCRIPT, 'utf-8', (err, data) => {	// read Web_ChatConnect.sql script
 		if (err) {
 			console.error('[Initializing database]: ERROR - Failed to read script.\n', err.message);
