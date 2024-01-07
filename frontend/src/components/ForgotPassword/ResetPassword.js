@@ -17,13 +17,11 @@ function ResetPassword() {
     if (authTokens) {
       const token = jwtDecode(authTokens.accessToken);
       setData({ ...data, id: token.id });
-      console.log(data);
     }
   }, []);
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
-    console.log(data);
   };
 
   const handleSubmit = async (e) => {
@@ -37,7 +35,7 @@ function ResetPassword() {
         error.response.status >= 400 &&
         error.response.status <= 500
       ) {
-        setError(error.response.data.message);
+        setError(error.response.data.error);
         console.log(error);
       }
     }

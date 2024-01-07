@@ -129,3 +129,38 @@ td {
 .topLink a:hover {
   font-weight: bold;
 }
+
+
+.groupFilter {
+  width: 30%;
+  min-width: 230px;
+
+  box-sizing: border-box;
+  font-family: LatoWeb, "Lato Extended", Lato, "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  max-width: 100%;
+  overflow: visible;
+  overscroll-behavior: auto;
+
+  margin: 20px;
+  position: relative;
+}
+
+.groupSelect {
+  display: inline-block;
+  margin-bottom: 0;
+  vertical-align: middle;
+
+  width: 220px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+
+  height: 2.375rem;
+  line-height: 2.375rem;
+
+  padding: 8px;
+  font-size: 0.875rem;
+  border-radius: 3px;
+
+  font-family: "Lato Extended","Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+}

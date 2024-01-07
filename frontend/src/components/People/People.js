@@ -12,11 +12,29 @@ function People() {
     <div>
       <div className="profile-top-bar">
         <div className={PeopleStyle.topLink}>
-          <Link className={PeopleStyle.link} to="/people">People</Link>
-          <Link className={PeopleStyle.link} to="/team">Team</Link>
+          <Link className={PeopleStyle.link} to="/people">
+            People
+          </Link>
+          <Link className={PeopleStyle.link} to="/team">
+            Team
+          </Link>
         </div>
       </div>
       <div className={PeopleStyle.box}>
+        <div className={PeopleStyle.groupFilter}>
+          <select
+            className={PeopleStyle.groupSelect}
+            name="people-sort"
+            id="people-sort"
+          >
+            <option defaultChecked value="All">
+              All
+            </option>
+            <option value="gpa">GPA</option>
+            <option value="availability">Availability</option>
+            <option value="tutorial">Tutorial Group</option>
+          </select>
+        </div>
         <div className={PeopleStyle.tableBlock}>
           <table className={PeopleStyle.table}>
             <thead className={PeopleStyle.thead}>

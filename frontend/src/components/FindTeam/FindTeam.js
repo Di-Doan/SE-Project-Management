@@ -27,7 +27,6 @@ function FindTeam() {
       <div className={TeamStyle.groupFilter}>
         <select className={TeamStyle.groupSelect} name="team-sort" id="team-sort">
           <option defaultChecked value="All">All</option>
-          <option value="gpa">GPA</option>
           <option value="availability">Availability</option>
           <option value="tutorial">Tutorial Group</option>
         </select>
