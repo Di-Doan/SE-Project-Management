@@ -11,6 +11,7 @@ import authRouter from './src/controller/auth/auth.router.js';
 import profileRouter from './src/controller/profile/profile.router.js';
 import friendRouter from './src/controller/friends/friend.router.js';
 import chatRouter from './src/controller/chat/chat.router.js';
+import courseRouter from './src/controller/courses/course.router.js';
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -32,9 +33,10 @@ app.use(bodyParser.json());
 
 app.use('/api/auth', authRouter);
 app.use('/api/profile', profileRouter);
-// app.use('/api/courses');
 app.use('/api/chats', chatRouter);
+app.use('/api/courses', courseRouter);
 app.use('/api/friends', friendRouter);
+app.use('/api/*', (req, res) => res.status(404).json({ message: 'Not found' }));
 
 app.use((req, res) => {
 	res.sendFile(path.join(__dirname, '..', 'frontend', 'build', 'index.html'));

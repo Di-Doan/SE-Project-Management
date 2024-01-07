@@ -2,8 +2,6 @@ import bcrypt from 'bcrypt';
 import pool from '../utils/mysql.service.js';
 import { removeUndefined } from '../utils/helper.js';
 
-
-
 export const STUDENT_STATUS = {
 	PENDING: 0,
 	ACTIVE: 1,
@@ -19,7 +17,7 @@ export const getStudentByUsername = async (username) => {
 
 		return results.length > 0
 			? {
-					id: results[0].student_id, 
+					id: results[0].student_id,
 					rmitSID: results[0].rmit_sid,
 					password: results[0].password,
 			  }
@@ -30,21 +28,34 @@ export const getStudentByUsername = async (username) => {
 	}
 };
 
-export const getStudentById = async (id) => {
+export const getStudentById = async (id, courseId) => {
 	try {
-		const queryString = 'SELECT * FROM Student WHERE Student.student_id = ? AND Student.status = ?';
+		// prettier-ignore
+		const queryString = `
+			SELECT * FROM Student
+			${courseId ? `LEFT JOIN Student_Course ON Student.student_id = Student_Course.student_id AND Student_Course.course_id = ${pool.escape(courseId)}` : ''}
+			WHERE Student.student_id = ? AND Student.status = ?
+		`;
 		const [results] = await pool.query(queryString, [id, STUDENT_STATUS.ACTIVE]);
+		console.log(results);
 
 		return results.length > 0
 			? {
 					id: results[0].student_id,
+					avatar: results[0].avatar,
 					rmitSID: results[0].rmit_sid,
 					fullname: results[0].fullname,
+					description: results[0].description,
 					email: results[0].email,
 					mobile: results[0].mobile,
-					messenger: results[0].messenger,
 					gpa: results[0].gpa,
-					showGpa: results[0].showGpa
+					showGpa: results[0].showGpa,
+					course: courseId
+						? {
+								id: results[0].course_id,
+								availablity: Boolean(results[0].availability),
+						  }
+						: undefined,
 			  }
 			: null;
 	} catch (err) {

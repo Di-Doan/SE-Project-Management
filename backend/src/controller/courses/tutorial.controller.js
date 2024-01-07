@@ -2,9 +2,12 @@ import pool from '../../utils/mysql.service.js';
 import * as chatService from '../../entities/chat.service.js';
 import * as tutorialService from '../../entities/tutorial.service.js';
 import * as studentTutorialService from '../../entities/student_tutorial.service.js';
+import * as courseService from '../../entities/course.service.js';
+import * as studentService from '../../entities/student.service.js';
 
 export const createTutorial = async (req, res) => {
 	const { id: courseId } = req.params;
+	console.log(courseId);
 	const { name } = req.body;
 
 	if (!name) {
@@ -48,29 +51,42 @@ export const createTutorial = async (req, res) => {
 };
 
 export const addStudentTutorial = async (req, res) => {
-	const { id: tutorialId } = req.params;
+	const { id: courseId, tutorialId } = req.params;
 	const { studentId } = req.body;
 
-	if (!studentId) return res.status(400).json({ message: 'Missing student ID' });
+	if (!studentId) {
+		return res.status(400).json({ message: 'Missing student ID' });
+	}
 
 	const tutorialPromise = tutorialService.getTutorialByID(tutorialId);
-	const studentPromise = studentService.getStudentByID(studentId);
 	const studentTutorialPromise = studentTutorialService.getStudentTutorial(studentId, tutorialId);
-	const [tutorial, student, studentTutorial] = await Promise.all([
-		tutorialPromise,
-		studentPromise,
-		studentTutorialPromise,
-	]);
+	const [tutorial, studentTutorial] = await Promise.all([tutorialPromise, studentTutorialPromise]);
 
-	if (!tutorial) return res.status(404).json({ message: 'Tutorial ID not found' });
-	if (!student) return res.status(404).json({ message: 'Student ID not found' });
-	if (studentTutorial) return res.status(409).json({ message: 'Student already in tutorial' });
+	if (!tutorial) {
+		return res.status(404).json({ message: 'Tutorial ID not found' });
+	}
+	if (tutorial.courseId != courseId) {
+		return res.status(400).json({ message: 'Tutorial not in course' });
+	}
+	if (studentTutorial) {
+		return res.status(400).json({ message: 'Student already in tutorial' });
+	}
+
+	const student = await studentService.getStudentById(studentId, tutorial.courseId);
+	if (!student) {
+		return res.status(404).json({ message: 'Student ID not found' });
+	}
+	if (!student.course?.id) {
+		return res.status(400).json({ message: 'Student not in this course' });
+	}
 
 	try {
 		const result = await studentTutorialService.addStudentTutorial(studentId, tutorialId);
-		if (!result) return res.status(500).json({ message: 'Failed to add student tutorial' });
+		if (result == null) {
+			return res.status(500).json({ message: 'Failed to add student tutorial' });
+		}
 
-		return res.status(200).json({ message: 'Student added to tutorial' });
+		return res.status(200).json({ studentId, tutorialId: Number(tutorialId) });
 	} catch (err) {
 		console.error('Failed to add student tutorial:', err);
 		return res.status(500).json({ message: 'Failed to add student tutorial' });
@@ -78,16 +94,26 @@ export const addStudentTutorial = async (req, res) => {
 };
 
 export const removeStudentTutorial = async (req, res) => {
-	const { id: tutorialId, studentId } = req.params;
+	const { id: courseId, tutorialId, studentId } = req.params;
 
-	if (!studentId) return res.status(400).json({ message: 'Missing student ID' });
-
-	const studentTutorial = await studentTutorialService.getStudentTutorial(studentId, tutorialId);
-	if (!studentTutorial) return res.status(409).json({ message: 'Student not in tutorial' });
+	const tutorialPromise = tutorialService.getTutorialByID(tutorialId);
+	const studentTutorialPromise = studentTutorialService.getStudentTutorial(studentId, tutorialId);
+	const [tutorial, studentTutorial] = await Promise.all([tutorialPromise, studentTutorialPromise]);
+	if (!tutorial) {
+		return res.status(404).json({ message: 'Tutorial ID not found' });
+	}
+	if (tutorial.courseId != courseId) {
+		return res.status(400).json({ message: 'Tutorial not in course' });
+	}
+	if (!studentTutorial) {
+		return res.status(409).json({ message: 'Student not in tutorial' });
+	}
 
 	try {
 		const result = await studentTutorialService.removeStudentTutorial(studentId, tutorialId);
-		if (!result) return res.status(500).json({ message: 'Failed to remove student tutorial' });
+		if (!result) {
+			return res.status(500).json({ message: 'Failed to remove student tutorial' });
+		}
 
 		return res.status(200).json({ message: 'Student removed from tutorial' });
 	} catch (err) {

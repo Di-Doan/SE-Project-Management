@@ -76,8 +76,11 @@ CREATE TABLE Student_Course (
 CREATE TABLE Student_Tutorial (
     student_id INT NOT NULL,
     tutorial_id INT NOT NULL,
+    course_id INT NOT NULL,
     FOREIGN KEY (student_id) REFERENCES Student (student_id) ON DELETE CASCADE,
     FOREIGN KEY (tutorial_id) REFERENCES Tutorial (tutorial_id) ON DELETE CASCADE,
+    FOREIGN KEY (course_id) REFERENCES Course (course_id) ON DELETE CASCADE,
+    UNIQUE (student_id, course_id),
     PRIMARY KEY (student_id, tutorial_id)
 );
 
