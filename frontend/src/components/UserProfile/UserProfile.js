@@ -98,18 +98,6 @@ function UserProfile() {
         </div>
       </div>
 
-      <div>
-        <div className={ProfileStyle.introductionToMangagment}>
-          {user.courses ? user.courses[0].name : "empty"}
-        </div>
-        <div className={ProfileStyle.buildingITSystem}>
-          {user.courses ? user.courses[1].name : "empty"}
-        </div>
-        <div className={ProfileStyle.userDesign}>
-          {user.courses ? user.courses[2].name : "empty"}
-        </div>
-        <div className={ProfileStyle.currentCourse}>Current Courses</div>
-      </div>
 
       <div>
         <div className={ProfileStyle.currentGPA}>Current GPA</div>

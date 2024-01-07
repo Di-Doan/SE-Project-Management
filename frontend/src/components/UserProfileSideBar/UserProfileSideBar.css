@@ -84,9 +84,9 @@
 
 .admin-main {
   position: relative;
-  width: calc(100% - 240px);
   left: 240px;
-  min-height: 100vh;
+  min-height: 130vh;
+  min-width: 170vh;
   transition: all 0.25s ease;
   
 }
