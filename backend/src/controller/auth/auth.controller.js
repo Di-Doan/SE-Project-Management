@@ -1,9 +1,10 @@
+import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import redis from '../../utils/redis.service.js';
-import { STUDENT_STATUS } from '../../entities/student.service.js';
 
+import redis from '../../utils/redis.service.js';
 import * as student from '../../entities/student.service.js';
+import { generateRandomNumber } from '../../utils/helper.js';
 
 export async function signup(req, res) {
 	const { sid, fullname, mobile, gpa } = req.body;
@@ -11,35 +12,94 @@ export async function signup(req, res) {
 	if (!sid || !fullname || !gpa)
 		return res.status(400).json({ error: 'Missing required student property' });
 
-	const createdUser = await student.createStudent({
-		sid,
-		fullname,
-		mobile,
-		gpa,
-		email: `${sid}@rmit.edu.vn`,
-	});
+	try {
+		const createdUser = await student.createStudent({
+			sid,
+			fullname,
+			mobile,
+			gpa,
+			email: `${sid}@rmit.edu.vn`,
+		});
 
-	if (createdUser) return res.status(201).json({ status: true });
-	else return res.status(500).json({ error: 'Internal server error' });
+		if (createdUser) {
+			res.status(201).json({ status: true });
+		} else {
+			res.status(500).json({ error: 'Internal server error' });
+		}
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: 'Internal server error' });
+	}
 }
 
 export async function forgotPassword(req, res) {
 	const { email } = req.body;
+	if (!email) return res.status(400).json({ error: 'Missing email' });
 
-	// Implement send email to user
+	const user = await student.getStudentByUsername(email);
+	if (!user) return res.status(400).json({ error: 'Invalid email' });
 
-	return res.status(200).json({ status: true });
+	try {
+		const otp = generateRandomNumber(6);
+		await redis.set(`otp:${email}`, otp, 'EX', 60 * 60);
+
+		const apiUrl = `https://api.mailgun.net/v3/${process.env.MAILGUN_DOMAIN_NAME || ''}/messages`;
+
+		const formData = new FormData();
+		formData.append(
+			'from',
+			`No Reply <noreply@${process.env.MAILGUN_DOMAIN_NAME || 'RMIT ChatConnect'}/>`
+		);
+		formData.append('to', email);
+		formData.append('subject', 'RMIT ChatConnect - Reset password');
+		formData.append(
+			'text',
+			`Hi ${user.rmitSID},
+
+There was a request to change your password!
+Your password reset code is: ${otp}
+
+If you did not make this request then please ignore this email.`
+		);
+
+		axios
+			.post(apiUrl, formData, {
+				headers: {
+					Authorization: `Basic ${Buffer.from(`api:${process.env.MAILGUN_API_KEY}`).toString(
+						'base64'
+					)}`,
+				},
+			})
+			.then((response) => {
+				console.log('Forgot Password Email sent successfully:', response.data);
+			})
+			.catch((error) => {
+				console.error('Error sending forgot password email:', otp, error.response.data);
+			});
+
+		return res.status(200).json({ status: true });
+	} catch (err) {
+		console.error(err);
+		return res.status(500).json({ error: 'Internal server error' });
+	}
 }
 
 export async function resetPassword(req, res) {
-	const { code, id, password } = req.body;
+	const { email, code, password } = req.body;
 
+	if (!email) return res.status(400).json({ error: 'Missing email' });
 	if (!code) return res.status(400).json({ error: 'Missing validation code' });
-	if (!id) return res.status(400).json({ error: 'Missing student id' });
 	if (!password) return res.status(400).json({ error: 'Missing new password' });
 
-	if (code != '123456') return res.status(400).json({ error: 'Invalid validation code' });
-	const result = await student.editStudentById(id, { password, status: STUDENT_STATUS.ACTIVE });
+	const confirmation = await redis.get(`otp:${email}`);
+	if (!confirmation || confirmation != code)
+		return res.status(400).json({ error: 'Invalid validation code' });
+
+	const user = await student.getStudentByUsername(email);
+	const result = await student.editStudentById(user.id, {
+		password,
+		status: student.STUDENT_STATUS.ACTIVE,
+	});
 
 	if (!result) return res.status(500).json({ error: 'Internal server error' });
 	else return res.status(200).json({ status: true });
@@ -72,21 +132,27 @@ export async function signin(req, res) {
 }
 
 export async function renew(req, res) {
-	const { refreshToken } = req.body;
-	if (!refreshToken) return res.status(400).json({ error: 'Missing refresh token' });
+	const refreshToken = req.body.refreshToken;
+	if (!refreshToken) {
+		return res.status(400).json({ error: 'Missing refresh token' });
+	}
+
 	try {
+		const isRevoked = await redis.get(`token:${refreshToken}`);
+		if (isRevoked) return res.status(400).json({ error: 'Invalid refresh token' });
+
 		const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_TOKEN_SECRET);
 		const user = await student.getStudentById(decoded.id);
 		if (!user) return res.status(400).json({ error: 'Invalid refresh token' });
 
-		const accessToken = jwt.sign({ id: user.id }, process.env.JWT_ACCESS_TOKEN_SECRET, {
+		const newAccessToken = jwt.sign({ id: user.id }, process.env.JWT_ACCESS_TOKEN_SECRET, {
 			expiresIn: parseInt(process.env.JWT_ACCESS_TOKEN_EXPIRY),
 		});
-		const refreshToken = jwt.sign({ id: user.id }, process.env.JWT_REFRESH_TOKEN_SECRET, {
+		const newRefreshToken = jwt.sign({ id: user.id }, process.env.JWT_REFRESH_TOKEN_SECRET, {
 			expiresIn: parseInt(process.env.JWT_REFRESH_TOKEN_EXPIRY),
 		});
 
-		return res.status(200).json({ accessToken, refreshToken });
+		return res.status(200).json({ accessToken: newAccessToken, refreshToken: newRefreshToken });
 	} catch (err) {
 		console.error(err);
 		return res.status(400).json({ error: 'Invalid refresh token' });
@@ -125,12 +191,12 @@ export async function validateAuth(req, res, next) {
 		req.user = user;
 		next();
 	} catch (err) {
-		console.err('Error validating authentication:', err);
+		console.error('Error validating authentication:', err);
 		return res.status(401).json({ error: 'Invalid access token' });
 	}
 }
 
-export async function validateRmit(req, res, next) {
+export async function validateRmitClient(req, res, next) {
 	const authHeader = req.headers.authorization;
 	if (!authHeader) return res.status(401).json({ error: 'Unauthorized access' });
 	if (!authHeader.startsWith('Basic ') || !authHeader.split(' ')[1])
@@ -140,5 +206,11 @@ export async function validateRmit(req, res, next) {
 	const decodedCredential = Buffer.from(encodedCredential, 'base64').toString('utf-8');
 	const [clientId, clientSecret] = decodedCredential.split(':');
 
-	return res.status(401).json({ error: 'Invalid access token' });
+	if (
+		clientId != process.env.BASIC_AUTH_RMIT_ID ||
+		clientSecret != process.env.BASIC_AUTH_RMIT_SECRET
+	)
+		return res.status(401).json({ error: 'Invalid access token' });
+
+	next();
 }

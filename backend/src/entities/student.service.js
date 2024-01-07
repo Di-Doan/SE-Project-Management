@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import pool from '../utils/mysql.service.js';
-import removeUndefined from '../utils/remove_undefined.js';
+import { removeUndefined } from '../utils/helper.js';
 
 export const STUDENT_STATUS = {
 	PENDING: 0,
@@ -50,12 +50,20 @@ export const getStudentById = async (id) => {
 	}
 };
 
-export const createStudent = async (student) => {
+export const createStudent = async (student, connection) => {
+	const db = connection || pool;
 	try {
-		const { sid, fullname, mobile, gpa } = student;
+		const { sid, fullname, mobile, gpa, email } = student;
 
-		const [results] = await pool.query('INSERT INTO Student SET ?', [
-			removeUndefined({ rmit_sid: sid, fullname, mobile, gpa, status: STUDENT_STATUS.PENDING }),
+		const [results] = await db.query('INSERT INTO Student SET ?', [
+			removeUndefined({
+				rmit_sid: sid,
+				fullname,
+				mobile,
+				gpa,
+				email,
+				status: STUDENT_STATUS.PENDING,
+			}),
 		]);
 
 		return results.insertId;

@@ -5,7 +5,8 @@ USE Web_ChatConnect;
 -- create tables
 CREATE TABLE Chat (
     chat_id INT PRIMARY KEY AUTO_INCREMENT,
-    chat_description VARCHAR(255)
+    chat_description VARCHAR(255),
+    last_updated DATE NOT NULL,
 );
 
 CREATE TABLE Semester (
@@ -50,6 +51,7 @@ CREATE TABLE Team (
 
 CREATE TABLE Student (
     student_id INT PRIMARY KEY AUTO_INCREMENT,
+    avatar VARCHAR(255),
     rmit_sid VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255),
     fullname VARCHAR(255) NOT NULL,
@@ -99,6 +101,7 @@ CREATE TABLE DirectChat (
     first_std_id INT NOT NULL,
     second_std_id INT NOT NULL,
     chat_id INT NOT NULL,
+    status INT NOT NULL DEFAULT 0,
     FOREIGN KEY (first_std_id) REFERENCES Student (student_id) ON DELETE CASCADE,
     FOREIGN KEY (second_std_id) REFERENCES Student (student_id) ON DELETE CASCADE,
     FOREIGN KEY (chat_id) REFERENCES Chat (chat_id) ON DELETE CASCADE,

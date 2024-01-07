@@ -34,11 +34,40 @@ export const getCourses = async (filter) => {
 	}
 };
 
-export const getCourse = async (courseId, studentId) => {
+export const getCourseByID = async (courseId) => {
+	const queryString = `
+		SELECT c.course_id, c.course_name, c.course_code, c.status, s.semester_name
+		FROM Course AS c
+		LEFT JOIN Semester AS s ON c.semester_id = s.semester_id
+		WHERE c.course_id = ${pool.escape(courseId)}
+	`;
+
+	try {
+		const [results] = await pool.query(queryString);
+		return results.length > 0
+			? {
+					id: e.couse_id,
+					name: e.course_name,
+					code: e.course_code,
+					status: e.status,
+					semester: e.semester_name,
+			  }
+			: null;
+	} catch (err) {
+		console.err('Failed to get courses:', err);
+		return null;
+	}
+};
+
+export const getCourseForStudent = async (courseId, studentId) => {
 	const queryString = `
     SELECT c.course_id, c.course_name, c.course_code, c.status, e.announcement_chat_id, c.reference_chat_id, s.semester_name,
-      JSON_ARRAYAGG(DISTINCT JSON_OBJECTAGG('id', tt.tutorial_id, 'name', tt.tutorial_name, 'chatId', tt.tut_chat_id, 'joined', CASE WHEN stt.student_id IS NOT NULL THEN 'True' ELSE 'False' END)) as tutorials
-      JSON_ARRAYAGG(DISTINCT JSON_OBJECTAGG('id', t.team_id, 'name', t.team_name, 'chatId', t.team_chat_id, 'joined', CASE WHEN st.student_id IS NOT NULL THEN 'True' ELSE 'False' END)) as teams
+      CAST(CONCAT('[', GROUP_CONCAT(
+				DISTINCT JSON_OBJECT('id', tt.tutorial_id, 'name', tt.tutorial_name, 'chatId', tt.tut_chat_id, 'joined', CASE WHEN stt.student_id IS NOT NULL THEN 'True' ELSE 'False' END)
+			), ']') AS JSON) as tutorials,
+      CAST(CONCAT('[', GROUP_CONCAT(
+				DISTINCT JSON_OBJECTAGG('id', t.team_id, 'name', t.team_name, 'chatId', t.team_chat_id, 'joined', CASE WHEN st.student_id IS NOT NULL THEN 'True' ELSE 'False' END)
+			), ']') AS JSON) as teams
     FROM Course AS c
     LEFT JOIN Semester AS s 
       ON c.semester_id = s.semester_id
@@ -74,6 +103,29 @@ export const getCourse = async (courseId, studentId) => {
 			: null;
 	} catch (err) {
 		console.err('Failed to get courses:', err);
+		return null;
+	}
+};
+
+export const createCourse = async (course, connection) => {
+	const db = connection || pool;
+	try {
+		const { name, code, semesterId, status, announcemenChatId, referenceChatId } = course;
+
+		const [results] = await db.query('INSERT INTO Course SET ?', [
+			{
+				course_name: name,
+				course_code: code,
+				semester_id: semesterId,
+				announcement_chat_id: announcemenChatId,
+				reference_chat_id: referenceChatId,
+				status: status || COURSE_STATUS.ACTIVE,
+			},
+		]);
+
+		return results.insertId;
+	} catch (err) {
+		console.error('Failed to create course:', err);
 		return null;
 	}
 };
