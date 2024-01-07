@@ -18,16 +18,12 @@ const port = process.env.PORT || 5000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(cors({ origin: `http://localhost:${port}` }));
+app.use(cors({ origin: [`http://localhost:${port}`, 'http://localhost:3000'] }));
 app.use(helmet());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'frontend', 'build')));
 app.use('/public', express.static(path.join(__dirname, 'public')));
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use('/api/auth', authRouter);

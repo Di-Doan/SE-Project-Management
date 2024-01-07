@@ -2,8 +2,6 @@ import bcrypt from 'bcrypt';
 import pool from '../utils/mysql.service.js';
 import { removeUndefined } from '../utils/helper.js';
 
-
-
 export const STUDENT_STATUS = {
 	PENDING: 0,
 	ACTIVE: 1,
@@ -19,7 +17,7 @@ export const getStudentByUsername = async (username) => {
 
 		return results.length > 0
 			? {
-					id: results[0].student_id, 
+					id: results[0].student_id,
 					rmitSID: results[0].rmit_sid,
 					password: results[0].password,
 			  }
@@ -39,7 +37,6 @@ export const getStudentById = async (id, courseId) => {
 			WHERE Student.student_id = ? AND Student.status = ?
 		`;
 		const [results] = await pool.query(queryString, [id, STUDENT_STATUS.ACTIVE]);
-		console.log(results);
 
 		return results.length > 0
 			? {

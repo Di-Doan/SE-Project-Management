@@ -76,7 +76,6 @@ export const addStudentTeam = async (req, res) => {
 	if (!student.course?.id) {
 		return res.status(400).json({ message: 'Student not in this course' });
 	}
-	console.log(student.course);
 	if (!student.course?.availablity) {
 		return res.status(400).json({ message: 'Student has joined another team in this course' });
 	}
