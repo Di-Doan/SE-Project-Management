@@ -71,7 +71,7 @@ If you did not make this request then please ignore this email.`
 				},
 			})
 			.then((response) => {
-				console.log('Forgot Password Email sent successfully:', response.data);
+				console.log('Forgot Password Email sent successfully:', otp, response.data);
 			})
 			.catch((error) => {
 				console.error('Error sending forgot password email:', otp, error.response.data);
