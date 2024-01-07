@@ -6,7 +6,7 @@
 CREATE TABLE Chat (
     chat_id INT PRIMARY KEY AUTO_INCREMENT,
     chat_description VARCHAR(255),
-    last_updated DATE NOT NULL
+    last_updated TIMESTAMP NOT NULL
 );
 
 CREATE TABLE Semester (

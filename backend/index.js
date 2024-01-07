@@ -24,11 +24,7 @@ app.use(helmet());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'frontend', 'build')));
 app.use('/public', express.static(path.join(__dirname, 'public')));
-app.use(
-	bodyParser.urlencoded({
-		extended: true,
-	})
-);
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use('/api/auth', authRouter);
