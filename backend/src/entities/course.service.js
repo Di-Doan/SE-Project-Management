@@ -6,9 +6,9 @@ export const COURSE_STATUS = {
 };
 
 export const getCourses = async (filter) => {
-	const whereQuery = '';
+	let whereQuery = '';
 	if (filter.studentId) {
-		whereQuery += `sc.student_id = ${pool.escape(studentId)}`;
+		whereQuery += `sc.student_id = ${pool.escape(filter.studentId)}`;
 	}
 
 	const queryString = `
@@ -29,7 +29,7 @@ export const getCourses = async (filter) => {
 			semester: e.semester_name,
 		}));
 	} catch (err) {
-		console.err('Failed to get courses:', err);
+		console.error('Failed to get courses:', err);
 		return null;
 	}
 };
@@ -46,15 +46,15 @@ export const getCourseByID = async (courseId) => {
 		const [results] = await pool.query(queryString);
 		return results.length > 0
 			? {
-					id: e.couse_id,
-					name: e.course_name,
-					code: e.course_code,
-					status: e.status,
-					semester: e.semester_name,
+					id: results[0].couse_id,
+					name: results[0].course_name,
+					code: results[0].course_code,
+					status: results[0].status,
+					semester: results[0].semester_name,
 			  }
 			: null;
 	} catch (err) {
-		console.err('Failed to get courses:', err);
+		console.error('Failed to get courses:', err);
 		return null;
 	}
 };
@@ -102,7 +102,7 @@ export const getCourseForStudent = async (courseId, studentId) => {
 			  }
 			: null;
 	} catch (err) {
-		console.err('Failed to get courses:', err);
+		console.error('Failed to get courses:', err);
 		return null;
 	}
 };

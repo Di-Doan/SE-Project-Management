@@ -9,13 +9,9 @@ export const getStudentCourse = async (studentId, courseId) => {
 
 	try {
 		const [results] = await pool.query(queryString);
-		return results.map((e) => ({
-			studentId: e.student_id,
-			courseId: e.course_id,
-			availability: e.availability,
-		}));
+		return results.length > 0 ? results[0] : null;
 	} catch (err) {
-		console.err('Failed to get student courses:', err);
+		console.error('Failed to get student courses:', err);
 		return null;
 	}
 };
@@ -49,6 +45,21 @@ export const removeStudentCourse = async (studentId, courseId, connection) => {
 		return results.affectedRows;
 	} catch (err) {
 		console.error('Failed to remove student course:', err);
+		return null;
+	}
+};
+
+export const updateAvailability = async (studentId, courseId, availability, connection) => {
+	const db = connection || pool;
+	try {
+		const [results] = await db.query(
+			'UPDATE Student_Course SET availability = ? WHERE student_id = ? AND course_id = ?',
+			[availability, studentId, courseId]
+		);
+
+		return results.affectedRows;
+	} catch (err) {
+		console.error('Failed to update student course availability:', err);
 		return null;
 	}
 };

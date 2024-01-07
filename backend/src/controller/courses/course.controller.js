@@ -32,10 +32,10 @@ export const createCourse = async (req, res) => {
 		return res.status(400).json({ message: 'Missing course required field' });
 	}
 
-	const semester = await semesterService.getSemesterById(req.body.semesterId);
-	if (!semester) {
-		return res.status(404).json({ message: 'Semester ID not found' });
-	}
+	// const semester = await semesterService.getSemesterById(req.body.semesterId);
+	// if (!semester) {
+	// 	return res.status(404).json({ message: 'Semester ID not found' });
+	// }
 
 	const connection = await pool.getConnection();
 	await connection.beginTransaction();
@@ -96,17 +96,23 @@ export const addStudentCourse = async (req, res) => {
 		studentPromise,
 		studentCoursePromise,
 	]);
-	if (!course) return res.status(404).json({ message: 'Course ID not found' });
-	if (!student) return res.status(404).json({ message: 'Student ID not found' });
-	if (studentCourse) return res.status(400).json({ message: 'Student already in this course' });
+	if (!course) {
+		return res.status(404).json({ message: 'Course ID not found' });
+	}
+	if (!student) {
+		return res.status(404).json({ message: 'Student ID not found' });
+	}
+	if (studentCourse) {
+		return res.status(400).json({ message: 'Student already in this course' });
+	}
 
 	try {
-		const studentCourseId = await studentCourseService.addStudentCourse(studentId, courseId);
-		if (!studentCourseId) {
+		const result = await studentCourseService.addStudentCourse(studentId, courseId);
+		if (result == null) {
 			return res.status(500).json({ message: 'Failed to add student course' });
 		}
 
-		return res.status(200).json({ id: studentCourseId, studentId, courseId });
+		return res.status(200).json({ studentId, courseId: Number(courseId), availability: true });
 	} catch (err) {
 		console.error('Failed to add student course:', err);
 		return res.status(500).json({ message: 'Failed to add student course' });

@@ -19,12 +19,12 @@ router.delete('/:id/students/:studentId', validateRmitClient, courseController.r
 
 router.post('/:id/tutorials', validateRmitClient, tutorialController.createTutorial);
 router.post(
-	'/:id/tutorials/:tutorial/students',
+	'/:id/tutorials/:tutorialId/students',
 	validateRmitClient,
 	tutorialController.addStudentTutorial
 );
 router.delete(
-	'/:id/tutorials/:tutorial/students/:studentId',
+	'/:id/tutorials/:tutorialId/students/:studentId',
 	validateRmitClient,
 	tutorialController.removeStudentTutorial
 );
