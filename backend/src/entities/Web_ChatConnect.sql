@@ -5,7 +5,8 @@ USE Web_ChatConnect;
 -- create tables
 CREATE TABLE Chat (
     chat_id INT PRIMARY KEY AUTO_INCREMENT,
-    chat_description VARCHAR(255)
+    chat_description VARCHAR(255),
+    last_updated TIMESTAMP NOT NULL
 );
 
 CREATE TABLE Semester (
@@ -44,12 +45,14 @@ CREATE TABLE Team (
     team_name VARCHAR(255) NOT NULL,
     course_id INT NOT NULL,
     team_chat_id INT NOT NULL,
+    num_members INT NOT NULL,
     FOREIGN KEY (course_id) REFERENCES Course (course_id) ON DELETE CASCADE,
     FOREIGN KEY (team_chat_id) REFERENCES Chat (chat_id) ON DELETE CASCADE
 );
 
 CREATE TABLE Student (
     student_id INT PRIMARY KEY AUTO_INCREMENT,
+    avatar VARCHAR(255),
     rmit_sid VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255),
     fullname VARCHAR(255) NOT NULL,
@@ -74,8 +77,11 @@ CREATE TABLE Student_Course (
 CREATE TABLE Student_Tutorial (
     student_id INT NOT NULL,
     tutorial_id INT NOT NULL,
+    course_id INT NOT NULL,
     FOREIGN KEY (student_id) REFERENCES Student (student_id) ON DELETE CASCADE,
     FOREIGN KEY (tutorial_id) REFERENCES Tutorial (tutorial_id) ON DELETE CASCADE,
+    FOREIGN KEY (course_id) REFERENCES Course (course_id) ON DELETE CASCADE,
+    UNIQUE (student_id, course_id),
     PRIMARY KEY (student_id, tutorial_id)
 );
 
@@ -90,8 +96,10 @@ CREATE TABLE Student_Team (
 CREATE TABLE Message (
     message_id INT PRIMARY KEY AUTO_INCREMENT,
     message_text TEXT NOT NULL,
+    message_sender INT NOT NULL,
     created_at DATE NOT NULL,
     chat_id INT NOT NULL,
+    FOREIGN key (message_sender) REFERENCES Student (student_id),
     FOREIGN KEY (chat_id) REFERENCES Chat (chat_id) ON DELETE CASCADE
 );
 
@@ -99,6 +107,7 @@ CREATE TABLE DirectChat (
     first_std_id INT NOT NULL,
     second_std_id INT NOT NULL,
     chat_id INT NOT NULL,
+    status INT NOT NULL DEFAULT 0,
     FOREIGN KEY (first_std_id) REFERENCES Student (student_id) ON DELETE CASCADE,
     FOREIGN KEY (second_std_id) REFERENCES Student (student_id) ON DELETE CASCADE,
     FOREIGN KEY (chat_id) REFERENCES Chat (chat_id) ON DELETE CASCADE,

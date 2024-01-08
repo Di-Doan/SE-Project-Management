@@ -10,16 +10,26 @@ import GroupBox from "./GroupBox";
 function FindTeam() {
   return (
     <div className={TeamStyle.body}>
+      <div className="profile-top-bar">
+        <div className={TeamStyle.topLink}>
+          <Link className={TeamStyle.link} to="/people">
+            People
+          </Link>
+          <Link className={TeamStyle.link} to="/team">
+            Team
+          </Link>
+        </div>
+      </div>
       <div className={TeamStyle.createGroupBtn}>
         <button className={TeamStyle.createBtn}>Create Group</button>
       </div>
 
       <div className={TeamStyle.groupFilter}>
-        <select className={TeamStyle.groupSelect} name="cars" id="cars">
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
+        <select className={TeamStyle.groupSelect} name="team-sort" id="team-sort">
+          <option defaultChecked value="All">All</option>
+          <option value="gpa">GPA</option>
+          <option value="availability">Availability</option>
+          <option value="tutorial">Tutorial Group</option>
         </select>
       </div>
 

@@ -10,6 +10,12 @@ import PeopleBlock from "./PeopleBlock";
 function People() {
   return (
     <div>
+      <div className="profile-top-bar">
+        <div className={PeopleStyle.topLink}>
+          <Link className={PeopleStyle.link} to="/people">People</Link>
+          <Link className={PeopleStyle.link} to="/team">Team</Link>
+        </div>
+      </div>
       <div className={PeopleStyle.box}>
         <div className={PeopleStyle.tableBlock}>
           <table className={PeopleStyle.table}>

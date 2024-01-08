@@ -1,5 +1,7 @@
 .body {
-  background-color: #ece8e8;
+  width: auto;
+  height:auto;
+  display: block;
 }
 
 .userProfile {
@@ -214,44 +216,15 @@
   flex-direction: column;
 }
 
-.introductionToMangagment {
+.courses {
   font-size: 20px;
   font-weight: bold;
   font-family: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-  position: absolute;
-  left: 401px;
-  top: 813px;
-  width: 973px;
-  height: 32px;
+  position: relative;
   flex-direction: column;
 }
 
-.buildingITSystem {
-  font-size: 20px;
-  font-weight: bold;
-  font-family: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-  position: absolute;
-  left: 401px;
-  top: 887px;
-  width: 977px;
-  height: 32px;
-  flex-direction: column;
-}
-
-.userDesign {
-  font-size: 20px;
-  font-weight: bold;
-  font-family: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-  position: absolute;
-  left: 401px;
-  top: 961px;
-  width: 166px;
-  height: 32px;
-  flex-direction: column;
-}
 .currentCourse {
   color: #384d6c;
   font-size: 16px;
@@ -275,7 +248,7 @@
 
   position: absolute;
   left: 334px;
-  top: 1064px;
+  top: 700px;
   width: 143px;
   height: min-content;
   flex-direction: column;
@@ -290,7 +263,7 @@
 
   position: absolute;
   left: 360px;
-  top: 1100px;
+  top: 750px;
   width: 143px;
   height: min-content;
   flex-direction: column;
@@ -300,7 +273,7 @@
 
   position: absolute;
   left: 710px;
-  top: 1100px;
+  top: 750px;
   width: 143px;
   height: min-content;
   flex-direction: column;}
@@ -311,8 +284,8 @@
     "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
 
   position: absolute;
-  left: 800px;
-  top: 1100px;
+  left: 807px;
+  top: 746px;
   width: 143px;
   height: min-content;
   flex-direction: column;}
@@ -320,7 +293,7 @@
 .saveButton {
   position: absolute;
   left: 926px;
-  top: 1162px;
+  top: 862px;
   width: 176px;
   height: 56px;
   justify-content: center;
@@ -343,7 +316,7 @@
 .cancelButton {
   position: absolute;
   left: 1150px;
-  top: 1190px;
+  top: 890px;
   width: 176px;
   height: 56px;
   justify-content: center;

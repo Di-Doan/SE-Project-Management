@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom'
 import axios from "axios";
-import { AxiosInstance } from '../../ultilities/axiosInstance.js';
+import  axiosInstance  from '../../ultilities/axiosInstance.js';
 import { jwtDecode } from "jwt-decode";
 
 import resets from './_resets.module.css';

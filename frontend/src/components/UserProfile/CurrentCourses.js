@@ -1,16 +1,44 @@
-import { NavLink, Outlet } from "react-router-dom";
-import "./UserProfileSideBar.css";
-import { ReactComponent as MenuIcon } from "../../assets/menu-icon.svg";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import ProfileStyle from "./UserProfile.module.css";
+import { jwtDecode } from "jwt-decode";
+import defaultAva from "../../assets/avatar.jpg";
+import UserProfileSideBar from "../UserProfileSideBar/UserProfileSideBar";
 import axiosInstance from "../../ultilities/axiosInstance";
+import { NavLink, Outlet } from "react-router-dom";
+import "../UserProfileSideBar/UserProfileSideBar.css";
+import { ReactComponent as MenuIcon } from "../../assets/menu-icon.svg";
 
-function UserProfileSideBar() {
+function CurrentCourses() {
+  const [user, setUser] = useState({});
+  const [auth, setAuth] = useState(false);
+  const [courses, setCourses] = useState([]);
+
   const authTokens = localStorage.getItem("authTokens")
     ? JSON.parse(localStorage.getItem("authTokens"))
     : null;
 
-  if (!authTokens) {
+  if (auth) {
     window.location = "/login";
   }
+
+  const getData = async () => {
+    try {
+      const response = await axiosInstance.get("/profile");
+      console.log(response.data.user.courses);
+      setUser(response.data.user);
+      setCourses(response.data.user.courses);
+    } catch (error) {
+      if (error) {
+        setAuth(true);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const signOut = async (e) => {
     e.preventDefault();
@@ -30,6 +58,7 @@ function UserProfileSideBar() {
     toggle.classList.toggle("active");
     sideNav.classList.toggle("active");
     adminMain.classList.toggle("active");
+    console.log(courses);
   };
 
   return (
@@ -92,11 +121,21 @@ function UserProfileSideBar() {
               <MenuIcon />
             </div>
           </div>
+          <div>
+            <div>
+              <h1>Current Courses</h1>
+            </div>
 
+            <div>
+              {courses.map((item) => (
+                <div className={ProfileStyle.courses}>{item.name}</div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export default UserProfileSideBar;
+export default CurrentCourses;

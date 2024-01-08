@@ -3,8 +3,8 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
 import redis from '../../utils/redis.service.js';
-import pool from '../../utils/mysql.service.js';
 import * as student from '../../entities/student.service.js';
+import { generateRandomNumber } from '../../utils/helper.js';
 
 export async function signup(req, res) {
 	const { sid, fullname, mobile, gpa } = req.body;
@@ -12,61 +12,90 @@ export async function signup(req, res) {
 	if (!sid || !fullname || !gpa)
 		return res.status(400).json({ error: 'Missing required student property' });
 
-	const connection = await pool.getConnection();
-
 	try {
-		await connection.beginTransaction();
-		const createdUser = await student.createStudent(
-			{ sid, fullname, mobile, gpa, email: `${sid}@rmit.edu.vn` },
-			connection
-		);
+		const createdUser = await student.createStudent({
+			sid,
+			fullname,
+			mobile,
+			gpa,
+			email: `${sid}@rmit.edu.vn`,
+		});
 
-		const firebaseUser = await axios.post(
-			`${process.env.FIREBASE_AUTH_BASE_URL}:signUp?key=${process.env.FIREBASE_AUTH_API_KEY}`,
-			{ email: `${sid}@rmit.edu.vn`, password: sid }
-		);
-
-		if (createdUser && firebaseUser) {
-			await connection.commit();
+		if (createdUser) {
 			res.status(201).json({ status: true });
 		} else {
-			await connection.rollback();
 			res.status(500).json({ error: 'Internal server error' });
 		}
 	} catch (err) {
 		console.error(err);
-		await connection.rollback();
 		res.status(500).json({ error: 'Internal server error' });
-	} finally {
-		connection.release();
 	}
 }
 
 export async function forgotPassword(req, res) {
 	const { email } = req.body;
+	if (!email) return res.status(400).json({ error: 'Missing email' });
 
-	await axios.post(
-		`${process.env.FIREBASE_AUTH_BASE_URL}:sendOobCode?key=${process.env.FIREBASE_AUTH_API_KEY}`,
-		{ requestType: 'PASSWORD_RESET', email }
-	);
+	const user = await student.getStudentByUsername(email);
+	if (!user) return res.status(400).json({ error: 'Invalid email' });
 
-	return res.status(200).json({ status: true });
+	try {
+		const otp = generateRandomNumber(6);
+		await redis.set(`otp:${email}`, otp, 'EX', 60 * 60);
+
+		const apiUrl = `https://api.mailgun.net/v3/${process.env.MAILGUN_DOMAIN_NAME || ''}/messages`;
+
+		const formData = new FormData();
+		formData.append(
+			'from',
+			`No Reply <noreply@${process.env.MAILGUN_DOMAIN_NAME || 'RMIT ChatConnect'}/>`
+		);
+		formData.append('to', email);
+		formData.append('subject', 'RMIT ChatConnect - Reset password');
+		formData.append(
+			'text',
+			`Hi ${user.rmitSID},
+
+There was a request to change your password!
+Your password reset code is: ${otp}
+
+If you did not make this request then please ignore this email.`
+		);
+
+		axios
+			.post(apiUrl, formData, {
+				headers: {
+					Authorization: `Basic ${Buffer.from(`api:${process.env.MAILGUN_API_KEY}`).toString(
+						'base64'
+					)}`,
+				},
+			})
+			.then((response) => {
+				console.log('Forgot Password Email sent successfully:', otp, response.data);
+			})
+			.catch((error) => {
+				console.error('Error sending forgot password email:', otp, error.response.data);
+			});
+
+		return res.status(200).json({ status: true });
+	} catch (err) {
+		console.error(err);
+		return res.status(500).json({ error: 'Internal server error' });
+	}
 }
 
 export async function resetPassword(req, res) {
-	const { code, password } = req.body;
+	const { email, code, password } = req.body;
 
+	if (!email) return res.status(400).json({ error: 'Missing email' });
 	if (!code) return res.status(400).json({ error: 'Missing validation code' });
 	if (!password) return res.status(400).json({ error: 'Missing new password' });
 
-	const confirmation = await axios.post(
-		`${process.env.FIREBASE_AUTH_BASE_URL}:resetPassword?key=${process.env.FIREBASE_AUTH_API_KEY}`,
-		{ oobCode: code }
-	);
+	const confirmation = await redis.get(`otp:${email}`);
+	if (!confirmation || confirmation != code)
+		return res.status(400).json({ error: 'Invalid validation code' });
 
-	if (!confirmation.email) return res.status(400).json({ error: 'Invalid validation code' });
-
-	const user = await student.getStudentByUsername(confirmation.email);
+	const user = await student.getStudentByUsername(email);
 	const result = await student.editStudentById(user.id, {
 		password,
 		status: student.STUDENT_STATUS.ACTIVE,
@@ -87,7 +116,8 @@ export async function signin(req, res) {
 		if (!user) return res.status(400).json({ error: 'Incorrect student ID or password' });
 
 		const validatePassword = await bcrypt.compare(password, user.password);
-		if (!validatePassword) return res.status(400).json({ error: "Incorrect student ID or password" });
+		if (!validatePassword)
+			return res.status(400).json({ error: 'Incorrect student ID or password' });
 
 		const accessToken = jwt.sign({ id: user.id }, process.env.JWT_ACCESS_TOKEN_SECRET, {
 			expiresIn: parseInt(process.env.JWT_ACCESS_TOKEN_EXPIRY),
@@ -104,21 +134,27 @@ export async function signin(req, res) {
 }
 
 export async function renew(req, res) {
-	const { refreshToken } = req.body;
-	if (!refreshToken) return res.status(400).json({ error: 'Missing refresh token' });
+	const refreshToken = req.body.refreshToken;
+	if (!refreshToken) {
+		return res.status(400).json({ error: 'Missing refresh token' });
+	}
+
 	try {
+		const isRevoked = await redis.get(`token:${refreshToken}`);
+		if (isRevoked) return res.status(400).json({ error: 'Invalid refresh token' });
+
 		const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_TOKEN_SECRET);
 		const user = await student.getStudentById(decoded.id);
 		if (!user) return res.status(400).json({ error: 'Invalid refresh token' });
 
-		const accessToken = jwt.sign({ id: user.id }, process.env.JWT_ACCESS_TOKEN_SECRET, {
+		const newAccessToken = jwt.sign({ id: user.id }, process.env.JWT_ACCESS_TOKEN_SECRET, {
 			expiresIn: parseInt(process.env.JWT_ACCESS_TOKEN_EXPIRY),
 		});
-		const refreshToken = jwt.sign({ id: user.id }, process.env.JWT_REFRESH_TOKEN_SECRET, {
+		const newRefreshToken = jwt.sign({ id: user.id }, process.env.JWT_REFRESH_TOKEN_SECRET, {
 			expiresIn: parseInt(process.env.JWT_REFRESH_TOKEN_EXPIRY),
 		});
 
-		return res.status(200).json({ accessToken, refreshToken });
+		return res.status(200).json({ accessToken: newAccessToken, refreshToken: newRefreshToken });
 	} catch (err) {
 		console.error(err);
 		return res.status(400).json({ error: 'Invalid refresh token' });
