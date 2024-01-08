@@ -164,3 +164,17 @@ export const removeStudentTeam = async (req, res) => {
 		connection.release();
 	}
 };
+
+export const getAllTeamFromCourseId = async (req, res) => {
+	const {id: courseId} = req.params;
+
+	try {
+		const [teams] = await teamService.getAllTeam(courseId);
+		console.log(teams)
+		return res.status(200).json(teams);
+	} catch (err) {
+		console.error('Oh no again....', err);
+		return res.status(404).json({ message: 'Failed to find teams' });
+	}
+	
+}

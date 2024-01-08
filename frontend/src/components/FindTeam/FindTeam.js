@@ -10,6 +10,7 @@ import GroupBox from "./GroupBox";
 function FindTeam() {
   const [user, setUser] = useState();
   const [auth, setAuth] = useState(false);
+  const [team, setTeam] = useState([]);
 
   if (auth) {
     window.location = "/login";
@@ -28,7 +29,21 @@ function FindTeam() {
 
   useEffect(() => {
     getUser();
+    getTeam();
+    
   }, []);
+
+  const getTeam = async () => {
+    try {
+      const response = await axiosInstance.get("/courses/teams/8");
+      const array = [];
+      array.push(response.data)
+      setTeam(array)
+      console.log(array);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className={TeamStyle.body}>
@@ -61,9 +76,9 @@ function FindTeam() {
       </div>
 
       <div className={TeamStyle.groupList}>
-        <GroupBox group="1" status = {false}></GroupBox>
-        <GroupBox group="2"></GroupBox>
-        <GroupBox group="3"></GroupBox>
+      {team.map((item) => (
+        <GroupBox name={item.team_name} member={item.chat_id}></GroupBox>
+      ))}
       </div>
     </div>
   );
