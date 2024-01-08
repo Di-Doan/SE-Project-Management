@@ -9,6 +9,8 @@ const router = Router();
 
 router.get('/', validateAuth, courseController.getCourses);
 router.get('/:id', validateAuth, courseController.getCourse);
+router.get('/:id/students', validateAuth, courseController.getCourseStudents);
+router.get('/:id/teams', validateAuth, teamController.getCourseTeams);
 router.post('/:id/teams/:teamId/students', validateAuth, teamController.addStudentTeam);
 router.delete('/:id/teams/:teamId/students', validateAuth, teamController.removeStudentTeam);
 router.get('/teams/:id', validateAuth, teamController.getAllTeamFromCourseId);

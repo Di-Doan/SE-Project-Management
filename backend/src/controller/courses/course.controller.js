@@ -139,3 +139,23 @@ export const removeStudentCourse = async (req, res) => {
 		return res.status(500).json({ message: 'Failed to remove student course' });
 	}
 };
+
+export const getCourseStudents = async (req, res) => {
+	const { id: courseId } = req.params;
+	const { id: studentId } = req.user;
+	const { q, availability, gpa, sameTutorial } = req.query;
+
+	const students = await studentService.getStudentsByFilters({
+		studentId,
+		courseId,
+		q,
+		availability,
+		gpa,
+		sameTutorial,
+	});
+	if (!students) {
+		return res.status(500).json({ message: 'Failed to get students' });
+	}
+
+	return res.status(200).json({ data: students });
+};
