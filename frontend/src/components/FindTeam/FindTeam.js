@@ -8,6 +8,28 @@ import TeamStyle from "./FindTeam.module.css";
 import GroupBox from "./GroupBox";
 
 function FindTeam() {
+  const [user, setUser] = useState();
+  const [auth, setAuth] = useState(false);
+
+  if (auth) {
+    window.location = "/login";
+  }
+
+  const getUser = async () => {
+    try {
+      const response = await axiosInstance.get("/profile");
+      setUser(response.data.user);
+    } catch (error) {
+      if (error) {
+        setAuth(true);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
   return (
     <div className={TeamStyle.body}>
       <div className="profile-top-bar">
@@ -25,15 +47,21 @@ function FindTeam() {
       </div>
 
       <div className={TeamStyle.groupFilter}>
-        <select className={TeamStyle.groupSelect} name="team-sort" id="team-sort">
-          <option defaultChecked value="All">All</option>
+        <select
+          className={TeamStyle.groupSelect}
+          name="team-sort"
+          id="team-sort"
+        >
+          <option defaultChecked value="All">
+            All
+          </option>
           <option value="availability">Availability</option>
           <option value="tutorial">Tutorial Group</option>
         </select>
       </div>
 
       <div className={TeamStyle.groupList}>
-        <GroupBox group="1"></GroupBox>
+        <GroupBox group="1" status = {false}></GroupBox>
         <GroupBox group="2"></GroupBox>
         <GroupBox group="3"></GroupBox>
       </div>

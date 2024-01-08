@@ -223,6 +223,7 @@
     "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   position: relative;
   flex-direction: column;
+  margin-bottom: 10px;
 }
 
 .currentCourse {

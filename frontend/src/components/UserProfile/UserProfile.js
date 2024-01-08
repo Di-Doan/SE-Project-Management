@@ -48,15 +48,17 @@ function UserProfile() {
         error.response.request.status >= 400 &&
         error.response.request.status <= 500
       ) {
-        window.location = "/login";
+        // window.location = "/login";
+      console.log(error);
       }
 
-      console.log(error);
+
     }
   };
 
   const cancelChanges = () => {
     setUser(oldData);
+  
   };
 
   return (

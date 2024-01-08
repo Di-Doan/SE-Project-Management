@@ -48,7 +48,7 @@ export const getStudentById = async (id, courseId) => {
 					email: results[0].email,
 					mobile: results[0].mobile,
 					gpa: results[0].gpa,
-					showGpa: results[0].show_gpa,
+					showGpa: results[0].showGpa, 
 					course: courseId
 						? {
 								id: results[0].course_id,

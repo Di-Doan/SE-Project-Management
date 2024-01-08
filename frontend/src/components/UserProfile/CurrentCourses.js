@@ -127,9 +127,11 @@ function CurrentCourses() {
             </div>
 
             <div>
-              {courses.map((item) => (
-                <div className={ProfileStyle.courses}>{item.name}</div>
-              ))}
+              {courses
+                .filter((filtered) => filtered.status == 1)
+                .map((item) => (
+                  <div className={ProfileStyle.courses}>{item.name}</div>
+                ))}
             </div>
           </div>
         </div>

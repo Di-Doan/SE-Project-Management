@@ -2,7 +2,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import dayjs from "dayjs";
 
-const baseURL = `https://chatconnect.nnhnam.io.vn/api`;
+const baseURL = `http://localhost:8000/api`;
 
 let authTokens = localStorage.getItem("authTokens")
   ? JSON.parse(localStorage.getItem("authTokens"))
