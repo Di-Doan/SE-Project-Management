@@ -1,6 +1,6 @@
--- DROP DATABASE IF EXISTS Web_ChatConnect;
--- CREATE DATABASE Web_ChatConnect;
--- USE Web_ChatConnect;
+DROP DATABASE IF EXISTS Web_ChatConnect;
+CREATE DATABASE Web_ChatConnect;
+USE Web_ChatConnect;
 
 -- create tables
 CREATE TABLE Chat (
