@@ -8,7 +8,60 @@ export const STUDENT_STATUS = {
 	INACTIVE: 2,
 };
 
-export const getStudentsByFilters = async (filters) => {};
+export const getStudentsByFilters = async (filters) => {
+	const { studentId, courseId, q, availability, gpa, sameTutorial } = filters;
+	try {
+		// prettier-ignore
+		let queryString = `
+			SELECT * FROM Student AS s
+			LEFT JOIN Student_Course AS sc 
+				ON s.student_id = sc.student_id ${courseId ? `AND sc.course_id = ${pool.escape(courseId)}` : ''}
+			${sameTutorial ? 'LEFT JOIN Student_Tutorial AS st ON st.student_id = s.student_id' : ''}
+			LEFT JOIN DirectChat AS dc 
+				ON (dc.first_std_id = ${pool.escape(studentId)} AND dc.second_std_id = s.student_id) OR (dc.first_std_id = s.student_id AND dc.second_std_id = ${pool.escape(studentId)})
+			WHERE s.student_id != ${pool.escape(studentId)}
+		`;
+
+		if (q) {
+			// prettier-ignore
+			queryString += ` AND MATCH (s.rmit_sid, s.fullname, s.email, s.mobile) AGAINST (${pool.escape(q)})`;
+		}
+		if (availability) {
+			queryString += ` AND sc.availability = true`;
+		}
+		if (sameTutorial) {
+			// prettier-ignore
+			queryString += ` AND st.tutorial_id = (SELECT tutorial_id FROM Student_Tutorial WHERE student_id = ${pool.escape(studentId)} AND course_id = ${pool.escape(courseId)})`;
+		}
+		if (gpa) {
+			queryString += ` ORDER BY s.gpa DESC`;
+		} else {
+			queryString += ` ORDER BY dc.chat_id DESC`;
+		}
+
+		const [results] = await pool.query(queryString);
+
+		return results.map((result) => ({
+			id: result.student_id,
+			avatar: result.avatar,
+			rmitSID: result.rmit_sid,
+			fullname: result.fullname,
+			description: result.description,
+			email: result.email,
+			mobile: result.mobile,
+			gpa: result.showGpa ? result.gpa : undefined,
+			course: courseId
+				? {
+						id: result.course_id,
+						availability: Boolean(result.availability),
+				  }
+				: undefined,
+		}));
+	} catch (err) {
+		console.error('Failed to get Students by filters:', err);
+		return null;
+	}
+};
 
 export const getStudentByUsername = async (username) => {
 	try {

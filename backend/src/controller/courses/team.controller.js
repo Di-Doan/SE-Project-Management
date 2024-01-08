@@ -6,6 +6,16 @@ import * as studentTeamService from '../../entities/student_team.service.js';
 import * as studentCourseService from '../../entities/student_course.service.js';
 import * as courseService from '../../entities/course.service.js';
 
+export const getCourseTeams = async (req, res) => {
+	const { id: courseId } = req.params;
+	const teams = await teamService.getTeams(courseId);
+	if (!teams) {
+		return res.status(500).json({ message: 'Failed to get teams' });
+	}
+
+	return res.status(200).json({ data: teams });
+};
+
 export const createTeam = async (req, res) => {
 	const { id: courseId } = req.params;
 	const { name } = req.body;
