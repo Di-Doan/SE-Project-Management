@@ -61,12 +61,12 @@ export const getCourseByID = async (courseId) => {
 
 export const getCourseForStudent = async (courseId, studentId) => {
 	const queryString = `
-    SELECT c.course_id, c.course_name, c.course_code, c.status, e.announcement_chat_id, c.reference_chat_id, s.semester_name,
+    SELECT c.course_id, c.course_name, c.course_code, c.status, c.announcement_chat_id, c.reference_chat_id, s.semester_name,
       CAST(CONCAT('[', GROUP_CONCAT(
 				DISTINCT JSON_OBJECT('id', tt.tutorial_id, 'name', tt.tutorial_name, 'chatId', tt.tut_chat_id, 'joined', CASE WHEN stt.student_id IS NOT NULL THEN 'True' ELSE 'False' END)
 			), ']') AS JSON) as tutorials,
       CAST(CONCAT('[', GROUP_CONCAT(
-				DISTINCT JSON_OBJECTAGG('id', t.team_id, 'name', t.team_name, 'chatId', t.team_chat_id, 'joined', CASE WHEN st.student_id IS NOT NULL THEN 'True' ELSE 'False' END)
+				DISTINCT JSON_OBJECT('id', t.team_id, 'name', t.team_name, 'chatId', t.team_chat_id, 'joined', CASE WHEN st.student_id IS NOT NULL THEN 'True' ELSE 'False' END)
 			), ']') AS JSON) as teams
     FROM Course AS c
     LEFT JOIN Semester AS s 
@@ -81,24 +81,24 @@ export const getCourseForStudent = async (courseId, studentId) => {
       ON t.course_id = c.course_id
     LEFT JOIN Student_Team AS st 
       ON st.team_id = t.team_id AND st.student_id = ${pool.escape(studentId)}
-    WHERE c.course_id = ${pool.escape(courseId)} AND sc.student_id NOT NULL 
+    WHERE c.course_id = ${pool.escape(courseId)} AND sc.student_id IS NOT NULL 
       AND c.status = ${pool.escape(COURSE_STATUS.ACTIVE)}
-    GROUP BY c.course_id, c.course_name, c.course_code, c.status, e.announcement_chat_id, c.reference_chat_id, s.semester_name
+    GROUP BY c.course_id, c.course_name, c.course_code, c.status, c.announcement_chat_id, c.reference_chat_id, s.semester_name
   `;
 
 	try {
 		const [results] = await pool.query(queryString, [studentId, studentId, courseId]);
 		return results.length > 0
 			? {
-					id: e.couse_id,
-					name: e.course_name,
-					code: e.course_code,
-					status: e.status,
-					semester: e.semester_name,
-					announcemenChatId: e.announcement_chat_id,
-					referenceChatId: e.reference_chat_id,
-					tutorials: e.tutorials,
-					teams: e.teams,
+					id: results[0].couse_id,
+					name: results[0].course_name,
+					code: results[0].course_code,
+					status: results[0].status,
+					semester: results[0].semester_name,
+					announcemenChatId: results[0].announcement_chat_id,
+					referenceChatId: results[0].reference_chat_id,
+					tutorials: results[0].tutorials,
+					teams: results[0].teams,
 			  }
 			: null;
 	} catch (err) {

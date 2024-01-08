@@ -45,6 +45,7 @@ CREATE TABLE Team (
     team_name VARCHAR(255) NOT NULL,
     course_id INT NOT NULL,
     team_chat_id INT NOT NULL,
+    num_members INT NOT NULL,
     FOREIGN KEY (course_id) REFERENCES Course (course_id) ON DELETE CASCADE,
     FOREIGN KEY (team_chat_id) REFERENCES Chat (chat_id) ON DELETE CASCADE
 );
