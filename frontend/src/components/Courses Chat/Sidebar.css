@@ -1,53 +1,52 @@
-/* Sidebar.css */
+/* Add these styles to your existing sidebar styles */
+
 .sidebar {
-    background-color: #36393f;
-    /* Discord dark theme background color */
-    color: #ffffff;
-    /* Text color */
-    width: 250px;
-    /* Adjust the width as needed */
-    padding: 20px;
-    height: 100vh;
-    /* Full height of the viewport */
     display: flex;
     flex-direction: column;
-}
-
-.sidebar-item {
+    background-color: #36393f;
+    color: white;
+    width: 250px;
+    height: 100vh; /* Full height of the viewport */
     padding: 10px;
+    overflow-y: auto;
+  }
+  
+  .sidebar-item {
+    padding: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.sidebar-item:hover {
-    background-color: #4a4f57;
-    /* Hover background color */
-}
-
-.sub-item {
-    padding-left: 20px;
-    /* Indent sub-items */
-}
-
-.user-info {
+    transition: background-color 0.3s;
+  }
+  
+  .sub-groups {
+    margin-left: 10px;
+  }
+  
+  .sub-item {
+    padding: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  
+    &:hover {
+      background-color: #4a4d53;
+    }
+  }
+  
+  /* User details at the bottom of the sidebar */
+  .user-details {
+    margin-top: auto;
     display: flex;
     align-items: center;
-    margin-top: auto;
-    /* Push user info to the bottom */
     padding: 10px;
-    background-color: #333;
-    /* Sidebar background color */
-}
-
-.user-avatar {
-    width: 40px;
-    height: 40px;
+  }
+  
+  .user-avatar img {
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     margin-right: 10px;
-}
-
-.user-name {
-    color: #fff;
+  }
+  
+  .user-name {
     font-weight: bold;
-}
+  }
   
