@@ -48,11 +48,10 @@ function UserProfile() {
         error.response.request.status >= 400 &&
         error.response.request.status <= 500
       ) {
-        // window.location = "/login";
-      console.log(error);
+        window.location = "/login";
       }
 
-
+      console.log(error);
     }
   };
 

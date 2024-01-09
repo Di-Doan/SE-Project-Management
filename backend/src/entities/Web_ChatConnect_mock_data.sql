@@ -2,13 +2,13 @@
 use Web_ChatConnect;
 
 INSERT INTO Chat (chat_description, last_updated) VALUES
-    ('Announcement Chat for COSC0003', '2024-01-07 09:44:16'), ('Reference Chat for COSC0003', '2024-01-07 09:44:16'),
-    ('Tutorial 1 Chat for COSC0003', '2024-01-07 09:44:16'), ('Tutorial 2 Chat for COSC0003', '2024-01-07 09:44:16'), ('Team Chat 1 for COSC0003', '2024-01-07 09:44:16'), 
-    ('Announcement Chat for COSC0004', '2024-01-07 09:44:16'), ('Reference Chat for COSC0004', '2024-01-07 09:44:16'),
-    ('Tutorial 1 Chat for COSC0004', '2024-01-07 09:44:16'), ('Tutorial 2 Chat for COSC0004', '2024-01-07 09:44:16'), ('Team Chat 1 for COSC0004', '2024-01-07 09:44:16'),  
-    ('Announcement Chat for COMM0002', '2024-01-07 09:44:16'), ('Reference Chat for COMM0002', '2024-01-07 09:44:16'),
-    ('Tutorial 1 Chat for COMM0002', '2024-01-07 09:44:16'), ('Tutorial 2 Chat for COMM0002', '2024-01-07 09:44:16'), ('Team Chat 1 for COMM0002', '2024-01-07 09:44:16'), ('Team Chat 2 for COMM0002', '2024-01-07 09:44:16'),
-    ('This is direct message between Nam and Di', '2024-01-07 09:44:16'), ('This is direct message between Nam and Phuong', '2024-01-07 09:44:16'), ('This is direct message between Di and Phuong', '2024-01-07 09:44:16');
+    ('Announcement Chat for COSC0003', NOW()), ('Reference Chat for COSC0003', NOW()),
+    ('Tutorial 1 Chat for COSC0003', NOW()), ('Tutorial 2 Chat for COSC0003', NOW()), ('Team Chat 1 for COSC0003', NOW()), 
+    ('Announcement Chat for COSC0004', NOW()), ('Reference Chat for COSC0004', NOW()),
+    ('Tutorial 1 Chat for COSC0004', NOW()), ('Tutorial 2 Chat for COSC0004', NOW()), ('Team Chat 1 for COSC0004', NOW()),  
+    ('Announcement Chat for COMM0002', NOW()), ('Reference Chat for COMM0002', NOW()),
+    ('Tutorial 1 Chat for COMM0002', NOW()), ('Tutorial 2 Chat for COMM0002', NOW()), ('Team Chat 1 for COMM0002', NOW()), ('Team Chat 2 for COMM0002', NOW()),
+    ('This is direct message between Nam and Di', NOW()), ('This is direct message between Nam and Phuong', NOW()), ('This is direct message between Di and Phuong', NOW());
 
 -- Insert mock data into Semester table
 INSERT INTO Semester (semester_name, start_date, end_date, status) VALUES
@@ -71,8 +71,13 @@ INSERT INTO Student_Team (student_id, team_id) VALUES
   (4, 1), (4, 2);
 
 -- Insert mock data into Message table
--- INSERT INTO Message (message_text, created_at, chat_id) VALUES
---   ('Hello, welcome to the general chat!', '2023-01-01', 1),
+INSERT INTO Message (message_text, message_sender, created_at, chat_id) VALUES
+    ('test announcement_chat_id [1] sended by student_id [1]', 1, NOW(), 1),
+    ('s1234567 to tut chat 1', 1, NOW(), 7),
+    ('s2345678 to tut chat 1', 2, NOW(), 7),
+    ('s3456789 to tut chat 2', 3, NOW(), 9),
+    ('s1234567 to tut chat 3', 1, NOW(), 11);
+
 --   ('Any questions about the tutorial?', '2023-01-05', 2),
 --   ('Team 1, let''s discuss the project.', '2023-01-10', 3);
 

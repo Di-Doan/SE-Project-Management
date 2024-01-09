@@ -96,8 +96,10 @@ CREATE TABLE Student_Team (
 CREATE TABLE Message (
     message_id INT PRIMARY KEY AUTO_INCREMENT,
     message_text TEXT NOT NULL,
+    message_sender INT NOT NULL,
     created_at DATE NOT NULL,
     chat_id INT NOT NULL,
+    FOREIGN key (message_sender) REFERENCES Student (student_id),
     FOREIGN KEY (chat_id) REFERENCES Chat (chat_id) ON DELETE CASCADE
 );
 

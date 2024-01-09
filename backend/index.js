@@ -10,6 +10,7 @@ import { fileURLToPath } from 'url';
 import authRouter from './src/controller/auth/auth.router.js';
 import profileRouter from './src/controller/profile/profile.router.js';
 import friendRouter from './src/controller/friends/friend.router.js';
+import chatRouter from './src/controller/chat/chat.router.js';
 import courseRouter from './src/controller/courses/course.router.js';
 
 const app = express();
@@ -28,9 +29,9 @@ app.use(bodyParser.json());
 
 app.use('/api/auth', authRouter);
 app.use('/api/profile', profileRouter);
+app.use('/api/chats', chatRouter);
 app.use('/api/courses', courseRouter);
 app.use('/api/friends', friendRouter);
-// app.use('/api/chats');
 app.use('/api/*', (req, res) => res.status(404).json({ message: 'Not found' }));
 
 app.use((req, res) => {
