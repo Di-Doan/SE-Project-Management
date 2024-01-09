@@ -11,6 +11,9 @@ function FindTeam() {
   const [user, setUser] = useState();
   const [auth, setAuth] = useState(false);
   const [team, setTeam] = useState([]);
+  const [teamId, setTeamId] = useState();
+  const [filter, setFilter] = useState("all");
+  const course = "8";
 
   if (auth) {
     window.location = "/login";
@@ -20,7 +23,6 @@ function FindTeam() {
     try {
       const response = await axiosInstance.get("/profile");
       setUser(response.data.user);
-      console.log(response.data.user);
     } catch (error) {
       if (error) {
         setAuth(true);
@@ -30,15 +32,23 @@ function FindTeam() {
 
   useEffect(() => {
     getUser();
+    getTeamId();
     getTeam();
-    
   }, []);
 
   const getTeam = async () => {
     try {
-      const response = await axiosInstance.get("/courses/8/teams");
-      setTeam(response.data.data)
-      console.log(response.data.data);
+      const response = await axiosInstance.get(`/courses/${course}/teams`);
+      setTeam(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getTeamId = async () => {
+    try {
+      const response = await axiosInstance.get(`/courses/${course}/teamId`);
+      setTeamId(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -65,19 +75,35 @@ function FindTeam() {
           className={TeamStyle.groupSelect}
           name="team-sort"
           id="team-sort"
+          onChange={(e) => {
+            setFilter(e.target.value);
+          }}
         >
-          <option defaultChecked value="All">
+          <option defaultChecked value="all">
             All
           </option>
           <option value="availability">Availability</option>
-          <option value="tutorial">Tutorial Group</option>
         </select>
       </div>
 
       <div className={TeamStyle.groupList}>
-      {team.map((item) => (
-        <GroupBox name={item.name} member={item.memberCount} teamId = {item.id} courseId = "8" ></GroupBox>
-      ))}
+        {team
+          .filter((item) => {
+            if (filter == "availability") {
+              return item.memberCount < 4;
+            } else {
+              return item;
+            }
+          })
+          .map((item) => (
+            <GroupBox
+              name={item.name}
+              member={item.memberCount}
+              teamId={item.id}
+              courseId={course}
+              id={teamId}
+            ></GroupBox>
+          ))}
       </div>
     </div>
   );

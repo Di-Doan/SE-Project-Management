@@ -7,7 +7,21 @@ function GroupBox(props) {
       const response = await axiosInstance.post(
         `/courses/${props.courseId}/teams/${props.teamId}/students`
       );
-    } catch (error) {console.log(error.response)}
+      window.location = "/team";
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  const leaveGroup = async () => {
+    try {
+      const response = await axiosInstance.delete(
+        `/courses/${props.courseId}/teams/${props.teamId}/students`
+      );
+      window.location = "/team";
+    } catch (error) {
+      console.log(error.response);
+    }
   };
 
   return (
@@ -18,7 +32,15 @@ function GroupBox(props) {
         </div>
         <span className={TeamStyle.groupStudent}>{props.member} students</span>
         <span className={TeamStyle.groupJoin}>
-          <button className={TeamStyle.joinBtn} onClick={joinGroup}>Join Group</button>
+          {props.teamId != props.id ? (
+            <button className={TeamStyle.joinBtn} onClick={joinGroup}>
+              Join Group
+            </button>
+          ) : (
+            <button className={TeamStyle.leaveBtn} onClick={leaveGroup}>
+              Leave Group
+            </button>
+          )}
         </span>
       </div>
     </div>
