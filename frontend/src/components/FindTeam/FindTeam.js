@@ -20,6 +20,7 @@ function FindTeam() {
     try {
       const response = await axiosInstance.get("/profile");
       setUser(response.data.user);
+      console.log(response.data.user);
     } catch (error) {
       if (error) {
         setAuth(true);
@@ -35,11 +36,9 @@ function FindTeam() {
 
   const getTeam = async () => {
     try {
-      const response = await axiosInstance.get("/courses/teams/8");
-      const array = [];
-      array.push(response.data)
-      setTeam(array)
-      console.log(array);
+      const response = await axiosInstance.get("/courses/8/teams");
+      setTeam(response.data.data)
+      console.log(response.data.data);
     } catch (error) {
       console.log(error);
     }
@@ -77,7 +76,7 @@ function FindTeam() {
 
       <div className={TeamStyle.groupList}>
       {team.map((item) => (
-        <GroupBox name={item.team_name} member={item.chat_id}></GroupBox>
+        <GroupBox name={item.name} member={item.memberCount} teamId = {item.id} courseId = "8" ></GroupBox>
       ))}
       </div>
     </div>

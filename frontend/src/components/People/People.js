@@ -8,6 +8,22 @@ import PeopleStyle from "./People.module.css";
 import PeopleBlock from "./PeopleBlock";
 
 function People() {
+  const [people, setPeople] = useState([]);
+
+  const getPeople = async () => {
+    try {
+      const response = await axiosInstance.get(`/courses/8/students`);
+      console.log(response.data.data)
+      setPeople(response.data.data)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getPeople();
+  }, []);
+
   return (
     <div>
       <div className="profile-top-bar">
@@ -46,9 +62,9 @@ function People() {
               </tr>
             </thead>
             <tbody className={PeopleStyle.tbody}>
-              <PeopleBlock name="Doan Thien Di" tutorial="1"></PeopleBlock>
-              <PeopleBlock name="Doan Thien Di" tutorial="1"></PeopleBlock>
-              <PeopleBlock name="Doan Thien Di" tutorial="1"></PeopleBlock>
+              {people.map((item) => (
+                <PeopleBlock name={item.fullname} tutorial="1"></PeopleBlock>
+              ))}
             </tbody>
           </table>
         </div>
