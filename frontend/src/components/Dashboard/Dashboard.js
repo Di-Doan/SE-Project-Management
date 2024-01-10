@@ -39,10 +39,6 @@ function Dashboard() {
   const [oldData, setOldData] = useState();
   const [auth, setAuth] = useState(false);
 
-  if (auth) {
-    window.location = "/login";
-  }
-
   const getData = async () => {
     try {
       const response = await axiosInstance.get("/profile");
@@ -228,12 +224,14 @@ function Dashboard() {
           <div className={classes.rectangle55977}></div>
           <div className={classes.image2364}></div>
           <div className={classes._3DAnimationConference5}>
-          3D Animation Conference
+            {user && user.courses && user.courses[1] ? user.courses[1].name : "empty"}
           </div>
           <div className={classes.december221030PM4}>December 22, 10:30 PM</div>
           <div className={classes.rectangle55978}></div>
           <div className={classes.image2338}></div>
-          <div className={classes._3DAnimationConference6}>3D Animation Conference</div>
+          <div className={classes._3DAnimationConference6}>
+            {user && user.courses && user.courses[3] ? user.courses[3].name : "empty"}
+          </div>
           <div className={classes.december221030PM5}>December 22, 10:30 PM</div>
           <div className={classes.rectangle55979}></div>
           <div className={classes.image2366}></div>
