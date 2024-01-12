@@ -7,8 +7,10 @@ function GroupBox(props) {
       const response = await axiosInstance.post(
         `/courses/${props.courseId}/teams/${props.teamId}/students`
       );
-      window.location = "/team";
+      
+      window.location = `/team/${props.courseId}`;
     } catch (error) {
+      alert(error.response.data.message);
       console.log(error.response);
     }
   };
@@ -18,9 +20,10 @@ function GroupBox(props) {
       const response = await axiosInstance.delete(
         `/courses/${props.courseId}/teams/${props.teamId}/students`
       );
-      window.location = "/team";
+      window.location = `/team/${props.courseId}`;
     } catch (error) {
       console.log(error.response);
+      alert(error.response.data.message);
     }
   };
 

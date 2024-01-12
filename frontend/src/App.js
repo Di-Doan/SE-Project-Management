@@ -15,24 +15,24 @@ import CoursesChat from './components/Courses Chat/CoursesChat';
 
 function App() {
 	return (
-		<BrowserRouter>
-			<Routes>
-				{/* // password and login  */}
-				<Route path='/login' element={<LoginForm />} />
-				<Route path='/forgot-password' element={<ForgotPassword />} />
-				<Route path='/reset-password' element={<ResetPassword />} />
+    <BrowserRouter>
+      <Routes>
+        {/* // password and login  */}
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
-				<Route path='/profile' element={<UserProfile />} />
-				<Route path='/current-courses' element={<CurrentCourses />} />
-				<Route path='/dashboard' element={<Dashboard />} />
-				<Route path='/directchatpage' element={<DirectChatPage />} />
-				<Route path='/courseschat' element={<CoursesChat />} />
+        <Route path="/profile" element={<UserProfile />} />
+        <Route path="/current-courses" element={<CurrentCourses />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/directchatpage" element={<DirectChatPage />} />
+        <Route path="/courseschat" element={<CoursesChat />} />
 
-				<Route path='/team' element={<FindTeam />} />
-				<Route path='/people' element={<People />} />
-			</Routes>
-		</BrowserRouter>
-	);
+        <Route path="/team/:course_id" element={<FindTeam />} />
+        <Route path="/people/:course_id" element={<People />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;

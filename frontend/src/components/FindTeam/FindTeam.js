@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import defaultAva from "../../assets/avatar.jpg";
@@ -13,7 +13,7 @@ function FindTeam() {
   const [team, setTeam] = useState([]);
   const [teamId, setTeamId] = useState();
   const [filter, setFilter] = useState("all");
-  const course = "8";
+  const { course_id } = useParams();
 
   if (auth) {
     window.location = "/login";
@@ -38,7 +38,7 @@ function FindTeam() {
 
   const getTeam = async () => {
     try {
-      const response = await axiosInstance.get(`/courses/${course}/teams`);
+      const response = await axiosInstance.get(`/courses/${course_id}/teams`);
       setTeam(response.data.data);
     } catch (error) {
       console.log(error);
@@ -47,7 +47,7 @@ function FindTeam() {
 
   const getTeamId = async () => {
     try {
-      const response = await axiosInstance.get(`/courses/${course}/teamId`);
+      const response = await axiosInstance.get(`/courses/${course_id}/teamId`);
       setTeamId(response.data);
     } catch (error) {
       console.log(error);
@@ -58,10 +58,10 @@ function FindTeam() {
     <div className={TeamStyle.body}>
       <div className="profile-top-bar">
         <div className={TeamStyle.topLink}>
-          <Link className={TeamStyle.link} to="/people">
+          <Link className={TeamStyle.link} to={`/people/${course_id}`}>
             People
           </Link>
-          <Link className={TeamStyle.link} to="/team">
+          <Link className={TeamStyle.link} to={`/team/${course_id}`}>
             Team
           </Link>
         </div>
@@ -100,7 +100,7 @@ function FindTeam() {
               name={item.name}
               member={item.memberCount}
               teamId={item.id}
-              courseId={course}
+              courseId={course_id}
               id={teamId}
             ></GroupBox>
           ))}
