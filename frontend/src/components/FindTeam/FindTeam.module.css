@@ -104,6 +104,30 @@
   touch-action: manipulation;
 }
 
+.leaveBtn {
+    margin: 0px;
+  padding: 7px;
+  border-radius: 0.25rem;
+  border-width: 0px;
+  width: auto;
+  cursor: pointer;
+
+  box-sizing: border-box;
+  font-family: LatoWeb, "Lato Extended", Lato, "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  max-width: 100%;
+  overflow: visible;
+  display: inline-block;
+  vertical-align: middle;
+  color: white;
+  background: #d6202f;
+  position: relative;
+  overscroll-behavior: auto;
+  appearance: none;
+  text-decoration: none;
+  touch-action: manipulation;
+}
+
 .createGroupBtn {
   height: 36px;
   z-index: 1;
