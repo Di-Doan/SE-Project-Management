@@ -145,8 +145,6 @@ export const getCourseStudents = async (req, res) => {
 	const { id: studentId } = req.user;
 	const { q, availability, gpa, sameTutorial } = req.query;
 
-
-	console.log("search:",q, "avail:",availability, "gpa:", gpa, "tut:", sameTutorial );
 	const students = await studentService.getStudentsByFilters({
 		studentId,
 		courseId,
@@ -159,7 +157,6 @@ export const getCourseStudents = async (req, res) => {
 		return res.status(500).json({ message: 'Failed to get students' });
 	}
 
-	console.log(students);
 
 	return res.status(200).json({ data: students });
 };
