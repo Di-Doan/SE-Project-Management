@@ -13,6 +13,7 @@ const CoursesChat = () => {
   const [messages, setMessages] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [courseUsers, setCourseUsers] = useState([]);
+  const [user, setUser] = useState(null); // Add user state
 
   const handleRoomChange = (group) => {
     setSelectedGroup(group);
@@ -21,12 +22,13 @@ const CoursesChat = () => {
 
   const addMessage = async (text) => {
     const newUser = 'John Doe'; // Replace with the actual user's name
+    const userID = 1;
   
     try {
       const response = await axiosInstance.post(`/chat/${user.id}`, {
         text,
         user: newUser,
-        userId: user.id, // Add the user ID to the message data
+        userId, // Add the user ID to the message data
         // other necessary data
       });
   
@@ -57,10 +59,20 @@ const CoursesChat = () => {
   };
 
   useEffect(() => {
+    // Fetch user information when the component mounts
+    const fetchUser = async () => {
+      try {
+        const response = await axiosInstance.get("/profile");
+        setUser(response.data.user);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
     // Fetch course users when the component mounts
     fetchCourseUsers();
     getChat();
-    addMessage();
+    fetchUser();
   }, []);
 
   return (
