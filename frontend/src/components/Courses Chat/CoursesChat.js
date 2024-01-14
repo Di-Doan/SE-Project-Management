@@ -6,14 +6,13 @@ import Sidebar from './Sidebar';
 import Group1 from './Group1';
 import RightSidebar from './RightSidebar';
 import axiosInstance from '../../ultilities/axiosInstance.js';
-import { jwtDecode } from "jwt-decode";
 import './CoursesChat.css';
 
 const CoursesChat = () => {
   const [messages, setMessages] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [courseUsers, setCourseUsers] = useState([]);
-  const [user, setUser] = useState(null); // Add user state
+  const [user, setUser] = useState(null);
 
   const handleRoomChange = (group) => {
     setSelectedGroup(group);
@@ -21,29 +20,26 @@ const CoursesChat = () => {
   };
 
   const addMessage = async (text) => {
-    const newUser = 'John Doe'; // Replace with the actual user's name
-    const userID = 1;
-  
+    const newUser = 'John Doe';
+
     try {
       const response = await axiosInstance.post(`/chat/${user.id}`, {
         text,
         user: newUser,
-        userId, // Add the user ID to the message data
-        // other necessary data
+        userId: user.id,
       });
-  
+
       // Update the state with the newly added message
       setMessages([...messages, response.data]);
     } catch (error) {
       console.error(error);
     }
   };
-  
 
   const fetchCourseUsers = async () => {
     try {
       const response = await axiosInstance.get("/courses");
-      setCourseUsers(response.data); // Assuming the response contains an array of course users
+      setCourseUsers(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -52,14 +48,13 @@ const CoursesChat = () => {
   const getChat = async () => {
     try {
       const response = await axiosInstance.get("/chat");
-      setChat(response.data.messages);
+      setMessages(response.data.messages);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    // Fetch user information when the component mounts
     const fetchUser = async () => {
       try {
         const response = await axiosInstance.get("/profile");
@@ -69,7 +64,6 @@ const CoursesChat = () => {
       }
     };
 
-    // Fetch course users when the component mounts
     fetchCourseUsers();
     getChat();
     fetchUser();
@@ -84,7 +78,6 @@ const CoursesChat = () => {
             <Message key={message.id} user={message.user} text={message.text} />
           ))}
           {selectedGroup === 'group1' && <Group1 />}
-          {/* Add similar conditions for other groups if needed */}
         </div>
         <MessageInput onSendMessage={addMessage} />
       </div>
