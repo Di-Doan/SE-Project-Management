@@ -1,5 +1,6 @@
 // RightSidebar.js
 import React from 'react';
+import axios from "axios";
 import './RightSidebar.css';
 
 const RightSidebar = ({ users }) => {

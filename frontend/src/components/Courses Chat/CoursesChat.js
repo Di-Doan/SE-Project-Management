@@ -6,6 +6,7 @@ import Sidebar from './Sidebar';
 import Group1 from './Group1';
 import RightSidebar from './RightSidebar';
 import axiosInstance from '../../ultilities/axiosInstance.js';
+import axios from "axios";
 import './CoursesChat.css';
 
 const CoursesChat = () => {
@@ -23,7 +24,7 @@ const CoursesChat = () => {
     const newUser = 'John Doe';
 
     try {
-      const response = await axiosInstance.post(`/chat/${user.id}`, {
+      const response = await axiosInstance.post(`/chats/${user.id}`, {
         text,
         user: newUser,
         userId: user.id,
@@ -47,7 +48,7 @@ const CoursesChat = () => {
 
   const getChat = async () => {
     try {
-      const response = await axiosInstance.get("/chat");
+      const response = await axiosInstance.get("/chats");
       setMessages(response.data.messages);
     } catch (error) {
       console.log(error);

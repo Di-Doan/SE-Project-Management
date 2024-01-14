@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import './Sidebar.css'; // Import the corresponding CSS file
 import axiosInstance from '../../ultilities/axiosInstance.js';
+import axios from "axios";
 import ava1 from "../../assets/avatar2.jpg";
 
 const Sidebar = ({ onSelectGroup }) => {
