@@ -14,23 +14,6 @@ export const createChat = async (description, connection) => {
 	}
 };
 
-export const getChatsGroup = async(student_id) => {
-    try {
-        var [results] = await pool.query('SELECT * FROM Student WHERE Student.student_id = ?', [student_id]);
-        if (results.length === 0) return null;
-
-        
-        const queryStringGroup = `
-        -- WIP
-        `;
-
-        const [resultsGroup] = await pool.query(queryStringGroup);
-        return resultsGroup.length > 0 ? resultsGroup : null;
-    } catch (err) {
-        console.error('Failed to get chats: ', err);
-    }
-}
-
 export const getMessageLog = async (chat_id,filter) => {
     var [results] = await pool.query('SELECT * FROM Chat WHERE Chat.chat_id = ?', [chat_id]);
     if (results.length === 0) return null;
