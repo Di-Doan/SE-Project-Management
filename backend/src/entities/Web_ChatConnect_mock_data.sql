@@ -46,7 +46,7 @@ INSERT INTO Team (team_name, course_id, team_chat_id, num_members) VALUES
 INSERT INTO Student (rmit_sid, password, fullname, description, email, mobile, gpa, showGpa, status) VALUES
   ('s3980297', '$2b$10$LgCFJ92WJ1VXoYw9QX/JgeBphi2o.8mVGB4eo.wC5OzvfMniEmE7m', 'Nam Nguyen', 'description', 's3980297@example.rmit.edu.vn', '1234567890', 3.5, 1, 1),
   ('s3926977', '$2b$10$LgCFJ92WJ1VXoYw9QX/JgeBphi2o.8mVGB4eo.wC5OzvfMniEmE7m', 'Di Doan', 'description', 's3926977@example.rmit.edu.vn', '9876543210', 3.8, 1, 1),
-  ('s3885751', '$2b$10$LgCFJ92WJ1VXoYw9QX/Jge Bphi2o.8mVGB4eo.wC5OzvfMniEmE7m', 'Phuong Hoang', 'description', 's3885751@example.rmit.edu.vn', '5551112233', 3.2, 1, 1),
+  ('s3885751', '$2b$10$LgCFJ92WJ1VXoYw9QX/JgeBphi2o.8mVGB4eo.wC5OzvfMniEmE7m', 'Phuong Hoang', 'description', 's3885751@example.rmit.edu.vn', '5551112233', 3.2, 1, 1),
   ('s3758273', '$2b$10$LgCFJ92WJ1VXoYw9QX/JgeBphi2o.8mVGB4eo.wC5OzvfMniEmE7m', 'Long Loi', 'description', 's3758273@example.rmit.edu.vn', '5551112233', 3.3, 1, 1);
 
 -- Insert mock data into Student_Course table
