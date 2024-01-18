@@ -15,7 +15,7 @@ function PeopleBlock(props) {
         </div>
       </td>
       <td>{props.name}</td>
-      <td>{props.tutorial}</td>
+      <td>{props.rmitId}</td>
       <td>
         <button className={PeopleStyle.btn} >Send Message</button>
       </td>

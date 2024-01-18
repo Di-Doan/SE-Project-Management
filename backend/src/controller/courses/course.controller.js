@@ -157,5 +157,6 @@ export const getCourseStudents = async (req, res) => {
 		return res.status(500).json({ message: 'Failed to get students' });
 	}
 
+
 	return res.status(200).json({ data: students });
 };

@@ -4,6 +4,7 @@ import axios from "axios";
 import  axiosInstance  from '../../ultilities/axiosInstance.js';
 import { jwtDecode } from "jwt-decode";
 
+import Sidebar from './Sidebar.js';
 import resets from './_resets.module.css';
 import classes from './Design.module.css';
 import { Ellipse2552Icon2 } from './Ellipse2552Icon2.tsx';
@@ -68,33 +69,7 @@ function Dashboard() {
         <Ellipse2617Icon className={classes.icon3} />
       </div>
       <div className={classes.dashboard}>
-        <div className={classes.sidebar}>
-          <div>
-            <img src={rmitLogo} alt="RMIT Logo" className={classes.rMITLogo_Horizontal1} />
-          </div>
-          <div className={classes.account}>Account</div>
-          <div className={classes.rectangle5571}></div>
-          <Link to="/Dashboard" className={classes.sidebarLink}>
-            <div className={classes.dashboard2}>Dashboard</div>
-            <div className={classes.vector}>
-              <HomeIcon className={classes.icon4} />
-            </div>
-          </Link>
-          <div className={classes.courses}>Courses</div>
-          <div className={classes.group1000004376}>
-            <Group1000004376Icon className={classes.icon5} />
-          </div>
-          <Link to="/Login" className={classes.sidebarLink}>
-            <div className={classes.messages}>Messages</div>
-            <div className={classes.group1000004379}>
-              <Group1000004379Icon className={classes.icon8} />
-            </div>
-          </Link>
-          <div className={classes.settings}>Settings</div>
-          <div className={classes.group1000004380}>
-            <Group1000004380Icon className={classes.icon9} />
-          </div>
-        </div>
+      <Sidebar></Sidebar>
         <div className={classes.topBar}>
           <div className={classes.searchBox}>
             <div className={classes.searchInput}>

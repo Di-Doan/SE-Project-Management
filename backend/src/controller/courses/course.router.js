@@ -11,8 +11,10 @@ router.get('/', validateAuth, courseController.getCourses);
 router.get('/:id', validateAuth, courseController.getCourse);
 router.get('/:id/students', validateAuth, courseController.getCourseStudents);
 router.get('/:id/teams', validateAuth, teamController.getCourseTeams);
+router.get("/:id/teamId", validateAuth, teamController.getTeamIdOfStudent);
 router.post('/:id/teams/:teamId/students', validateAuth, teamController.addStudentTeam);
 router.delete('/:id/teams/:teamId/students', validateAuth, teamController.removeStudentTeam);
+
 
 // FOR RMIT CLIENT
 router.post('/', validateRmitClient, courseController.createCourse);

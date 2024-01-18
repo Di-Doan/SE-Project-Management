@@ -17,7 +17,7 @@ function UserProfileSideBar() {
     try {
       const response = await axiosInstance.post("/auth/signout", authTokens);
       localStorage.removeItem("authTokens");
-      window.location = "/profile";
+      window.location = "/login";
     } catch (error) {
       console.log(error);
     }

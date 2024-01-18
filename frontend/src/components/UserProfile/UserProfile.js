@@ -57,6 +57,7 @@ function UserProfile() {
 
   const cancelChanges = () => {
     setUser(oldData);
+  
   };
 
   return (
