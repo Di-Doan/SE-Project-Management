@@ -22,8 +22,9 @@ export async function getNewMessage(req, res) {
 }
 
 export async function postMessage(req, res) {
-    const {message, chatId} = req.body;
+    const {message} = req.body;
     const {id: studentId} = req.user;
+    const {id: chatId} = req.params;
 
     if (!message || !chatId) return res.status(400).json({ error: 'Missing required message properties.' });
 
