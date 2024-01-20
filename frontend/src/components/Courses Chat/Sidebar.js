@@ -9,11 +9,13 @@ const Sidebar = ({ onSelectGroup }) => {
   const [user, setUser] = useState({});
   const [auth, setAuth] = useState(false);
 
+  if (auth) {
+    window.location = "/login";
+  }
   const getData = async () => {
     try {
       const response = await axiosInstance.get("/profile");
       setUser(response.data.user);
-      setOldData(response.data.user);
     } catch (error) {
       if (error) {
         setAuth(true);

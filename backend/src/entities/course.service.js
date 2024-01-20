@@ -22,7 +22,7 @@ export const getCourses = async (filter) => {
 	try {
 		const [results] = await pool.query(queryString);
 		return results.map((e) => ({
-			id: e.couse_id,
+			id: e.course_id,
 			name: e.course_name,
 			code: e.course_code,
 			status: e.status,
