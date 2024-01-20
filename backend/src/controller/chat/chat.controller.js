@@ -1,12 +1,5 @@
 import * as chat from '../../entities/chat.service.js'
 
-export async function getChatsGroup(req, res) {
-    const {id: studentId} = req.user;
-
-    const chats = await chat.getChatsGroup(studentId);
-    return chats.length > 0 ? res.status(200).json({ chats }) : res.status(404).json({ error: 'Chats not found!' });
-}
-
 export async function getMessageLog(req, res) {
     const {filter} = req.body;
     const {id: chatId} = req.params;
