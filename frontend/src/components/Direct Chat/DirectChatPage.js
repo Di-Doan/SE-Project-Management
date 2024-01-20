@@ -1,54 +1,53 @@
-// DirectChatPage.js
-
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import DirectChatSidebar from "./DirectChatSidebar"; // Adjust the path accordingly
+import DirectChatSidebar from "./DirectChatSidebar";
 import style from "./DirectChatPage.css";
 import ava1 from "../../assets/avatar2.jpg";
-import ava2 from "../../assets/avatar3.jpg";
+import axiosInstance from '../../ultilities/axiosInstance'; // Import axiosInstance
 
 const DirectChatPage = () => {
-  const { id } = useParams();
-  const [chat, setChat] = useState(null); // Set initial state to null
+  const [messages, setMessages] = useState([]);
   const [messageText, setMessageText] = useState("");
+  const [user, setUser] = useState({});
+  const [auth, setAuth] = useState(false);
 
-  // Simulated useEffect to fetch chat data
-  useEffect(() => {
-    // Simulating fetching chat data from an API or other source
-    // For simplicity, we set some initial data directly
-    const initialChatData = {
-      name: "John Doe", // Replace with actual chat data
-      messages: [
-        { id: 1, sender: "John Doe", text: "Hello there!" },
-        // Add more messages as needed
-      ],
-    };
-
-    setChat(initialChatData);
-  }, [id]);
-
-  const handleSendMessage = () => {
-    if (messageText.trim() !== "") {
-      const newMessage = {
-        id: chat.messages.length + 1,
-        sender: "User",
-        text: messageText,
-      };
-
-      setChat((prevChat) => ({
-        ...prevChat,
-        messages: [...prevChat.messages, newMessage],
-      }));
-
-      // Reset message text after sending
-      setMessageText("");
+  const getData = async () => {
+    try {
+      const response = await axiosInstance.get("/profile");
+      setUser(response.data.user);
+    } catch (error) {
+      if (error) {
+        setAuth(true);
+      }
     }
   };
 
-  if (!chat) {
-    return <div>Loading...</div>; // Add loading state or spinner
-  }
+  const addMessage = async (text) => {
+    const newUser = 'John Doe'; // Replace with the actual user's name
+  
+    try {
+      const response = await axiosInstance.post(`/chat/${user.id}`, {
+        text,
+        user: newUser,
+        userId: user.id,
+      });
+  
+      setMessages([...messages, response.data]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const handleSendMessage = () => {
+    if (messageText.trim() !== "") {
+      addMessage(messageText);
+      setMessageText("");
+    }
+  };
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
@@ -68,27 +67,23 @@ const DirectChatPage = () => {
         <div className="top-bar">
           <div className="sender-info">
             <div className="sender-avatar">
-              <img src={ava1} />
-              {/* Add sender's avatar here */}
+              <img src={ava1} alt="Sender Avatar" />
             </div>
-            <div className="sender-name">{chat.name}</div>
+            <div className="sender-name">{user.fullname || "John Doe"}</div>
           </div>
           <button className="call-button">Call</button>
         </div>
         <div className="direct-chat-page">
           <div className="chat-messages">
-            {/* Render chat messages here */}
-            {chat.messages.map((message) => (
+            {messages.map((message) => (
               <div
                 key={message.id}
                 className={`message ${
-                  message.sender === "User" ? "user-message" : "sender-message"
+                  message.sender === user.fullname ? "user-message" : "sender-message"
                 }`}
               >
                 <div className="message-avatar">
-                  {message.sender === "User" ? (
-                    ""
-                  ) : (
+                  {message.sender !== user.fullname && (
                     <img src={ava1} alt="Sender Avatar" />
                   )}
                 </div>
@@ -96,7 +91,7 @@ const DirectChatPage = () => {
                   <div className="message-text">{message.text}</div>
                   <div
                     className={`${
-                      message.sender === "User"
+                      message.sender === user.fullname
                         ? "message-time-user"
                         : "message-time"
                     }`}
@@ -108,14 +103,13 @@ const DirectChatPage = () => {
             ))}
           </div>
 
-          {/* Input field for typing messages */}
           <div className="message-input-container">
             <div className="message-input">
               <input
                 type="text"
                 value={messageText}
                 onChange={(e) => setMessageText(e.target.value)}
-                onKeyPress={handleKeyPress} /* Add the onKeyPress event */
+                onKeyPress={handleKeyPress}
                 placeholder="Type a message..."
               />
               <button onClick={handleSendMessage} className="send-button">
@@ -131,7 +125,7 @@ const DirectChatPage = () => {
             <img src={ava1} alt="Sender Avatar" />
           </div>
           <div className="right-sender-details">
-            <div className="right-sender-name">Sender Name</div>
+            <div className="right-sender-name">{user.fullname || "John Doe"}</div>
             <div className="right-user-profile">
               <Link to="/profile">
                 <button className="profile-button">View profile</button>

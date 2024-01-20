@@ -14,12 +14,15 @@ function LoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const token = localStorage.getItem("authTokens");
+    localStorage.removeItem("authTokens") 
     try {
-      const response =  await axiosInstance.post('/auth/signin', data);
+      const response = await axiosInstance.post("/auth/signin", data);
       localStorage.setItem("authTokens", JSON.stringify(response.data));
       window.location = "/dashboard";
     } catch (error) {
-      console.log(error)
+      console.log(error);
       if (
         error.response &&
         error.response.status >= 400 &&
@@ -73,9 +76,7 @@ function LoginForm() {
           </form>
 
           <div>
-            <Link to="/forgot-password">
-              Forget your password?
-            </Link>
+            <Link to="/forgot-password">Forget your password?</Link>
           </div>
         </div>
       </div>

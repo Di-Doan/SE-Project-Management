@@ -6,9 +6,9 @@ import defaultAva from "../../assets/avatar.jpg";
 import axiosInstance from "../../ultilities/axiosInstance";
 import TeamStyle from "./FindTeam.module.css";
 import GroupBox from "./GroupBox";
+import Sidebar from "../Dashboard/Sidebar";
 
 function FindTeam() {
-  const [user, setUser] = useState();
   const [auth, setAuth] = useState(false);
   const [team, setTeam] = useState([]);
   const [teamId, setTeamId] = useState();
@@ -22,7 +22,6 @@ function FindTeam() {
   const getUser = async () => {
     try {
       const response = await axiosInstance.get("/profile");
-      setUser(response.data.user);
     } catch (error) {
       if (error) {
         setAuth(true);
@@ -55,55 +54,60 @@ function FindTeam() {
   };
 
   return (
-    <div className={TeamStyle.body}>
-      <div className="profile-top-bar">
-        <div className={TeamStyle.topLink}>
-          <Link className={TeamStyle.link} to={`/people/${course_id}`}>
-            People
-          </Link>
-          <Link className={TeamStyle.link} to={`/team/${course_id}`}>
-            Team
-          </Link>
+    <div>
+      <div className={TeamStyle.body}>
+        <div className="profile-top-bar">
+          <div className={TeamStyle.topLink}>
+            <Link className={TeamStyle.link} to={`/Dashboard`}>
+              Dashboard
+            </Link>
+            <Link className={TeamStyle.link} to={`/people/${course_id}`}>
+              People
+            </Link>
+            <Link className={TeamStyle.link} to={`/team/${course_id}`}>
+              Team
+            </Link>
+          </div>
         </div>
-      </div>
-      <div className={TeamStyle.createGroupBtn}>
-        <button className={TeamStyle.createBtn}>Create Group</button>
-      </div>
+        <div className={TeamStyle.createGroupBtn}>
+          <button className={TeamStyle.createBtn}>Create Group</button>
+        </div>
 
-      <div className={TeamStyle.groupFilter}>
-        <select
-          className={TeamStyle.groupSelect}
-          name="team-sort"
-          id="team-sort"
-          onChange={(e) => {
-            setFilter(e.target.value);
-          }}
-        >
-          <option defaultChecked value="all">
-            All
-          </option>
-          <option value="availability">Availability</option>
-        </select>
-      </div>
+        <div className={TeamStyle.groupFilter}>
+          <select
+            className={TeamStyle.groupSelect}
+            name="team-sort"
+            id="team-sort"
+            onChange={(e) => {
+              setFilter(e.target.value);
+            }}
+          >
+            <option defaultChecked value="all">
+              All
+            </option>
+            <option value="availability">Availability</option>
+          </select>
+        </div>
 
-      <div className={TeamStyle.groupList}>
-        {team
-          .filter((item) => {
-            if (filter == "availability") {
-              return item.memberCount < 4;
-            } else {
-              return item;
-            }
-          })
-          .map((item) => (
-            <GroupBox
-              name={item.name}
-              member={item.memberCount}
-              teamId={item.id}
-              courseId={course_id}
-              id={teamId}
-            ></GroupBox>
-          ))}
+        <div className={TeamStyle.groupList}>
+          {team
+            .filter((item) => {
+              if (filter == "availability") {
+                return item.memberCount < 4;
+              } else {
+                return item;
+              }
+            })
+            .map((item) => (
+              <GroupBox
+                name={item.name}
+                member={item.memberCount}
+                teamId={item.id}
+                courseId={course_id}
+                id={teamId}
+              ></GroupBox>
+            ))}
+        </div>
       </div>
     </div>
   );

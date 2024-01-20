@@ -17,6 +17,21 @@ function People() {
     availability: null,
   });
   const [clear, setClear] = useState(null);
+  const [auth, setAuth] = useState(false);
+
+  if (auth) {
+    window.location = "/login";
+  }
+
+  const getData = async () => {
+    try {
+      const response = await axiosInstance.get("/profile");
+    } catch (error) {
+      if (error) {
+        setAuth(true);
+      }
+    }
+  };
 
   const getPeople = async () => {
     try {
@@ -62,12 +77,16 @@ function People() {
 
   useEffect(() => {
     getPeople();
+    getData();
   }, []);
 
   return (
     <div>
       <div className="profile-top-bar">
         <div className={PeopleStyle.topLink}>
+          <Link className={PeopleStyle.link} to={`/Dashboard`}>
+            Dashboard
+          </Link>
           <Link className={PeopleStyle.link} to={`/people/${course_id}`}>
             People
           </Link>

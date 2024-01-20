@@ -1,34 +1,35 @@
-import React, {useState, useEffect} from 'react';
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import  axiosInstance  from '../../ultilities/axiosInstance.js';
+import axiosInstance from "../../ultilities/axiosInstance.js";
 import { jwtDecode } from "jwt-decode";
 
-import resets from './_resets.module.css';
-import classes from './Design.module.css';
-import { Ellipse2552Icon2 } from './Ellipse2552Icon2.tsx';
-import { Ellipse2552Icon3 } from './Ellipse2552Icon3.tsx';
-import { Ellipse2552Icon4 } from './Ellipse2552Icon4.tsx';
-import { Ellipse2552Icon } from './Ellipse2552Icon.tsx';
-import { Ellipse2615Icon } from './Ellipse2615Icon.tsx';
-import { Ellipse2616Icon } from './Ellipse2616Icon.tsx';
-import { Ellipse2617Icon } from './Ellipse2617Icon.tsx';
-import { Group1000004376Icon } from './Group1000004376Icon.tsx';
-import { Group1000004379Icon } from './Group1000004379Icon.tsx';
-import { Group1000004380Icon } from './Group1000004380Icon.tsx';
-import { Group1000004420Icon } from './Group1000004420Icon.tsx';
-import { Group1000004421Icon } from './Group1000004421Icon.tsx';
-import { Group1000004422Icon2 } from './Group1000004422Icon2.tsx';
-import { Group1000004422Icon } from './Group1000004422Icon.tsx';
-import { UiIconMessageLightIcon } from './UiIconMessageLightIcon.tsx';
-import { UiIconNotificationLightIcon } from './UiIconNotificationLightIcon.tsx';
-import { UiIconSearchLightIcon } from './UiIconSearchLightIcon.tsx';
-import { VectorIcon2 } from './VectorIcon2.tsx';
-import { VectorIcon3 } from './VectorIcon3.tsx';
-import { VectorIcon4 } from './VectorIcon4.tsx';
-import { VectorIcon5 } from './VectorIcon5.tsx';
-import rmitLogo from './rmit-logo.png';
-import { ReactComponent as HomeIcon } from './home-icon.svg';
+import Sidebar from "./Sidebar.js";
+import resets from "./_resets.module.css";
+import classes from "./Design.module.css";
+import { Ellipse2552Icon2 } from "./Ellipse2552Icon2.tsx";
+import { Ellipse2552Icon3 } from "./Ellipse2552Icon3.tsx";
+import { Ellipse2552Icon4 } from "./Ellipse2552Icon4.tsx";
+import { Ellipse2552Icon } from "./Ellipse2552Icon.tsx";
+import { Ellipse2615Icon } from "./Ellipse2615Icon.tsx";
+import { Ellipse2616Icon } from "./Ellipse2616Icon.tsx";
+import { Ellipse2617Icon } from "./Ellipse2617Icon.tsx";
+import { Group1000004376Icon } from "./Group1000004376Icon.tsx";
+import { Group1000004379Icon } from "./Group1000004379Icon.tsx";
+import { Group1000004380Icon } from "./Group1000004380Icon.tsx";
+import { Group1000004420Icon } from "./Group1000004420Icon.tsx";
+import { Group1000004421Icon } from "./Group1000004421Icon.tsx";
+import { Group1000004422Icon2 } from "./Group1000004422Icon2.tsx";
+import { Group1000004422Icon } from "./Group1000004422Icon.tsx";
+import { UiIconMessageLightIcon } from "./UiIconMessageLightIcon.tsx";
+import { UiIconNotificationLightIcon } from "./UiIconNotificationLightIcon.tsx";
+import { UiIconSearchLightIcon } from "./UiIconSearchLightIcon.tsx";
+import { VectorIcon2 } from "./VectorIcon2.tsx";
+import { VectorIcon3 } from "./VectorIcon3.tsx";
+import { VectorIcon4 } from "./VectorIcon4.tsx";
+import { VectorIcon5 } from "./VectorIcon5.tsx";
+import rmitLogo from "./rmit-logo.png";
+import { ReactComponent as HomeIcon } from "./home-icon.svg";
 
 const Props = {
   className: undefined,
@@ -36,18 +37,13 @@ const Props = {
 
 function Dashboard() {
   const [user, setUser] = useState({});
-  const [oldData, setOldData] = useState();
   const [auth, setAuth] = useState(false);
-
-  if (auth) {
-    window.location = "/login";
-  }
 
   const getData = async () => {
     try {
-      const response = await axiosInstance.get("/profile");
-      setUser(response.data.user);
-      setOldData(response.data.user);
+      const response = await axiosInstance.get("/courses/");
+      setUser(response.data.data);
+      
     } catch (error) {
       if (error) {
         setAuth(true);
@@ -72,33 +68,7 @@ function Dashboard() {
         <Ellipse2617Icon className={classes.icon3} />
       </div>
       <div className={classes.dashboard}>
-        <div className={classes.sidebar}>
-          <div>
-            <img src={rmitLogo} alt="RMIT Logo" className={classes.rMITLogo_Horizontal1} />
-          </div>
-          <div className={classes.account}>Account</div>
-          <div className={classes.rectangle5571}></div>
-          <Link to="/Dashboard" className={classes.sidebarLink}>
-            <div className={classes.dashboard2}>Dashboard</div>
-            <div className={classes.vector}>
-              <HomeIcon className={classes.icon4} />
-            </div>
-          </Link>
-          <div className={classes.courses}>Courses</div>
-          <div className={classes.group1000004376}>
-            <Group1000004376Icon className={classes.icon5} />
-          </div>
-          <Link to="/Login" className={classes.sidebarLink}>
-            <div className={classes.messages}>Messages</div>
-            <div className={classes.group1000004379}>
-              <Group1000004379Icon className={classes.icon8} />
-            </div>
-          </Link>
-          <div className={classes.settings}>Settings</div>
-          <div className={classes.group1000004380}>
-            <Group1000004380Icon className={classes.icon9} />
-          </div>
-        </div>
+        <Sidebar></Sidebar>
         <div className={classes.topBar}>
           <div className={classes.searchBox}>
             <div className={classes.searchInput}>
@@ -107,7 +77,11 @@ function Dashboard() {
                   <UiIconSearchLightIcon className={classes.icon11} />
                 </div>
                 <div className={classes.frame22}>
-                  <input type="text" placeholder="Search or type" className={classes.searchOrType} />
+                  <input
+                    type="text"
+                    placeholder="Search or type"
+                    className={classes.searchOrType}
+                  />
                 </div>
               </div>
             </div>
@@ -133,7 +107,9 @@ function Dashboard() {
         <div className={classes.rectangle5594}></div>
         <div className={classes.rectangle5597}></div>
         <div className={classes.image233}></div>
-        <div className={classes._3DAnimationConference}>3D Animation Conference</div>
+        <div className={classes._3DAnimationConference}>
+          3D Animation Conference
+        </div>
         <div className={classes.december14830PM}>December 14, 08:30 PM</div>
         <div className={classes.vector2}>
           <VectorIcon2 className={classes.icon14} />
@@ -150,7 +126,9 @@ function Dashboard() {
         <div className={classes.image2333}></div>
         <div className={classes.image235}></div>
         <div className={classes.image237}></div>
-        <div className={classes.machineLearningLesson}>Machine Learning Lesson</div>
+        <div className={classes.machineLearningLesson}>
+          Machine Learning Lesson
+        </div>
         <div className={classes.december181030PM2}>December 18, 10:30 PM</div>
         <div className={classes.vector4}>
           <VectorIcon4 className={classes.icon16} />
@@ -158,7 +136,9 @@ function Dashboard() {
         <div className={classes.rectangle55974}></div>
         <div className={classes.image2334}></div>
         <div className={classes.image236}></div>
-        <div className={classes._3DAnimationConference2}>3D Animation Conference</div>
+        <div className={classes._3DAnimationConference2}>
+          3D Animation Conference
+        </div>
         <div className={classes.december221030PM}>December 22, 10:30 PM</div>
         <div className={classes.vector5}>
           <VectorIcon5 className={classes.icon17} />
@@ -167,7 +147,6 @@ function Dashboard() {
         <div className={classes.rectangle5593}></div>
         <div className={classes.week}>Week</div>
         <div className={classes.rectangle5606}></div>
-        <div className={classes.topTutors}>Top Tutors</div>
         <div className={classes.rectangle5592}></div>
         <div className={classes.ellipse2552}>
           <Ellipse2552Icon className={classes.icon20} />
@@ -222,23 +201,26 @@ function Dashboard() {
           <div className={classes.rectangle55976}></div>
           <div className={classes.image2336}></div>
           <div className={classes._3DAnimationConference4}>
-            {user && user.courses && user.courses[0] ? user.courses[0].name : "empty"}
+            <Link to={user && user[0] ? `/people/${user[0].id}` : "/dashboard"}>
+              {user && user[0] ? user[0].name : "empty"}
+            </Link>
           </div>
           <div className={classes.december221030PM3}>December 22, 10:30 PM</div>
           <div className={classes.rectangle55977}></div>
           <div className={classes.image2364}></div>
           <div className={classes._3DAnimationConference5}>
-          3D Animation Conference
+            <Link to={user && user[1] ? `/people/${user[1].id}` : "/dashboard"}>
+              {user && user[1] ? user[1].name : "empty"}
+            </Link>
           </div>
           <div className={classes.december221030PM4}>December 22, 10:30 PM</div>
           <div className={classes.rectangle55978}></div>
           <div className={classes.image2338}></div>
-          <div className={classes._3DAnimationConference6}>3D Animation Conference</div>
-          <div className={classes.december221030PM5}>December 22, 10:30 PM</div>
-          <div className={classes.rectangle55979}></div>
-          <div className={classes.image2366}></div>
-          <div className={classes._3DAnimationConference7}>3D Animation Conference</div>
-          <div className={classes.december221030PM6}>December 22, 10:30 PM</div>
+          <div className={classes._3DAnimationConference6}>
+            <Link to={user && user[2] ? `/people/${user[2].id}` : "/dashboard"}>
+              {user && user[2] ? user[2].name : "empty"}
+            </Link>
+          </div>
         </div>
       </div>
     </div>
