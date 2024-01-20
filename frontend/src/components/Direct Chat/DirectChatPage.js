@@ -22,20 +22,13 @@ const DirectChatPage = () => {
     }
   };
 
-  const addMessage = async (text) => {
-    const newUser = 'John Doe'; // Replace with the actual user's name
-  
-    try {
-      const response = await axiosInstance.post(`/chat/${user.id}`, {
-        text,
-        user: newUser,
-        userId: user.id,
-      });
-  
-      setMessages([...messages, response.data]);
-    } catch (error) {
-      console.error(error);
-    }
+  const addMessage = (text) => {
+    const newMessage = {
+      id: messages.length + 1,
+      user: user.fullname,
+      text: text
+    };
+    setMessages([...messages, newMessage]);
   };
 
   useEffect(() => {
@@ -69,7 +62,7 @@ const DirectChatPage = () => {
             <div className="sender-avatar">
               <img src={ava1} alt="Sender Avatar" />
             </div>
-            <div className="sender-name">{user.fullname || "John Doe"}</div>
+            <div className="sender-name">{user.fullname}</div>
           </div>
           <button className="call-button">Call</button>
         </div>
@@ -125,7 +118,7 @@ const DirectChatPage = () => {
             <img src={ava1} alt="Sender Avatar" />
           </div>
           <div className="right-sender-details">
-            <div className="right-sender-name">{user.fullname || "John Doe"}</div>
+            <div className="right-sender-name">{user.fullname}</div>
             <div className="right-user-profile">
               <Link to="/profile">
                 <button className="profile-button">View profile</button>
