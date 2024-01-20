@@ -12,6 +12,7 @@ export const getCourses = async (req, res) => {
 		return res.status(500).json({ message: 'Failed to get courses' });
 	}
 
+
 	return res.status(200).json({ data: courses });
 };
 
