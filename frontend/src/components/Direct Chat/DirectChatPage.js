@@ -5,7 +5,7 @@ import style from "./DirectChatPage.css";
 import ava1 from "../../assets/avatar2.jpg";
 import axiosInstance from '../../ultilities/axiosInstance'; // Import axiosInstance
 
-const DirectChatPage = () => {
+const DirectChatPage = ({ loggedInUserId, otherUserId }) => {
   const [messages, setMessages] = useState([]);
   const [messageText, setMessageText] = useState("");
   const [user, setUser] = useState({});
@@ -22,18 +22,43 @@ const DirectChatPage = () => {
     }
   };
 
+  useEffect(() => {
+    getData();
+    fetchMessages(loggedInUserId, otherUserId);
+  }, []);
+
+  const fetchMessages = async (userId1, userId2) => {
+    try {
+      const response = await axiosInstance.get(`/friends/${userId1}/${userId2}`);
+      setMessages(response.data.messages);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const addMessage = (text) => {
     const newMessage = {
       id: messages.length + 1,
       user: user.fullname,
-      text: text
+      text: text,
+      created_at: new Date(),
     };
     setMessages([...messages, newMessage]);
+    sendMessage(newMessage);
   };
 
-  useEffect(() => {
-    getData();
-  }, []);
+  const sendMessage = async (message) => {
+    try {
+      await axiosInstance.post("/friends", {
+        sender_id: loggedInUserId,
+        receiver_id: otherUserId,
+        text: message.text,
+        created_at: message.created_at,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleSendMessage = () => {
     if (messageText.trim() !== "") {
@@ -72,11 +97,11 @@ const DirectChatPage = () => {
               <div
                 key={message.id}
                 className={`message ${
-                  message.sender === user.fullname ? "user-message" : "sender-message"
+                  message.user === user.fullname ? "user-message" : "sender-message"
                 }`}
               >
                 <div className="message-avatar">
-                  {message.sender !== user.fullname && (
+                  {message.user !== user.fullname && (
                     <img src={ava1} alt="Sender Avatar" />
                   )}
                 </div>
@@ -84,7 +109,7 @@ const DirectChatPage = () => {
                   <div className="message-text">{message.text}</div>
                   <div
                     className={`${
-                      message.sender === user.fullname
+                      message.user === user.fullname
                         ? "message-time-user"
                         : "message-time"
                     }`}
