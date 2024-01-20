@@ -1,12 +1,12 @@
-// CoursesChat.js
 import React, { useState, useEffect } from 'react';
+import { Link, useParams } from "react-router-dom";
 import Message from './Message';
 import MessageInput from './MessageInput';
 import Sidebar from './Sidebar';
 import Group1 from './Group1';
 import RightSidebar from './RightSidebar';
 import axiosInstance from '../../ultilities/axiosInstance.js';
-import axios from "axios";
+import axios from 'axios';
 import './CoursesChat.css';
 
 const CoursesChat = () => {
@@ -14,6 +14,7 @@ const CoursesChat = () => {
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [courseUsers, setCourseUsers] = useState([]);
   const [user, setUser] = useState(null);
+  const { course_id } = useParams();
 
   const handleRoomChange = (group) => {
     setSelectedGroup(group);
@@ -39,8 +40,8 @@ const CoursesChat = () => {
 
   const fetchCourseUsers = async () => {
     try {
-      const response = await axiosInstance.get("/courses");
-      setCourseUsers(response.data);
+      const response = await axiosInstance.get(`/courses/${course_id}/students`);
+      setCourseUsers(response.data.data);
     } catch (error) {
       console.error(error);
     }
@@ -48,7 +49,7 @@ const CoursesChat = () => {
 
   const getChat = async () => {
     try {
-      const response = await axiosInstance.get("/chats");
+      const response = await axiosInstance.get('/chats');
       setMessages(response.data.messages);
     } catch (error) {
       console.log(error);
@@ -58,7 +59,7 @@ const CoursesChat = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axiosInstance.get("/profile");
+        const response = await axiosInstance.get('/profile');
         setUser(response.data.user);
       } catch (error) {
         console.error(error);
@@ -73,7 +74,7 @@ const CoursesChat = () => {
   return (
     <div className="chat-container">
       <Sidebar onSelectGroup={handleRoomChange} />
-      <div className='chat'>
+      <div className="chat">
         <div className="chat-messages">
           {messages.map((message) => (
             <Message key={message.id} user={message.user} text={message.text} />

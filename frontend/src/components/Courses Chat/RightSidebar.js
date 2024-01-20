@@ -8,14 +8,17 @@ const RightSidebar = ({ users }) => {
     <div className="right-sidebar">
       <h2>Users</h2>
       <ul>
-        {users.map((user) => (
+        {Array.isArray(users) && users.length > 0 ? (users.map((user) => (
           <li key={user.id}>
             <div className="user-avatar">
               <img src={user.avatar} alt={`Avatar of ${user.name}`} />
             </div>
             <div className="user-name">{user.name}</div>
           </li>
-        ))}
+        ))
+      ) : (
+        <li>No users available</li>
+      )}
       </ul>
     </div>
   );

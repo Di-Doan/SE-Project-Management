@@ -7,8 +7,8 @@ import ava1 from "../../assets/avatar2.jpg";
 
 const DirectChatSidebar = () => {
   const [chats, setChats] = useState([
-    { id: 1, name: 'John Doe', lastMessage: 'Hello there!', unreadCount: 0 },
-    { id: 2, name: 'Alice Smith', lastMessage: 'How are you?', unreadCount: 1 },
+    { id: 1, name: 'Phuong Hoang', lastMessage: 'Hello there!', unreadCount: 0 },
+    { id: 2, name: 'Di Doan', lastMessage: 'How are you?', unreadCount: 1 },
     // Add more chat objects as needed
   ]);
 
