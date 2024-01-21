@@ -21,4 +21,9 @@
     margin-top: 5px;
     font-weight: bold;
     font-size: 20px;
+   
+}
+
+.modal-box a {
+   text-decoration: none;
 }
