@@ -17,7 +17,7 @@ function PeopleBlock(props) {
       <td>{props.name}</td>
       <td>{props.rmitId}</td>
       <td>
-        <button className={PeopleStyle.btn} >Send Message</button>
+        <button className={PeopleStyle.btn} onClick={()=>{window.location = `/messages`}} >Send Message</button>
       </td>
     </tr>
   );
