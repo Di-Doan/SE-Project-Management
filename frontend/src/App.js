@@ -28,6 +28,7 @@ function App() {
           <Route path="/current-courses" element={<CurrentCourses />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/messages" element={<DirectChatPage />} />
+          <Route path="/messages/:user_id" element={<DirectChatPage />} />
           <Route path="/courseschat/:course_id" element={<CoursesChat />} />
 
           <Route path="/team/:course_id" element={<FindTeam />} />
