@@ -56,6 +56,7 @@ export const getStudentsByFilters = async (filters) => {
 						availability: Boolean(result.availability),
 				  }
 				: undefined,
+			chatId: result.chat_id,
 		}));
 	} catch (err) {
 		console.error('Failed to get Students by filters:', err);
