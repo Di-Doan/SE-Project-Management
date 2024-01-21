@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'; // Import useParams
 
 function RightSidebar() {
   const [people, setPeople] = useState([]);
-  const { course_id } = useParams(); // Get the course_id from useParams
+  const { course_id } = useParams();
 
   const getPeople = async () => {
     try {
@@ -27,9 +27,9 @@ function RightSidebar() {
     <div className="right-sidebar">
       <h2>Users</h2>
       <ul>
-        {Array.isArray(people) && people.length > 0 ? (people.map((user) => (
-          <li key={user.id}>
-            <div className="user-name">{user.name}</div>
+        {Array.isArray(people) && people.length > 0 ? (people.map((item) => (
+          <li key={item.id}>
+            <div className="user-name">{item.fullname}</div>
           </li>
         ))
       ) : (
