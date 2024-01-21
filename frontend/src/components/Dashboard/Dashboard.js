@@ -32,7 +32,7 @@ function Dashboard() {
 					{courses.map((course) => (
 						<div key={course.id} className={`${classes.course} px-4 py-3 rounded-1`}>
 							<Link
-								to={`/people/${course.id}`}
+								to={`/courses/${course.id}/people`}
 								className='text-decoration-none text-dark fw-medium'
 							>
 								{course.name}
