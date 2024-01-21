@@ -5,7 +5,7 @@ import axiosInstance from '../../ultilities/axiosInstance.js';
 import Message from './Message';
 import MessageInput from './MessageInput';
 import RightSidebar from './RightSidebar';
-import './CoursesChat.css';
+import classes from './CoursesChat.module.css';
 
 const CoursesChat = () => {
 	const { user } = useOutletContext();
@@ -55,8 +55,8 @@ const CoursesChat = () => {
 
 	return (
 		<>
-			<div className='chat'>
-				<div className='chat-messages'>
+			<div className={classes.chat}>
+				<div className={`${classes['chat-messages']} d-flex flex-column-reverse h-100`}>
 					{messages.map((message) => (
 						<Message key={message.id} user={message.sender.fullname} text={message.message} />
 					))}

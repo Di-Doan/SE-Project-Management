@@ -1,5 +1,6 @@
 // MessageInput.js
 import React, { useState } from 'react';
+import classes from './CoursesChat.module.css';
 
 const MessageInput = ({ onSendMessage }) => {
 	const [messageText, setMessageText] = useState('');
@@ -12,7 +13,7 @@ const MessageInput = ({ onSendMessage }) => {
 	};
 
 	return (
-		<div className='message-input'>
+		<div className={classes['message-input']}>
 			<input
 				type='text'
 				value={messageText}

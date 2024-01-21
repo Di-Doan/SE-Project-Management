@@ -42,9 +42,9 @@ export const getMessageLog = async (chat_id, filter) => {
 			message: m.message_text,
 			sender: {
 				id: m.student_id,
-				fullname: m.student_fullname,
+				fullname: m.fullname,
 			},
-			timestamp: m.creat_at,
+			timestamp: m.created_at,
 		}));
 	} catch (err) {
 		console.error('Failed to get chat log: ', err);
@@ -65,8 +65,8 @@ export const postMessage = async (message, chat_id, student_id) => {
 		if (results.length === 0) return null;
 
 		[results] = await pool.query(
-			'INSERT INTO Message (message_text, message_sender,create_at, chat_id) VALUES (?, ?, NOW(), ?)',
-			[message, results.student_id, chat_id]
+			'INSERT INTO Message (message_text, message_sender,created_at, chat_id) VALUES (?, ?, NOW(), ?)',
+			[message, student_id, chat_id]
 		);
 		return results.insertId;
 		// io.to(chat_id).emit('newMessage', { message_id, message, sender: rmit_sid });
