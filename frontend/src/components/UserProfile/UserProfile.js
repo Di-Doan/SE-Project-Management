@@ -43,13 +43,14 @@ function UserProfile() {
 
 	return (
 		<div className='p-5'>
-			<div>
-				<div className={ProfileStyle.userProfile}>User Profile</div>
-				<div className={ProfileStyle.vector75}></div>
-				<div className={ProfileStyle.group16}>
-					<img src={defaultAva} className={ProfileStyle.icon2} />
+			<div className={`${ProfileStyle.userProfile} mb-5`}>User Profile</div>
+			<div className='w-100 d-flex justify-content-between mb-5'>
+				<div className='d-flex gap-3'>
+					<div className={ProfileStyle.group16}>
+						<img src={defaultAva} className={ProfileStyle.icon2} alt='user image' />
+					</div>
+					<div className={ProfileStyle.fullName}>{user.fullname ? user.fullname : 'Full Name'}</div>
 				</div>
-				<div className={ProfileStyle.fullName}>{user.fullname ? user.fullname : 'Full Name'}</div>
 
 				<div className={ProfileStyle.row3}>
 					<button className={ProfileStyle.uploadPhoto}>Upload New Photo</button>
@@ -57,41 +58,52 @@ function UserProfile() {
 				</div>
 			</div>
 
-			<div>
-				<div className={ProfileStyle.firstName}>Full Name</div>
-				<div className={ProfileStyle.nameField}></div>
-				<div className={ProfileStyle.egAlaa}>{user.fullname ? user.fullname : 'Student Name'}</div>
-				<div className={ProfileStyle.lastName}>Mobile number</div>
-				<div className={ProfileStyle.nameField2}></div>
-				<div className={ProfileStyle.egMohamed}>
-					{user.mobile ? user.mobile : 'Student Phone Number'}
+			<div className='d-flex gap-4 mb-5'>
+				<div className='d-flex flex-column flex-grow-1'>
+					<label className={ProfileStyle.firstName}>Full Name</label>
+					<input
+						disabled
+						className={ProfileStyle.nameField}
+						value={user.fullname ? user.fullname : 'Student Name'}
+					/>
+				</div>
+				<div className='d-flex flex-column flex-grow-1'>
+					<label className={ProfileStyle.lastName}>Mobile number</label>
+					<input
+						disabled
+						className={ProfileStyle.nameField2}
+						value={user.mobile ? user.mobile : 'Student Phone Number'}
+					/>
 				</div>
 			</div>
 
-			<div>
+			<div className='mb-5'>
 				<div className={ProfileStyle.emailAddress}>Email Address</div>
 				<div className={ProfileStyle.studentEmail}>{user.email ? user.email : 'Student Mail'}</div>
 			</div>
 
-			<div>
-				<div className={ProfileStyle.currentGPA}>Current GPA</div>
-				<div className={ProfileStyle.studentGPA}>{user.gpa ? user.gpa : 'Student GPA'}</div>
-				<input
-					className={ProfileStyle.showGPA}
-					type='checkbox'
-					id='showGPA'
-					name='showGPA'
-					value='showGPA'
-					checked={user.showGpa == 1 ? true : false}
-					onClick={showGPA}
-				/>
-				<label className={ProfileStyle.showGPALabel} for='showGPA'>
-					{' '}
-					Show GPA
-				</label>
+			<div className='mb-5 row'>
+				<div className='col-6'>
+					<div className={ProfileStyle.currentGPA}>Current GPA</div>
+					<div className={ProfileStyle.studentGPA}>{user.gpa ? user.gpa : 'Student GPA'}</div>
+				</div>
+				<div className='col-6'>
+					<input
+						className={`${ProfileStyle.showGPA} me-3`}
+						type='checkbox'
+						id='showGPA'
+						name='showGPA'
+						value='showGPA'
+						checked={Number(user.showGpa) === 1}
+						onClick={showGPA}
+					/>
+					<label className={ProfileStyle.showGPALabel} for='showGPA'>
+						Show GPA
+					</label>
+				</div>
 			</div>
 
-			<div>
+			<div className='d-flex gap-4 w-100 justify-content-end'>
 				<button className={ProfileStyle.saveButton} onClick={saveChanges}>
 					Save Changes
 				</button>
