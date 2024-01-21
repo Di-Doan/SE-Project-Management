@@ -17,10 +17,14 @@ const CoursesChat = () => {
 	const addMessage = (text) => {
 		const newMessage = {
 			id: messages.length + 1,
-			user: user.fullname,
-			text: text,
+			sender: {
+				id: user.id,
+				fullname: user.fullname,
+			},
+			message: text,
 		};
 		setMessages([...messages, newMessage]);
+		axiosInstance.post(`/chats/${chat_id}`, { message: text });
 	};
 
 	const getCourseUsers = async () => {
@@ -34,8 +38,8 @@ const CoursesChat = () => {
 
 	const getChat = async () => {
 		try {
-			const response = await axiosInstance.get(`/chat/${chat_id}`);
-			setMessages(response.data.messages);
+			const response = await axiosInstance.get(`/chats/${chat_id}`);
+			setMessages(response.data.chatLog);
 		} catch (error) {
 			console.log(error);
 		}
@@ -54,7 +58,7 @@ const CoursesChat = () => {
 			<div className='chat'>
 				<div className='chat-messages'>
 					{messages.map((message) => (
-						<Message key={message.id} user={message.user} text={message.text} />
+						<Message key={message.id} user={message.sender.fullname} text={message.message} />
 					))}
 				</div>
 				<MessageInput onSendMessage={addMessage} />

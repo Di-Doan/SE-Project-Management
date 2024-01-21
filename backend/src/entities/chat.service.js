@@ -40,7 +40,10 @@ export const getMessageLog = async (chat_id, filter) => {
 		return results.map((m) => ({
 			id: m.message_id,
 			message: m.message_text,
-			sender: m.student_id,
+			sender: {
+				id: m.student_id,
+				fullname: m.student_fullname,
+			},
 			timestamp: m.creat_at,
 		}));
 	} catch (err) {
