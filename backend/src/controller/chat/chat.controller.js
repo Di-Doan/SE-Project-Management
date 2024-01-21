@@ -11,16 +11,6 @@ export async function getMessageLog(req, res) {
     return res.status(404).json({ error: 'Chat log not found!' });
 }
 
-export async function getNewMessage(req, res) {
-    const messageId = req.body;
-
-    if (!messageId) return res.status(400).json({ error: 'Missing required message_id' });
-
-    const message = await chat.getMessage(messageId);
-    if (message.length > 0) return res.status(200).json({ message })
-    return res.status(404).json({ error: 'Message not found!' });
-}
-
 export async function postMessage(req, res) {
     const {message} = req.body;
     const {id: studentId} = req.user;
