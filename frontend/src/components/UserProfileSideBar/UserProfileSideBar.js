@@ -1,14 +1,14 @@
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./UserProfileSideBar.css";
 import { ReactComponent as MenuIcon } from "../../assets/menu-icon.svg";
 import axiosInstance from "../../ultilities/axiosInstance";
 import CourseModal from "../Modal/CourseModal";
 
-
 function UserProfileSideBar() {
   const [modal, setModal] = useState(false);
   const handleShow = () => setModal(true);
+  const [courses, setCourses] = useState();
 
   const authTokens = localStorage.getItem("authTokens")
     ? JSON.parse(localStorage.getItem("authTokens"))
@@ -29,6 +29,20 @@ function UserProfileSideBar() {
     }
   };
 
+  const getCourse = async () => {
+    try {
+      const response = await axiosInstance.get("/courses/");
+      setCourses(response.data.data);
+      console.log(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+    useEffect(() => {
+      getCourse();
+    }, []);
+
   const toggleMenu = () => {
     let toggle = document.querySelector(".toggle");
     let sideNav = document.querySelector(".side-nav");
@@ -40,8 +54,7 @@ function UserProfileSideBar() {
 
   return (
     <div>
-
-      <CourseModal modal= {modal} setModal={setModal}/>
+      <CourseModal modal={modal} setModal={setModal} course = {courses}/>
       <div className="side-nav">
         <ul>
           <li className="side-nav-link logo-container">
