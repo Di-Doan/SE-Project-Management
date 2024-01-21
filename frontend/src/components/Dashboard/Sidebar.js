@@ -1,12 +1,14 @@
 import React from "react";
 import axiosInstance from "../../ultilities/axiosInstance.js";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import { ReactComponent as HomeIcon } from "./home-icon.svg";
 import { Group1000004376Icon } from "./Group1000004376Icon.tsx";
 import { Group1000004379Icon } from "./Group1000004379Icon.tsx";
 import { Group1000004380Icon } from "./Group1000004380Icon.tsx";
 import rmitLogo from "./rmit-logo.png";
-import classes from "./Design.module.css"; // Replace with your actual stylesheet
+import classes from "./Design.module.css"; 
+import CourseModal from "../Modal/CourseModal.js";
 
 const Sidebar = () => {
   const authTokens = localStorage.getItem("authTokens")
@@ -37,6 +39,7 @@ const Sidebar = () => {
           className={classes.rMITLogo_Horizontal1}
         />
       </div>
+
       <div className={classes.account}>Account</div>
       <div className={classes.rectangle5571}></div>
       <Link to="/Dashboard" className={classes.sidebarLink}>
@@ -45,17 +48,21 @@ const Sidebar = () => {
           <HomeIcon className={classes.icon4} />
         </div>
       </Link>
-      <div className={classes.courses}>Courses</div>
+      <div className={classes.courses} >
+        Courses
+      </div>
       <div className={classes.group1000004376}>
         <Group1000004376Icon className={classes.icon5} />
       </div>
-      <Link to="/Login" className={classes.sidebarLink}>
+      <Link className={classes.sidebarLink}>
         <div className={classes.messages}>Messages</div>
         <div className={classes.group1000004379}>
           <Group1000004379Icon className={classes.icon8} />
         </div>
       </Link>
-      <button className={classes.settings} onClick={signOut}>Logout</button>
+      <button className={classes.settings} onClick={signOut}>
+        Logout
+      </button>
       <div className={classes.group1000004380}>
         <Group1000004380Icon className={classes.icon9} />
       </div>
