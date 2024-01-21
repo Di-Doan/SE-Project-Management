@@ -1,0 +1,24 @@
+.modal-dialog {
+  max-width: 25vw !important;
+  max-height: 100%;
+  margin: 0 !important;
+
+
+  position: absolute;
+  left: 217px;
+
+}
+
+.modal {
+  padding: 0 !important;
+
+}
+
+.modal-backdrop {
+   opacity: 0 !important;
+}
+
+.modal-course {
+    margin-top: 5px;
+    font-weight: bold;
+}
