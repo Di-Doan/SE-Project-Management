@@ -83,7 +83,7 @@ function People() {
 					<Link className={PeopleStyle.link} to={`/courses/${course_id}/people`}>
 						People
 					</Link>
-					<Link className={PeopleStyle.link} to={`/team/${course_id}/team`}>
+					<Link className={PeopleStyle.link} to={`/courses/${course_id}/team`}>
 						Team
 					</Link>
 				</div>
