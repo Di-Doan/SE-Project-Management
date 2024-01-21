@@ -1,48 +1,42 @@
 /* CoursesChat.css */
-.chat-container {
-    display: flex;
-  }
-
 .chat {
-    flex-grow: 1;
-    padding: 20px;
-    border-left: 1px solid #ccc; /* Add a border between the sidebar and chat */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .chat-messages {
-    flex-grow: 1;
-    overflow-y: auto; /* Add scroll for messages */
-  }
-  
-  .message-input {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: #f0f0f0;
-    border-top: 1px solid #ccc; /* Add a border above the message input */
-  }
-  
-  .message-input input {
-    flex-grow: 1;
-    margin-right: 10px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .message-input button {
-    padding: 8px 16px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  /* Adjust styles as needed */
-  
-  
+	flex-grow: 1;
+	padding: 20px;
+	border-left: 1px solid #ccc; /* Add a border between the sidebar and chat */
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.chat-messages {
+	flex-grow: 1;
+	overflow-y: auto; /* Add scroll for messages */
+}
+
+.message-input {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	background-color: #f0f0f0;
+	border-top: 1px solid #ccc; /* Add a border above the message input */
+}
+
+.message-input input {
+	flex-grow: 1;
+	margin-right: 10px;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.message-input button {
+	padding: 8px 16px;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+/* Adjust styles as needed */

@@ -1,0 +1,15 @@
+/* Add these styles to your existing sidebar styles */
+
+.sidebar {
+	background-color: #36393f;
+	color: white;
+	width: 250px;
+	overflow-y: auto;
+}
+
+.navlink:hover {
+	background-color: rgba(255, 255, 255, 0.2);
+}
+.navlink:global(.active) {
+	background-color: rgba(255, 255, 255, 0.4);
+}

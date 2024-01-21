@@ -1,24 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams, useOutletContext } from 'react-router-dom';
+import axiosInstance from '../../ultilities/axiosInstance.js';
+
 import Message from './Message';
 import MessageInput from './MessageInput';
-import Sidebar from './Sidebar';
 import RightSidebar from './RightSidebar';
-import axiosInstance from '../../ultilities/axiosInstance.js';
-import axios from 'axios';
 import './CoursesChat.css';
 
 const CoursesChat = () => {
+	const { user } = useOutletContext();
 	const [messages, setMessages] = useState([]);
-	const [selectedGroup, setSelectedGroup] = useState(null);
 	const [courseUsers, setCourseUsers] = useState([]);
-	const [user, setUser] = useState({});
-	const { course_id } = useParams();
-
-	const handleRoomChange = (group) => {
-		setSelectedGroup(group);
-		setMessages([]); // Reset messages when changing rooms
-	};
+	const { course_id, chat_id } = useParams();
 
 	// Function to add a new message
 	const addMessage = (text) => {
@@ -30,7 +23,7 @@ const CoursesChat = () => {
 		setMessages([...messages, newMessage]);
 	};
 
-	const fetchCourseUsers = async () => {
+	const getCourseUsers = async () => {
 		try {
 			const response = await axiosInstance.get(`/courses/${course_id}/students`);
 			setCourseUsers(response.data.data);
@@ -41,42 +34,30 @@ const CoursesChat = () => {
 
 	const getChat = async () => {
 		try {
-			// const response = await axiosInstance.get(`/courses/${chat_id}`);
-			// setMessages(response.data.messages);
+			const response = await axiosInstance.get(`/chat/${chat_id}`);
+			setMessages(response.data.messages);
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
 	useEffect(() => {
-		const fetchUser = async () => {
-			try {
-				const response = await axiosInstance.get('/profile');
-				setUser(response.data.user);
-			} catch (error) {
-				console.error(error);
-			}
-		};
-
-		fetchCourseUsers();
+		getCourseUsers();
 		getChat();
-		fetchUser();
 	}, []);
 
 	return (
-		<div className='chat-container'>
-			<Sidebar onSelectGroup={handleRoomChange} />
+		<>
 			<div className='chat'>
 				<div className='chat-messages'>
 					{messages.map((message) => (
 						<Message key={message.id} user={message.user} text={message.text} />
 					))}
-					{/* {selectedGroup === 'group1' && <Group1 />} */}
 				</div>
 				<MessageInput onSendMessage={addMessage} />
 			</div>
 			<RightSidebar users={courseUsers} />
-		</div>
+		</>
 	);
 };
 

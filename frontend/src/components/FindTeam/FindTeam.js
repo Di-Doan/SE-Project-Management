@@ -1,36 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
-import defaultAva from '../../assets/avatar.jpg';
 import axiosInstance from '../../ultilities/axiosInstance';
 import TeamStyle from './FindTeam.module.css';
 import GroupBox from './GroupBox';
-import Sidebar from '../ProtectedRoute/Sidebar';
 
 function FindTeam() {
-	const [auth, setAuth] = useState(false);
 	const [team, setTeam] = useState([]);
 	const [teamId, setTeamId] = useState();
 	const [filter, setFilter] = useState('all');
 	const { course_id } = useParams();
 
-	if (auth) {
-		window.location = '/login';
-	}
-
-	const getUser = async () => {
-		try {
-			const response = await axiosInstance.get('/profile');
-		} catch (error) {
-			if (error) {
-				setAuth(true);
-			}
-		}
-	};
-
 	useEffect(() => {
-		getUser();
 		getTeamId();
 		getTeam();
 	}, []);
@@ -58,13 +38,10 @@ function FindTeam() {
 			<div className={TeamStyle.body}>
 				<div className='profile-top-bar'>
 					<div className={TeamStyle.topLink}>
-						<Link className={TeamStyle.link} to={`/Dashboard`}>
-							Dashboard
-						</Link>
-						<Link className={TeamStyle.link} to={`/people/${course_id}`}>
+						<Link className={TeamStyle.link} to={`/courses/${course_id}/people`}>
 							People
 						</Link>
-						<Link className={TeamStyle.link} to={`/team/${course_id}`}>
+						<Link className={TeamStyle.link} to={`/courses/${course_id}/team`}>
 							Team
 						</Link>
 					</div>

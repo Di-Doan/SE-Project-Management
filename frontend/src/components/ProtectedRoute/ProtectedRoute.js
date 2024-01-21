@@ -7,31 +7,34 @@ import Sidebar from './Sidebar';
 import TopBar from './TopBar';
 
 function ProtectedRoute(props) {
-	const [auth, setAuth] = useState(true);
+	const [loading, setLoading] = useState(true);
+	const [user, setUser] = useState(null);
 
-	const checkAuth = async () => {
+	const fetchUser = async () => {
 		try {
-			const response = await axiosInstance.get('/');
-			if (response.data.auth) {
-				setAuth(true);
-			}
+			const response = await axiosInstance.get('/profile');
+			setUser(response.data.user);
+			setLoading(false);
 		} catch (error) {
-			console.log(error);
+			setLoading(false);
+			console.error(error);
 		}
 	};
 
 	useEffect(() => {
-		checkAuth();
+		fetchUser();
 	}, []);
 
 	return (
 		<>
-			{auth ? (
+			{loading ? (
+				<div>Loading...</div>
+			) : user ? (
 				<div className='vw-100 min-vh-100 d-flex flex-row align-items-stretch'>
 					<Sidebar />
 					<div className='w-100 d-flex flex-column'>
 						<TopBar />
-						<Outlet />
+						<Outlet context={{ user }} />
 					</div>
 				</div>
 			) : (
