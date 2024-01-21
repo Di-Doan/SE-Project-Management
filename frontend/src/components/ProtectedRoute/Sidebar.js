@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,6 +9,7 @@ import {
 	faRightFromBracket,
 	faUser,
 } from '@fortawesome/free-solid-svg-icons';
+import CourseModal from '../Modal/CourseModal.js';
 
 import axiosInstance from '../../ultilities/axiosInstance.js';
 import rmitLogo from '../Dashboard/rmit-logo.png';
@@ -16,6 +17,9 @@ import classes from './Sidebar.module.css'; // Replace with your actual styleshe
 
 const Sidebar = () => {
 	const navigate = useNavigate();
+	const [courses, setCourses] = useState();
+	const [modal, setModal] = useState(false);
+	const handleShow = () => {setModal(true)};
 
 	const signOut = async (e) => {
 		e.preventDefault();
@@ -32,8 +36,23 @@ const Sidebar = () => {
 		}
 	};
 
+		const getCourses = async () => {
+      try {
+        const response = await axiosInstance.get("/courses");
+        setCourses(response.data.data);
+    
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+	useEffect(() => {
+    getCourses();
+  }, []);
+
 	return (
 		<div className={`${classes.sidebar} d-flex flex-column shadow`}>
+			<CourseModal modal = {modal} setModal={setModal} course = {courses}/>
 			<img src={rmitLogo} alt='RMIT Logo' className={`${classes.RMITLogo_Horizontal1} m-4`} />
 
 			<NavLink
@@ -43,7 +62,7 @@ const Sidebar = () => {
 				<FontAwesomeIcon icon={faHouseChimney} />
 				Dashboard
 			</NavLink>
-			<div
+			<div onClick={handleShow}
 				className={`text-primary-emphasis text-decoration-none d-flex align-items-center gap-3 py-2 px-4 fs-5 rounded-end-pill ${classes.navlink}`}
 			>
 				<FontAwesomeIcon icon={faBookOpen} />
