@@ -2,6 +2,7 @@ import React, { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 import './RightSidebar.css';
 import { useParams } from 'react-router-dom'; // Import useParams
+import axiosInstance from "../../ultilities/axiosInstance";
 
 function RightSidebar() {
   const [people, setPeople] = useState([]);
@@ -20,7 +21,7 @@ function RightSidebar() {
 
   useEffect(() => {
     getPeople();
-    getData();
+
   }, []);
 
   return (
