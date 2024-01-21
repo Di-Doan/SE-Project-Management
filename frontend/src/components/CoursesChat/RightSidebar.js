@@ -21,7 +21,6 @@ function RightSidebar() {
 
   useEffect(() => {
     getPeople();
-
   }, []);
 
   return (

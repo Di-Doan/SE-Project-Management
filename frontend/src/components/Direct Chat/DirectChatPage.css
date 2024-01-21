@@ -126,8 +126,8 @@
 .message-input-container {
     position: fixed;
     bottom: 0;
-    left: 292px;
-    right: 242px;
+    left: 480px;
+    right: 200px;
     background-color: #fff;
     padding: 15px;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
