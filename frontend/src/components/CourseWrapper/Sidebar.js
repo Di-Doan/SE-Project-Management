@@ -9,18 +9,18 @@ const Sidebar = () => {
 	const { course_id } = useParams();
 	const [course, setCourse] = useState();
 
-	const getCourse = async () => {
-		try {
-			const response = await axiosInstance.get(`/courses/${course_id}`);
-			setCourse(response.data);
-		} catch (error) {
-			console.error(error);
-		}
-	};
-
 	useEffect(() => {
+		const getCourse = async () => {
+			try {
+				const response = await axiosInstance.get(`/courses/${course_id}`);
+				setCourse(response.data);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+
 		getCourse();
-	}, []);
+	}, [course_id]);
 
 	return (
 		<div className={`${classes.sidebar} d-flex flex-column p-3 gap-2 h-100`}>
