@@ -7,7 +7,7 @@ export async function getMessageLog(req, res) {
 	if (!chatId) return res.status(400).json({ error: 'Missing required chat_id' });
 
 	const chatLog = await chat.getMessageLog(chatId, filter);
-	if (chatLog.length > 0) return res.status(200).json({ chatLog });
+	if (chatLog) return res.status(200).json({ chatLog });
 	return res.status(404).json({ error: 'Chat log not found!' });
 }
 

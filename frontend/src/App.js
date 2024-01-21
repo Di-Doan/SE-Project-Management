@@ -28,7 +28,7 @@ function App() {
 					<Route path='profile' element={<UserProfile />} />
 					<Route path='dashboard' element={<Dashboard />} />
 					<Route path='messages' element={<DirectChatPage />} />
-					<Route path='messages/:user_id' element={<DirectChatPage />} />
+					<Route path='messages/:chat_id' element={<DirectChatPage />} />
 					<Route path='courses/:course_id' element={<CourseWrapper />}>
 						<Route path='team' element={<FindTeam />} />
 						<Route path='people' element={<People />} />
