@@ -20,7 +20,6 @@ function RightSidebar() {
 
   useEffect(() => {
     getPeople();
-    getData();
   }, []);
 
   return (

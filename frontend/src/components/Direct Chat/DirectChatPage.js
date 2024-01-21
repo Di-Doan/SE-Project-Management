@@ -27,10 +27,10 @@ const DirectChatPage = ({ loggedInUserId, otherUserId }) => {
     fetchMessages(loggedInUserId, otherUserId);
   }, []);
 
-  const fetchMessages = async (userId1, userId2) => {
+  const fetchMessages = async () => {
     try {
-      const response = await axiosInstance.get(`/friends/${userId1}/${userId2}`);
-      setMessages(response.data.messages);
+      const response = await axiosInstance.get(`/friends`);;
+      setMessages(response.data.data);
     } catch (error) {
       console.error(error);
     }
@@ -38,10 +38,8 @@ const DirectChatPage = ({ loggedInUserId, otherUserId }) => {
 
   const addMessage = (text) => {
     const newMessage = {
-      id: messages.length + 1,
       user: user.fullname,
       text: text,
-      created_at: new Date(),
     };
     setMessages([...messages, newMessage]);
     sendMessage(newMessage);
@@ -53,7 +51,6 @@ const DirectChatPage = ({ loggedInUserId, otherUserId }) => {
         sender_id: loggedInUserId,
         receiver_id: otherUserId,
         text: message.text,
-        created_at: message.created_at,
       });
     } catch (error) {
       console.error(error);
