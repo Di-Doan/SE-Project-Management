@@ -99,9 +99,12 @@ function Dashboard() {
               </div>
               <div className={classes.frame262}></div>
             </div>
-            <div className={classes.avatar}>
-              <div className={classes.customer11}></div>
-            </div>
+            <Link to="/profile">
+       
+              <div className={classes.avatar}>
+                <div className={classes.customer11}></div>
+              </div>
+            </Link>
           </div>
         </div>
         <div className={classes.rectangle5594}></div>

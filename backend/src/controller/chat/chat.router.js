@@ -7,7 +7,6 @@ const router = Router();
 
 
 router.get('/:id', validateAuth, chatController.getMessageLog);
-router.get('/', validateAuth, chatController.getChatsGroup);
 router.post('/:id', validateAuth, chatController.postMessage);
 
 

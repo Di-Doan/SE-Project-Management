@@ -30,6 +30,8 @@ function App() {
 
         <Route path="/team/:course_id" element={<FindTeam />} />
         <Route path="/people/:course_id" element={<People />} />
+
+    
       </Routes>
     </BrowserRouter>
   );
