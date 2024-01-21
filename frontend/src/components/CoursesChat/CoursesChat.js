@@ -43,8 +43,11 @@ const CoursesChat = () => {
 
 	useEffect(() => {
 		getCourseUsers();
+	}, [course_id]);
+
+	useEffect(() => {
 		getChat();
-	}, []);
+	}, [chat_id]);
 
 	return (
 		<>
