@@ -51,10 +51,10 @@ INSERT INTO Student (rmit_sid, password, fullname, description, email, mobile, g
 
 -- Insert mock data into Student_Course table
 INSERT INTO Student_Course (student_id, course_id, availability) VALUES
-  (1, 1, 1), (1, 5, 1), (1, 7, 1), (1, 8, 1), (1, 9, 1), (1, 10, 1),
-  (2, 2, 1), (2, 5, 1), (2, 7, 1), (2, 8, 1), (2, 9, 1), (2, 10, 1),
-  (3, 3, 1), (3, 6, 1), (3, 7, 1), (3, 8, 1), (3, 9, 1), (3, 10, 1),
-  (4, 4, 1), (4, 6, 1), (4, 7, 1), (4, 8, 1), (4, 9, 1), (4, 10, 1);
+  (1, 1, 1), (1, 5, 1), (1, 7, 1), (1, 8, 0), (1, 9, 0), (1, 10, 0),
+  (2, 2, 1), (2, 5, 1), (2, 7, 1), (2, 8, 0), (2, 9, 0), (2, 10, 0),
+  (3, 3, 1), (3, 6, 1), (3, 7, 1), (3, 8, 0), (3, 9, 0), (3, 10, 0),
+  (4, 4, 1), (4, 6, 1), (4, 7, 1), (4, 8, 0), (4, 9, 0), (4, 10, 1);
 
 -- Insert mock data into Student_Tutorial table
 INSERT INTO Student_Tutorial (student_id, tutorial_id, course_id) VALUES
