@@ -1,9 +1,15 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useState } from "react";
 import "./UserProfileSideBar.css";
 import { ReactComponent as MenuIcon } from "../../assets/menu-icon.svg";
 import axiosInstance from "../../ultilities/axiosInstance";
+import CourseModal from "../Modal/CourseModal";
+
 
 function UserProfileSideBar() {
+  const [modal, setModal] = useState(false);
+  const handleShow = () => setModal(true);
+
   const authTokens = localStorage.getItem("authTokens")
     ? JSON.parse(localStorage.getItem("authTokens"))
     : null;
@@ -34,65 +40,57 @@ function UserProfileSideBar() {
 
   return (
     <div>
-      <div>
-        <div className="side-nav">
-          <ul>
-            <li className="side-nav-link logo-container">
-              <span className="side-nav-icon">
-                <em className="fas fa-bold"></em>
-              </span>
-              <span className="title">RMIT </span>
-            </li>
-            <li className="side-nav-link">
-              <NavLink to="/profile">
-                <span className="side-nav-icon">
-                  <em className="fas fa-home"></em>
-                </span>
-                <span className="title">User Profile</span>
-              </NavLink>
-            </li>
-            <li className="side-nav-link">
-              <NavLink to="/current-courses">
-                <span className="side-nav-icon">
-                  <em className="fas fa-ad"></em>
-                </span>
-                <span className="title">Current Courses</span>
-              </NavLink>
-            </li>
-            <li className="side-nav-link">
-              <NavLink to="/admin/users">
-                <span className="side-nav-icon">
-                  <em className="fas fa-user"></em>
-                </span>
-                <span className="title">Manage Team</span>
-              </NavLink>
-            </li>
-            <li className="side-nav-link">
-              <NavLink to="https://mytimetable.rmit.edu.vn/odd/student">
-                <span className="side-nav-icon">
-                  <em className="fas fa-file"></em>
-                </span>
-                <span className="title">Edit Time</span>
-              </NavLink>
-            </li>
 
-            <li className="side-nav-link" id="sign-out-link">
+      <CourseModal modal= {modal} setModal={setModal}/>
+      <div className="side-nav">
+        <ul>
+          <li className="side-nav-link logo-container">
+            <span className="side-nav-icon">
+              <em className="fas fa-bold"></em>
+            </span>
+            <span className="title">RMIT </span>
+          </li>
+          <li className="side-nav-link">
+            <NavLink className={modal ? "inactive" : ""} to="/profile">
               <span className="side-nav-icon">
-                <em className="fas fa-sign-out"></em>
+                <em className="fas fa-home"></em>
               </span>
-              <button className="title" onClick={signOut}>
-                Sign out
-              </button>
-            </li>
-          </ul>
-        </div>
-        <div className="admin-main">
-          <div className="profile-top-bar">
-            <div className="toggle" onClick={() => toggleMenu()}>
-              <MenuIcon />
-            </div>
+              <span className="title">User Profile</span>
+            </NavLink>
+          </li>
+          <li className="side-nav-link " onClick={handleShow}>
+            <a className={modal ? "active" : ""}>
+              <span className="side-nav-icon">
+                <em className="fas fa-ad"></em>
+              </span>
+              <span className="title">Current Courses</span>
+            </a>
+          </li>
+
+          <li className="side-nav-link">
+            <NavLink to="https://mytimetable.rmit.edu.vn/odd/student">
+              <span className="side-nav-icon">
+                <em className="fas fa-file"></em>
+              </span>
+              <span className="title">Edit Time</span>
+            </NavLink>
+          </li>
+
+          <li className="side-nav-link" id="sign-out-link">
+            <span className="side-nav-icon">
+              <em className="fas fa-sign-out"></em>
+            </span>
+            <button className="title" onClick={signOut}>
+              Sign out
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div className="admin-main">
+        <div className="profile-top-bar">
+          <div className="toggle" onClick={() => toggleMenu()}>
+            <MenuIcon />
           </div>
-
         </div>
       </div>
     </div>
