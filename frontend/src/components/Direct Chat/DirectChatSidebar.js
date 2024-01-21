@@ -16,7 +16,7 @@ const DirectChatSidebar = () => {
     <div className="direct-chat-sidebar">
       <div className="chat-list">
         {chats.map((chat) => (
-          <Link to={`/chat/${chat.id}`} key={chat.id} className="chat-item">
+          <Link to={`/chats/${chat.id}`} key={chat.id} className="chat-item">
             <div className="chat-avatar"><img src={ava1} /></div>
             <div className="chat-details">
               <div className="chat-name">{chat.name}</div>

@@ -3,7 +3,6 @@ import { Link, useParams } from "react-router-dom";
 import Message from './Message';
 import MessageInput from './MessageInput';
 import Sidebar from './Sidebar';
-import Group1 from './Group1';
 import RightSidebar from './RightSidebar';
 import axiosInstance from '../../ultilities/axiosInstance.js';
 import axios from 'axios';
@@ -13,7 +12,7 @@ const CoursesChat = () => {
   const [messages, setMessages] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [courseUsers, setCourseUsers] = useState([]);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
   const { course_id } = useParams();
 
   const handleRoomChange = (group) => {
@@ -21,21 +20,14 @@ const CoursesChat = () => {
     setMessages([]); // Reset messages when changing rooms
   };
 
-  const addMessage = async (text) => {
-    const newUser = 'John Doe';
-
-    try {
-      const response = await axiosInstance.post(`/chats/${user.id}`, {
-        text,
-        user: newUser,
-        userId: user.id,
-      });
-
-      // Update the state with the newly added message
-      setMessages([...messages, response.data]);
-    } catch (error) {
-      console.error(error);
-    }
+  // Function to add a new message
+  const addMessage = (text) => {
+    const newMessage = {
+      id: messages.length + 1,
+      user: user.fullname,
+      text: text
+    };
+    setMessages([...messages, newMessage]);
   };
 
   const fetchCourseUsers = async () => {
@@ -49,7 +41,7 @@ const CoursesChat = () => {
 
   const getChat = async () => {
     try {
-      const response = await axiosInstance.get('/chats');
+      const response = await axiosInstance.get(`/courses/${chat_id}`);
       setMessages(response.data.messages);
     } catch (error) {
       console.log(error);

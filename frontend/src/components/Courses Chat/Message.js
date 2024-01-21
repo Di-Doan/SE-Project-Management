@@ -1,12 +1,12 @@
 // Message.js
 import React from 'react';
 
-const Message = ({ sender, message }) => {
+const Message = ({ user, text }) => {
   return (
     <div className="message">
       <div className="message-content">
-        <div className='message-user'>{sender}</div>
-        <div className="message-text">{message}</div>
+        <div className='message-user'>{user}</div>
+        <div className="message-text">{text}</div>
       </div>
     </div>
   );

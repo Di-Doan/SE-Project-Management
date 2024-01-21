@@ -52,50 +52,7 @@ const Sidebar = ({ onSelectGroup }) => {
           </div>
         </div>
       </div>
-      <div className="BuildingITSystem1">
-        <div
-          className='course'
-          onClick={() => onSelectGroup('Tutorial 1')}
-        >
-          {user && user.courses && user.courses[1] ? user.courses[1].name : "empty"}
-        </div>
-        <div className='sub-groups'>
-          <div
-            className='sub-group'
-            onClick={() => onSelectGroup('Tutorial 1')}
-          >
-            Tutorial 1
-          </div>
-          <div
-            className='sub-group'
-            onClick={() => onSelectGroup('Tutorial 2')}
-          >
-            Tutorial 2
-          </div>
-        </div>
-      </div>
-      <div className="BuildingITSystem2">
-        <div
-          className='course'
-          onClick={() => onSelectGroup('Tutorial 1')}
-        >
-          {user && user.courses && user.courses[3] ? user.courses[3].name : "empty"}
-        </div>
-        <div className='sub-groups'>
-          <div
-            className='sub-group'
-            onClick={() => onSelectGroup('Tutorial 1')}
-          >
-            Tutorial 1
-          </div>
-          <div
-            className='sub-group'
-            onClick={() => onSelectGroup('Tutorial 2')}
-          >
-            Tutorial 2
-          </div>
-        </div>
-      </div>
+      
       {/* User's avatar and name at the bottom */}
       <div className="user-details">
         <div className="user-avatar">
