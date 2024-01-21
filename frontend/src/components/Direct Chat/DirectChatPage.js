@@ -34,7 +34,7 @@ const DirectChatPage = ({ loggedInUserId, otherUserId }) => {
 	};
 
 	useEffect(() => {
-		fetchFriends(loggedInUserId, otherUserId);
+		fetchFriends();
 	}, []);
 
 	useEffect(() => {
